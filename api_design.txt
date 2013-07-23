@@ -1,0 +1,125 @@
+
+### Config
+Emarsys.configure do |config|
+  config.username = "xyz"
+  config.password = "xyz"
+  config.api_endpoint = "https://suite4.emarsys.com/api/v2/"
+end
+
+# Alternative Syntax
+
+Emarsys.username = "xyz"
+Emarsys.password = "asdasd"
+
+
+Emarsys.emails => Returns emails
+
+# Datenstruktur
+module Emarsys
+  class DataObject
+    def get(method_name)
+      request method_name, 'get'
+    end
+
+    def request(method_name, http_verb)
+      response = Emarsys::Request.new(method_name, http_verb)
+
+      Emarsys = Response.new(response)
+    end
+  end
+
+  class Email < DataObject
+    def collection
+      get 'email'
+    end
+
+    def resource(id)
+      get "email/#{id}"
+    end
+
+    def create(params = {})
+      post "email", params
+    end
+
+    def launch
+      ...
+    end
+  end
+
+
+  class Request
+    def initialize(method_name, http_verb, options = {})
+      self.method_name = method_name
+      ...
+    end
+
+    private
+
+    def send_request
+      case http_verb.to_sym
+      when :get
+        ...
+      when :put
+        ...
+      else
+        error!
+      end
+    end
+  end
+
+  class Response
+    attr_accessor :code, :text, :data
+
+    def intialize(response)
+      json = JSON.parse(response)
+      self.code = json['reply_code']
+      self.text = json['reply_text']
+      self.data = json['data']
+    end
+
+    def result
+      if code == "0"
+        data
+      else
+        error(code, text)
+      end
+    end
+
+    def error
+      Error.new(code, text).cry
+    end
+
+  end
+
+  class Error
+    def initialize(emarsys_code, text)
+      ...
+    end
+
+    def cry
+      case emarsys_code
+      when
+        AccessDeniedError.new(emarsys_code, text)
+      when
+      else
+        raise UnknowError
+      end
+    end
+  end
+
+  module EmarsysErrors
+    class EmarsysBaseError
+      attr_accessor :code, :text
+    end
+
+    class AccessDeniedError < EmarsysBaseError end
+    class HixenplixError < EmarsysBaseError end
+  end
+
+end
+
+
+
+
+
+
