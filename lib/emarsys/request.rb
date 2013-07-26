@@ -11,8 +11,7 @@ module Emarsys
     end
 
     def send_request
-      response = perform_request(emarsys_uri)
-      Emarsys::Response.new(response).result
+      perform_request(emarsys_uri)
     end
 
     def emarsys_uri
@@ -26,15 +25,23 @@ module Emarsys
     private
 
     def perform_request(uri)
-      response = case http_verb.to_sym
+      case http_verb.to_sym
       when :post
-        RestClient.post uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string
+        RestClient.post(uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
       when :put
-        RestClient.put uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string
+        RestClient.put uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
       when :delete
-        RestClient.delete uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string
+        RestClient.delete(uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
       else
-        RestClient.get uri, :content_type => :json, :x_wsse => client.x_wsse_string
+        RestClient.get(uri, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
       end
     end
 

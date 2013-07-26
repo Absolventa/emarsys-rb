@@ -13,7 +13,7 @@ module Emarsys
       if code == 0
         data
       else
-        raise "Somethign is wrong"
+        raise "Somethign is wrong - Code #{code}: #{text}"
         #error(code, text)
       end
     end
