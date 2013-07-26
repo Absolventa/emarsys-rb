@@ -1,8 +1,8 @@
 module Emarsys
   class Folder < DataObject
     class << self
-      def collection
-        get 'folder'
+      def collection(params = {})
+        get 'folder', params
       end
     end
   end

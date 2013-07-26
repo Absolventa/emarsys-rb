@@ -9,7 +9,7 @@ module Emarsys
     ]
 
     class << self
-      def collection
+      def collection(params = {})
         CODES
       end
 
