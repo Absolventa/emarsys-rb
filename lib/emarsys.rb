@@ -1,16 +1,27 @@
-require 'uri'
-require 'net/https'
-require 'json'
 require "base64"
+require 'json'
+require 'net/https'
+require 'uri'
 
 require 'emarsys/client'
+require 'emarsys/extensions'
 require 'emarsys/request'
 require 'emarsys/response'
-require 'emarsys/extensions'
 
 require 'emarsys/data_objects/base'
+require 'emarsys/data_objects/condition'
+require 'emarsys/data_objects/contact_list'
 require 'emarsys/data_objects/email'
+require 'emarsys/data_objects/email_category'
+require 'emarsys/data_objects/event'
+require 'emarsys/data_objects/export'
+require 'emarsys/data_objects/field'
+require 'emarsys/data_objects/file'
+require 'emarsys/data_objects/folder'
+require 'emarsys/data_objects/form'
 require 'emarsys/data_objects/language'
+require 'emarsys/data_objects/segment'
+require 'emarsys/data_objects/source'
 
 require "emarsys/version"
 
