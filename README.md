@@ -2,6 +2,8 @@
 
 TODO: Write a gem description
 
+HINT: All data object methods are implemented as class methods - I hate that. It is due to the Emarsys API, they usally do not provide a way to access single resources
+
 ## Installation
 
 Add this line to your application's Gemfile:

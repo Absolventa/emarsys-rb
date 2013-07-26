@@ -35,7 +35,7 @@ module Emarsys
           Emarsys::Response.new(response).result
         end
       when :delete
-        RestClient.delete(uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
+        RestClient.delete(uri, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
           Emarsys::Response.new(response).result
         end
       else

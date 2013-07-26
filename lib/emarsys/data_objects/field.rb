@@ -4,6 +4,10 @@ module Emarsys
       def collection(params = {})
         get 'field', params
       end
+
+      def choice(id)
+        get "field/#{id}/choice", {}
+      end
     end
   end
 end
