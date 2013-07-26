@@ -11,49 +11,30 @@ module Emarsys
     end
 
     def send_request
-      uri = URI.parse([Emarsys.api_endpoint, @path].join('/'))
-
-      http_request = build_request_object(uri, params.stringify_keys)
-      http_request["Content-Type"] = 'application/json'
-      http_request["X-WSSE"] = client.x_wsse_string
-
-      http = Net::HTTP.new(uri.host, uri.port)
-
-      if uri.scheme == 'https'
-        http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      end
-
-      http_result = http.request(http_request)
-
-      Emarsys::Response.new(http_result).result
+      response = perform_request(emarsys_uri)
+      Emarsys::Response.new(response).result
     end
 
+    def emarsys_uri
+      [Emarsys.api_endpoint, @path].join('/')
+    end
+
+    def converted_params
+      Emarsys::ParamsConverter.new(params).convert_to_ids
+    end
 
     private
 
-    def build_request_object(uri, data)
-      case http_verb.to_sym
+    def perform_request(uri)
+      response = case http_verb.to_sym
       when :post
-        if data["file"]
-          r = Net::HTTP::Post::Multipart.new(uri.request_uri, data)
-        else
-          r = Net::HTTP::Put.new(uri.request_uri)
-          r.set_form_data(data)
-        end
-        return r
+        RestClient.post uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string
       when :put
-        r = Net::HTTP::Put.new(uri.request_uri)
-        r.set_form_data(data)
-        return r
+        RestClient.put uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string
       when :delete
-        r = Net::HTTP::Delete.new(uri.request_uri)
-        r.set_form_data(data)
-        return r
+        RestClient.delete uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string
       else
-        r = Net::HTTP::Get.new(uri.request_uri)
-        r.set_form_data(data)
-        return r
+        RestClient.get uri, :content_type => :json, :x_wsse => client.x_wsse_string
       end
     end
 

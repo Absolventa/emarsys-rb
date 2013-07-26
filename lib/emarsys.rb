@@ -1,10 +1,12 @@
 require "base64"
 require 'json'
-require 'net/https'
+require 'rest_client'
 require 'uri'
 
 require 'emarsys/client'
 require 'emarsys/extensions'
+require 'emarsys/field_mapping'
+require 'emarsys/params_converter'
 require 'emarsys/request'
 require 'emarsys/response'
 

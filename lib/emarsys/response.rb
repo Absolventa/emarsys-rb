@@ -3,7 +3,7 @@ module Emarsys
     attr_accessor :code, :text, :data
 
     def initialize(response)
-      json = JSON.parse(response.body)
+      json = JSON.parse(response)
       self.code = json['replyCode']
       self.text = json['replyText']
       self.data = json['data']
