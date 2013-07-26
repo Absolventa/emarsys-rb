@@ -41,7 +41,6 @@ module Emarsys
           r = Net::HTTP::Put.new(uri.request_uri)
           r.set_form_data(data)
         end
-
         return r
       when :put
         r = Net::HTTP::Put.new(uri.request_uri)

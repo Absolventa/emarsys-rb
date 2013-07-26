@@ -1,8 +1,8 @@
 module Emarsys
   class Email < DataObject
     class << self
-      def collection
-        get 'email'
+      def collection(params = {})
+        get 'email', params
       end
 
       def resource(id)

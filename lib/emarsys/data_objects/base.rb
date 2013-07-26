@@ -2,8 +2,12 @@ module Emarsys
   class DataObject
 
     class << self
-      def get(method_name)
-        self.new.request method_name, 'get'
+      def get(method_name, params)
+        if params.empty?
+          self.new.request method_name, 'get', params
+        else
+          self.new.request [method_name, parameterize_params(params)].join("/"), 'get', {}
+        end
       end
 
       def post(method_name, params)
@@ -17,14 +21,18 @@ module Emarsys
       def delete(method_name, params)
         self.new.request method_name, 'delete', params
       end
+
+      def parameterize_params(params)
+        params.inject(""){|string, (k, v)| string << "#{k}=#{v}"; string << "&"; string}[0..-2]
+      end
     end
 
     def client
       Emarsys::Client.new
     end
 
-    def request(method_name, http_verb)
-      response = Emarsys::Request.new(client, method_name, http_verb).send_request
+    def request(method_name, http_verb, params)
+      response = Emarsys::Request.new(client, method_name, http_verb, params).send_request
     end
   end
 end
