@@ -13,7 +13,7 @@ describe Emarsys::ParamsConverter do
   end
 
   describe 'with attributes' do
-    it 'should set params attribute on initialize' do
+    it 'sets params attribute on initialize' do
       params = {1 => 'Jane', 2 => 'Doe'}
       params_converter = Emarsys::ParamsConverter.new(params)
       params_converter.params.should eq(params)
