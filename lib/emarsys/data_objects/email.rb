@@ -6,7 +6,7 @@ module Emarsys
       end
 
       def resource(id)
-        get "email/#{id}"
+        get "email/#{id}", {}
       end
 
       def create(params = {})

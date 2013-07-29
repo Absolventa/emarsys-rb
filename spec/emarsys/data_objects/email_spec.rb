@@ -1,33 +1,30 @@
 require 'spec_helper'
 
 describe Emarsys::Email do
-  before :each do
-    Emarsys.configure do |config|
-      config.api_username = "my_username"
-      config.api_password = "my_password"
-    end
+  before :all do
+    stub_emarsys_authentication!
   end
 
   describe ".collection" do
-    it "returns all emails" do
+    it "requests all emails" do
       stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email").to_return(standard_return_body)
       Emarsys::Email.collection
       stub.should have_been_requested.once
     end
 
-    it "returns all emails to the given status parameter" do
+    it "requests all emails to the given status parameter" do
       stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/status=3").to_return(standard_return_body)
       Emarsys::Email.collection({:status => 3})
       stub.should have_been_requested.once
     end
 
-    it "returns all emails to the given contactlist parameter" do
+    it "requests all emails to the given contactlist parameter" do
       stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/contactlist=123").to_return(standard_return_body)
       Emarsys::Email.collection({:contactlist => 123})
       stub.should have_been_requested.once
     end
 
-    it "returns all emails - even with combined parameters" do
+    it "requests all emails - even with combined parameters" do
       stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/status=3&contactlist=123").to_return(standard_return_body)
       Emarsys::Email.collection({:status => 3, :contactlist => 123})
       stub.should have_been_requested.once
@@ -35,7 +32,19 @@ describe Emarsys::Email do
   end
 
   describe ".resource" do
+    it "requests a single email" do
+      stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/123").to_return(standard_return_body)
+      Emarsys::Email.resource(123)
+      stub.should have_been_requested.once
+    end
+  end
 
+  describe ".create" do
+    it "requests email creation" do
+      stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/email").to_return(standard_return_body)
+      Emarsys::Email.create
+      stub.should have_been_requested.once
+    end
   end
 
 end
