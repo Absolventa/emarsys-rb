@@ -20,9 +20,6 @@ module Emarsys
       string
     end
 
-
-    private
-
     def header_password_digest
       Base64.encode64(calculated_digest).gsub("\n", "")
     end
