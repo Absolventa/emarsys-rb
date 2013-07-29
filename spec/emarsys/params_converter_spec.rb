@@ -4,12 +4,12 @@ describe Emarsys::ParamsConverter do
   let(:converter) { Emarsys::ParamsConverter.new({}) }
 
   before :each do
-    Emarsys::FieldMapping.send(:remove_const, 'ATTRIBUTES')
-    Emarsys::FieldMapping::ATTRIBUTES = [
+    attributes = [
       {:id => 0,   :identifier => 'interests', :name => 'Interests'},
       {:id => 1,   :identifier => 'first_name', :name => 'First Name'},
       {:id => 2,   :identifier => 'last_name',  :name => 'Last Name'},
     ]
+    stub_const("Emarsys::FieldMapping::ATTRIBUTES", attributes)
   end
 
   describe 'with attributes' do
