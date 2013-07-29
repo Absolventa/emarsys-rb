@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Emarsys::Email do
-  before :all do
-    stub_emarsys_authentication!
-  end
-
   describe ".collection" do
     it "requests all emails" do
       stub_get('email') { Emarsys::Email.collection }.should have_been_requested.once

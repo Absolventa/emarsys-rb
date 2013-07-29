@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Emarsys::Contact do
-  before :all do
-    stub_emarsys_authentication!
-  end
-
   describe ".create" do
     it "requests contact creation" do
       stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/contact").to_return(standard_return_body)
