@@ -7,35 +7,25 @@ describe Emarsys::Email do
 
   describe ".collection" do
     it "requests all emails" do
-      stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email").to_return(standard_return_body)
-      Emarsys::Email.collection
-      stub.should have_been_requested.once
+      stub_get('email') { Emarsys::Email.collection }.should have_been_requested.once
     end
 
     it "requests all emails to the given status parameter" do
-      stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/status=3").to_return(standard_return_body)
-      Emarsys::Email.collection({:status => 3})
-      stub.should have_been_requested.once
+      stub_get('email/status=3') { Emarsys::Email.collection({:status => 3}) }.should have_been_requested.once
     end
 
     it "requests all emails to the given contactlist parameter" do
-      stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/contactlist=123").to_return(standard_return_body)
-      Emarsys::Email.collection({:contactlist => 123})
-      stub.should have_been_requested.once
+      stub_get('email/contactlist=123') { Emarsys::Email.collection({:contactlist => 123}) }.should have_been_requested.once
     end
 
     it "requests all emails - even with combined parameters" do
-      stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/status=3&contactlist=123").to_return(standard_return_body)
-      Emarsys::Email.collection({:status => 3, :contactlist => 123})
-      stub.should have_been_requested.once
+      stub_get('email/status=3&contactlist=123') { Emarsys::Email.collection({:status => 3, :contactlist => 123}) }.should have_been_requested.once
     end
   end
 
   describe ".resource" do
     it "requests a single email" do
-      stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/email/123").to_return(standard_return_body)
-      Emarsys::Email.resource(123)
-      stub.should have_been_requested.once
+      stub_get('email/123') { Emarsys::Email.resource(123) }.should have_been_requested.once
     end
   end
 

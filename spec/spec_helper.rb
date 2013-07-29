@@ -18,3 +18,9 @@ end
 def standard_return_body
   {:body => "{\"replyCode\":0,\"replyText\":\"Something\",\"data\":1}"}
 end
+
+def stub_get(path, &block)
+  stub = stub_request(:get, "https://suite5.emarsys.net/api/v2/#{path}").to_return(standard_return_body)
+  yield if block_given?
+  stub
+end
