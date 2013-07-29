@@ -32,7 +32,7 @@ module Emarsys
     end
 
     def request(method_name, http_verb, params)
-      response = Emarsys::Request.new(client, method_name, http_verb, params).send_request
+      Emarsys::Request.new(client, method_name, http_verb, params).send_request
     end
   end
 end
