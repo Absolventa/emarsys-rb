@@ -1,0 +1,59 @@
+require 'spec_helper'
+
+describe Emarsys::DataObject do
+  context "as a class" do
+
+    describe '.get' do
+      it "delegates to the instance request method" do
+        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'get', {}).and_return(nil)
+        Emarsys::DataObject.get('test_method', {})
+      end
+
+      it "transfers params to specific emarsys params format" do
+        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method/a=1&b=2', 'get', {}).and_return(nil)
+        Emarsys::DataObject.get('test_method', {'a' => 1, 'b' => 2})
+      end
+    end
+
+    describe '.post' do
+      it "delegates to the instance request method" do
+        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'post', {}).and_return(nil)
+        Emarsys::DataObject.post('test_method', {})
+      end
+    end
+
+    describe '.put' do
+      it "delegates to the instance request method" do
+        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'put', {}).and_return(nil)
+        Emarsys::DataObject.put('test_method', {})
+      end
+    end
+
+    describe '.delete' do
+      it "delegates to the instance request method" do
+        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'delete', {}).and_return(nil)
+        Emarsys::DataObject.delete('test_method', {})
+      end
+    end
+
+    describe '.parameterize_params' do
+      it "converts hash to params string" do
+        params = {"a" => 1, "b" => 2, "c" => 3}
+        expect(Emarsys::DataObject.parameterize_params(params)).to eq("a=1&b=2&c=3")
+      end
+    end
+  end
+
+  context "as an instance" do
+    let(:data_object) { Emarsys::DataObject.new }
+
+    it "provides a simple client accessor method" do
+      expect(data_object.client).to be_a(Emarsys::Client)
+    end
+
+    it "provides a simpel #request that delegates to Emarsys::Request" do
+      Emarsys::Request.any_instance.should_receive(:send_request).and_return(nil)
+      data_object.request('test_method', 'get', {})
+    end
+  end
+end
