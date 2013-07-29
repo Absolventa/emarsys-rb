@@ -45,6 +45,13 @@ describe Emarsys::Email do
       Emarsys::Email.create
       stub.should have_been_requested.once
     end
+
+    it "requests email creation with parameters" do
+      stub_params = {:language => 'de', :name => "Something"}
+      stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/email").with(:body => stub_params.to_json).to_return(standard_return_body)
+      Emarsys::Email.create(stub_params)
+      stub.should have_been_requested.once
+    end
   end
 
 end
