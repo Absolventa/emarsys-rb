@@ -11,7 +11,24 @@ module Emarsys
     end
 
     def send_request
-      perform_request(emarsys_uri)
+      case http_verb.to_sym
+      when :post
+        RestClient.post(emarsys_uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
+      when :put
+        RestClient.put emarsys_uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
+      when :delete
+        RestClient.delete(emarsys_uri, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
+      else
+        RestClient.get(emarsys_uri, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
+          Emarsys::Response.new(response).result
+        end
+      end
     end
 
     def emarsys_uri
@@ -20,29 +37,6 @@ module Emarsys
 
     def converted_params
       Emarsys::ParamsConverter.new(params).convert_to_ids
-    end
-
-    private
-
-    def perform_request(uri)
-      case http_verb.to_sym
-      when :post
-        RestClient.post(uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
-          Emarsys::Response.new(response).result
-        end
-      when :put
-        RestClient.put uri, converted_params.to_json, :content_type => :json, :x_wsse => client.x_wsse_string do |response, request, result, &block|
-          Emarsys::Response.new(response).result
-        end
-      when :delete
-        RestClient.delete(uri, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
-          Emarsys::Response.new(response).result
-        end
-      else
-        RestClient.get(uri, :content_type => :json, :x_wsse => client.x_wsse_string) do |response, request, result, &block|
-          Emarsys::Response.new(response).result
-        end
-      end
     end
 
   end
