@@ -1,9 +1,9 @@
 module Emarsys
 
   class Request
-    attr_accessor :client, :path, :http_verb, :params
+    attr_accessor :http_verb, :path, :params
 
-    def initialize(path, http_verb, params = {})
+    def initialize(http_verb, path, params = {})
       self.path = path
       self.http_verb = http_verb
       self.params = params
@@ -41,7 +41,6 @@ module Emarsys
     def converted_params
       Emarsys::ParamsConverter.new(params).convert_to_ids
     end
-
   end
 
 end

@@ -4,22 +4,22 @@ module Emarsys
     class << self
       def get(method_name, params)
         if params.empty?
-          self.new.request method_name, 'get', params
+          self.new.request 'get', method_name, params
         else
-          self.new.request [method_name, parameterize_params(params)].join("/"), 'get', {}
+          self.new.request 'get', [method_name, parameterize_params(params)].join("/"), {}
         end
       end
 
       def post(method_name, params)
-        self.new.request method_name, 'post', params
+        self.new.request 'post', method_name, params
       end
 
       def put(method_name, params)
-        self.new.request method_name, 'put', params
+        self.new.request 'put', method_name, params
       end
 
       def delete(method_name, params)
-        self.new.request method_name, 'delete', params
+        self.new.request 'delete', method_name, params
       end
 
       def parameterize_params(params)
@@ -27,8 +27,8 @@ module Emarsys
       end
     end
 
-    def request(method_name, http_verb, params)
-      Emarsys::Request.new(method_name, http_verb, params).send_request
+    def request(http_verb, method_name, params)
+      Emarsys::Request.new(http_verb, method_name, params).send_request
     end
   end
 end

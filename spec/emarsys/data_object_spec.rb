@@ -5,33 +5,33 @@ describe Emarsys::DataObject do
 
     describe '.get' do
       it "delegates to the instance request method" do
-        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'get', {}).and_return(nil)
+        Emarsys::DataObject.any_instance.should_receive(:request).with('get', 'test_method', {}).and_return(nil)
         Emarsys::DataObject.get('test_method', {})
       end
 
       it "transfers params to specific emarsys params format" do
-        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method/a=1&b=2', 'get', {}).and_return(nil)
+        Emarsys::DataObject.any_instance.should_receive(:request).with('get', 'test_method/a=1&b=2', {}).and_return(nil)
         Emarsys::DataObject.get('test_method', {'a' => 1, 'b' => 2})
       end
     end
 
     describe '.post' do
       it "delegates to the instance request method" do
-        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'post', {}).and_return(nil)
+        Emarsys::DataObject.any_instance.should_receive(:request).with('post', 'test_method', {}).and_return(nil)
         Emarsys::DataObject.post('test_method', {})
       end
     end
 
     describe '.put' do
       it "delegates to the instance request method" do
-        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'put', {}).and_return(nil)
+        Emarsys::DataObject.any_instance.should_receive(:request).with('put', 'test_method', {}).and_return(nil)
         Emarsys::DataObject.put('test_method', {})
       end
     end
 
     describe '.delete' do
       it "delegates to the instance request method" do
-        Emarsys::DataObject.any_instance.should_receive(:request).with('test_method', 'delete', {}).and_return(nil)
+        Emarsys::DataObject.any_instance.should_receive(:request).with('delete', 'test_method', {}).and_return(nil)
         Emarsys::DataObject.delete('test_method', {})
       end
     end
@@ -49,7 +49,7 @@ describe Emarsys::DataObject do
 
     it "provides a simpel #request that delegates to Emarsys::Request" do
       Emarsys::Request.any_instance.should_receive(:send_request).and_return(nil)
-      data_object.request('test_method', 'get', {})
+      data_object.request('get', 'test_method', {})
     end
   end
 end
