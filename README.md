@@ -4,7 +4,7 @@ Simple Ruby wrapper for the Emarsys API.
 
 ## Installation
 
-    $ gem install emarsys
+    gem install emarsys
 
 ## Emarsys API Hint
 
@@ -27,11 +27,12 @@ as the global return object
 ## Configuration and Setup
 ### Authentication
 
-    $ Emarsys.configure do |c|
-    $   c.api_username = 'my_username'
-    $   c.api_password = 'my_password'
-    $   c.api_endpoint = 'https://www.emarsys.net/api/v2' # OPTIONAL, defaults to https://suite5.emarsys.net/api/v2
-    $ end
+    Emarsys.configure do |c|
+      c.api_username = 'my_username'
+      c.api_password = 'my_password'
+      # OPTIONAL, defaults to https://suite5.emarsys.net/api/v2
+      c.api_endpoint = 'https://www.emarsys.net/api/v2'
+    end
 
 ### Field Mapping
 
@@ -39,79 +40,83 @@ As said before, Emarsys loves IDs. For using an APi, they are evil. This Gem pro
 an easy way to adjust the individual field settings. Internally there is a Ruby Constant,
 that can be overwritten, the mapping will be picked up automatically. E.g.:
 
-    $  # Complete overwrite
-    $  Emarsys::FieldMapping::ATTRIBUTES = [
-    $    {:id => 0,   :identifier => 'interests',                  :name => 'Interests'},
-    $    {:id => 1,   :identifier => 'first_name',                 :name => 'First Name'},
-    $    {:id => 2,   :identifier => 'last_name',                  :name => 'Last Name'},
-    $  ]
+    # Complete overwrite
+    Emarsys::FieldMapping::ATTRIBUTES = [
+      {:id => 0, :identifier => 'interests',  :name => 'Interests'},
+      {:id => 1, :identifier => 'first_name', :name => 'First Name'},
+      {:id => 2, :identifier => 'last_name',  :name => 'Last Name'},
+    ]
 
-    $  # Complete overwrite
-    $  Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'age', :name => "Age"}
+    # Add to the Mapping-Constant
+    Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'id', :name => "User_id"}
 
 
 ## Interacting with the API
 ### Condition
 
-    $ Emarsys::Language.collection
+    Emarsys::Language.collection
 
 ### Contact
 
-    $ Emarsys::Contact.create
-    $ Emarsys::Contact.update
+    # Create a contact with custom key_field (identifier called 'user_id', internally mapped to the id 100)
+    Emarsys::Contact.create({:user_id => 10}, {:first_name => "Jane", :lastname => "Doe", :email => "jane.doe@example.com"})
+
+    # Update a contact with key_field (identifier called 'email', internally mapped to the id 3)
+    Emarsys::Contact.update({:email => "jane.doe@example.com"}, {:first_name => "John", :lastname => "Doe"})
 
 ### ContactList
 
-    $ # Get all contact_lists
-    $ Emarsys::ContactList.collection
-    $
-    $ # Create a contact list
-    $ Emarsys::ContactList.create
+    # Get all contact_lists
+    Emarsys::ContactList.collection
+
+    # Create a contact list
+    Emarsys::ContactList.create
 
 ### Emails
 
-    $ Emarsys::Email.collection
-    $ Emarsys::Email.collection(:status => 3)
-    $ Emarsys::Email.resource(1)
-    $ Emarsys::Email.create({})
-    $ Emarsys::Email.launch({})
+    Emarsys::Email.collection
+    Emarsys::Email.collection(:status => 3)
+    Emarsys::Email.resource(1)
+    Emarsys::Email.create({})
+    Emarsys::Email.launch({})
 
 ### Event
 
-    $ Emarsys::Event.collection
-    $ Emarsys::Event.trigger(65, 3, ["test@example.com"])
+    Emarsys::Event.collection
+    Emarsys::Event.trigger(65, 3, ["test@example.com"])
 
 ### Export
 
-    $ Emarsys::Export.resource(1)
+    Emarsys::Export.resource(1)
 
 ### Field
 
-    $ Emarsys::Field.collection
-    $ Emarsys::Field.choice(1)
+    Emarsys::Field.collection
+    Emarsys::Field.choice(1)
 
 ### Folder
 
-    $ Emarsys::Folder.collection
-    $ Emarsys::Folder.collection(:folder => 3)
+    Emarsys::Folder.collection
+    Emarsys::Folder.collection(:folder => 3)
 
 ### Form
 
-    $ Emarsys::Form.collection
+    Emarsys::Form.collection
 
 ### Language
 
-    $ Emarsys::Language.collection
+    Emarsys::Language.collection
 
 ### Segment
 
-    $ Emarsys::Segment.collection
+    Emarsys::Segment.collection
 
 ### Source
 
-    $ Emarsys::Source.collection
-    $ Emarsys::Source.create("New Source")
-    $ Emarsys::Source.destroy(123)
+    Emarsys::Source.collection
+    Emarsys::Source.create("New Source")
+    Emarsys::Source.destroy(123)
+
 
 Please refer to the code easir understand of each method.
 
