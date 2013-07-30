@@ -15,6 +15,7 @@ style was chossen it is most likely due to the inconsistency of the API itself.
 Feel free to get in touch or submit a pull request if something is missing.
 
 Must-known facts about the Emarsys API:
+
 * all data_fields must be specified with the internal Emarsys-ID. E.g. "first_name"
 defaults to "1", last_name defaults to "2" etc.
 * certain methods require the specification of a key-field. It defaults to the Emarsys default
@@ -34,6 +35,20 @@ as the global return object
 
 ### Field Mapping
 
+As said before, Emarsys loves IDs. For using an APi, they are evil. This Gem provides
+an easy way to adjust the individual field settings. Internally there is a Ruby Constant,
+that can be overwritten, the mapping will be picked up automatically. E.g.:
+
+    $  # Complete overwrite
+    $  Emarsys::FieldMapping::ATTRIBUTES = [
+    $    {:id => 0,   :identifier => 'interests',                  :name => 'Interests'},
+    $    {:id => 1,   :identifier => 'first_name',                 :name => 'First Name'},
+    $    {:id => 2,   :identifier => 'last_name',                  :name => 'Last Name'},
+    $  ]
+
+    $  # Complete overwrite
+    $  Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'age', :name => "Age"}
+
 
 ## Interacting with the API
 ### Condition
@@ -45,16 +60,40 @@ as the global return object
     $ Emarsys::Contact.create
     $ Emarsys::Contact.update
 
+### ContactList
+
+    $ # Get all contact_lists
+    $ Emarsys::ContactList.collection
+    $
+    $ # Create a contact list
+    $ Emarsys::ContactList.create
+
 ### Emails
 
     $ Emarsys::Email.collection
     $ Emarsys::Email.collection(:status => 3)
     $ Emarsys::Email.resource(1)
+    $ Emarsys::Email.create({})
+    $ Emarsys::Email.launch({})
 
 ### Event
 
     $ Emarsys::Event.collection
     $ Emarsys::Event.trigger(65, 3, ["test@example.com"])
+
+### Export
+
+    $ Emarsys::Export.resource(1)
+
+### Field
+
+    $ Emarsys::Field.collection
+    $ Emarsys::Field.choice(1)
+
+### Folder
+
+    $ Emarsys::Folder.collection
+    $ Emarsys::Folder.collection(:folder => 3)
 
 ### Form
 
@@ -64,13 +103,17 @@ as the global return object
 
     $ Emarsys::Language.collection
 
-### Sources
+### Segment
+
+    $ Emarsys::Segment.collection
+
+### Source
 
     $ Emarsys::Source.collection
-    $ Emarsys::Source.create(:name => "New Source")
+    $ Emarsys::Source.create("New Source")
     $ Emarsys::Source.destroy(123)
 
-Please refer to the code for more method. It should be quite easy to understand.
+Please refer to the code easir understand of each method.
 
 
 ## Contributing
@@ -80,3 +123,8 @@ Please refer to the code for more method. It should be quite easy to understand.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+## Copyright
+
+Copyright (c) 2013 Daniel Schoppmann. See LICENSE.txt for details.

@@ -1,8 +1,8 @@
 module Emarsys
   class ContactList < DataObject
     class << self
-      def collection(params = {})
-        get 'contactlist', params
+      def collection
+        get 'contactlist', {}
       end
 
       def create(params = {})
