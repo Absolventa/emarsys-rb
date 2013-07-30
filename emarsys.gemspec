@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "emarsys"
   spec.version       = Emarsys::VERSION
   spec.authors       = ["Daniel Schoppmann"]
-  spec.email         = ["daniel.schoppmann@gmail.com"]
-  spec.description   = %q{Emarsys Ruby Wrapper}
-  spec.summary       = %q{Emarsys Ruby Wrapper}
-  spec.homepage      = ""
+  spec.email         = ["daniel.schoppmann@absolventa.de"]
+  spec.description   = %q{A Ruby library for interacting with the Emarsys API.}
+  spec.summary       = %q{Easy to use client library for Sirportly.}
+  spec.homepage      = "http://www.absolventa.de"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
