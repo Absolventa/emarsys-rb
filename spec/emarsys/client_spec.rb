@@ -12,6 +12,16 @@ describe Emarsys::Client do
       Emarsys.stub(:api_password).and_return("my_password")
       expect(Emarsys::Client.new.password).to eq("my_password")
     end
+
+    it 'raises error if api_username is not set' do
+      Emarsys.stub(:api_username).and_return(nil)
+      expect{Emarsys::Client.new.username}.to raise_error(ArgumentError, 'Emarsys.api_username is not set')
+    end
+
+    it 'raises error if api_password is not set' do
+      Emarsys.stub(:api_password).and_return(nil)
+      expect{Emarsys::Client.new.password}.to raise_error(ArgumentError, 'Emarsys.api_password is not set')
+    end
   end
 
   context 'client authentication' do

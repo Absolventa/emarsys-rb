@@ -2,12 +2,12 @@ module Emarsys
   class Client
 
     def username
-      # TODO raise error if not set
+      raise ArgumentError, "Emarsys.api_username is not set" if Emarsys.api_username.nil?
       Emarsys.api_username
     end
 
     def password
-      # TODO raise error if not set
+      raise ArgumentError, "Emarsys.api_password is not set" if Emarsys.api_password.nil?
       Emarsys.api_password
     end
 
