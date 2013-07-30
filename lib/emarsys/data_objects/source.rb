@@ -5,8 +5,8 @@ module Emarsys
         get 'source', {}
       end
 
-      def create(params = {})
-        post 'source/create', params
+      def create(name)
+        post 'source/create', {:name => name}
       end
 
       def destroy(id)
