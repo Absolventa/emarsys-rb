@@ -20,10 +20,15 @@ describe Emarsys::Response do
       expect(response.result).to eq(1)
     end
 
-    it "raises error if code is not 0" do
+    it "raises BadRequest error if code is not 0" do
       response.stub(:code).and_return(1)
-      response.stub(:text).and_return("XY is missing")
-      expect{response.result}.to raise_error(RuntimeError, "Somethign is wrong - Code #{response.code}: #{response.text}")
+      expect{response.result}.to raise_error(Emarsys::BadRequest)
+    end
+
+    it "raises Unauthorized error if http-status is 401" do
+      response.stub(:code).and_return(1)
+      response.stub(:status).and_return(401)
+      expect{response.result}.to raise_error(Emarsys::Unauthorized)
     end
   end
 

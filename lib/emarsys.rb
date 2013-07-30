@@ -5,6 +5,7 @@ require 'uri'
 
 require 'emarsys/client'
 require 'emarsys/data_object'
+require 'emarsys/error'
 require 'emarsys/extensions'
 require 'emarsys/field_mapping'
 require 'emarsys/params_converter'
