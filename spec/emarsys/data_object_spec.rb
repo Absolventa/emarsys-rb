@@ -47,10 +47,6 @@ describe Emarsys::DataObject do
   context "as an instance" do
     let(:data_object) { Emarsys::DataObject.new }
 
-    it "provides a simple client accessor method" do
-      expect(data_object.client).to be_a(Emarsys::Client)
-    end
-
     it "provides a simpel #request that delegates to Emarsys::Request" do
       Emarsys::Request.any_instance.should_receive(:send_request).and_return(nil)
       data_object.request('test_method', 'get', {})

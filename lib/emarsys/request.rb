@@ -3,8 +3,7 @@ module Emarsys
   class Request
     attr_accessor :client, :path, :http_verb, :params
 
-    def initialize(client, path, http_verb, params = {})
-      self.client = client
+    def initialize(path, http_verb, params = {})
       self.path = path
       self.http_verb = http_verb
       self.params = params
@@ -29,6 +28,10 @@ module Emarsys
           Emarsys::Response.new(response).result
         end
       end
+    end
+
+    def client
+      Emarsys::Client.new
     end
 
     def emarsys_uri

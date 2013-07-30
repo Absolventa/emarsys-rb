@@ -27,12 +27,8 @@ module Emarsys
       end
     end
 
-    def client
-      Emarsys::Client.new
-    end
-
     def request(method_name, http_verb, params)
-      Emarsys::Request.new(client, method_name, http_verb, params).send_request
+      Emarsys::Request.new(method_name, http_verb, params).send_request
     end
   end
 end
