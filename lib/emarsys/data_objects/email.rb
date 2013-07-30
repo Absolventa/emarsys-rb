@@ -16,6 +16,10 @@ module Emarsys
       def launch
         # TODO
       end
+
+      def response_summary(id)
+        get "email/#{id}/responsesummary", {}
+      end
     end
   end
 end

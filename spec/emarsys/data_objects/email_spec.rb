@@ -40,4 +40,10 @@ describe Emarsys::Email do
     end
   end
 
+  describe ".response_summary" do
+    it "requests a single email" do
+      stub_get('email/123/responsesummary') { Emarsys::Email.response_summary(123) }.should have_been_requested.once
+    end
+  end
+
 end
