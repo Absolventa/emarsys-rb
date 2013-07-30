@@ -1,8 +1,8 @@
 module Emarsys
   class EmailCategory < DataObject
     class << self
-      def collection(params = {})
-        get 'emailcategory', params
+      def collection
+        get 'emailcategory', {}
       end
     end
   end

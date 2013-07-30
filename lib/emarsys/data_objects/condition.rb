@@ -1,8 +1,8 @@
 module Emarsys
   class Condition < DataObject
     class << self
-      def collection(params = {})
-        get 'condition', params
+      def collection
+        get 'condition', {}
       end
     end
   end
