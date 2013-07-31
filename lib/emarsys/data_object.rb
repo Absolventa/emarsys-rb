@@ -1,3 +1,5 @@
+require 'hashie'
+
 module Emarsys
   class DataObject
 
@@ -28,7 +30,19 @@ module Emarsys
     end
 
     def request(http_verb, method_name, params)
-      Emarsys::Request.new(http_verb, method_name, params).send_request
+      response = Emarsys::Request.new(http_verb, method_name, params).send_request
+      #hashiefy(response)
+    end
+
+    # TODO: Not finally evaluated. Is Hashie necessary? Maybe use "real Data Objects instead"?
+    def hashiefy(response)
+      if response.is_a?(Array)
+        response.map!{|elem| Hashie::Mash.new(elem) }
+      elsif
+        Hashie::Mash.new(response)
+      else
+        response
+      end
     end
   end
 end
