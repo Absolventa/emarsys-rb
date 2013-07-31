@@ -54,7 +54,7 @@ that can be overwritten, the mapping will be picked up automatically. E.g.:
 ## Interacting with the API
 ### Condition
 
-    Emarsys::Language.collection
+    Emarsys::Condition.collection
 
 ### Contact
 

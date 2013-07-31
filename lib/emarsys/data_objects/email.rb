@@ -17,6 +17,10 @@ module Emarsys
         # TODO
       end
 
+      def preview(id, version = 'html')
+        post "email/#{id}/preview", {:version => version}
+      end
+
       def response_summary(id)
         get "email/#{id}/responsesummary", {}
       end

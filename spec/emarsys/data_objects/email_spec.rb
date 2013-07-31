@@ -40,6 +40,15 @@ describe Emarsys::Email do
     end
   end
 
+  describe ".preview" do
+    it "requests an email preview" do
+      stub_params = {:version => 'html'}
+      stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/email/123/preview").with(:body => stub_params.to_json).to_return(standard_return_body)
+      Emarsys::Email.preview(123, 'html')
+      stub.should have_been_requested.once
+    end
+  end
+
   describe ".response_summary" do
     it "requests a single email" do
       stub_get('email/123/responsesummary') { Emarsys::Email.response_summary(123) }.should have_been_requested.once
