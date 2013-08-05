@@ -59,10 +59,16 @@ that can be overwritten, the mapping will be picked up automatically. E.g.:
 ### Contact
 
     # Create a contact with custom key_field (identifier called 'user_id', internally mapped to the id 100)
-    Emarsys::Contact.create({:user_id => 10}, {:first_name => "Jane", :lastname => "Doe", :email => "jane.doe@example.com"})
+    Emarsys::Contact.create('user_id', 10, {:first_name => "Jane", :lastname => "Doe", :email => "jane.doe@example.com"})
 
     # Update a contact with key_field (identifier called 'email', internally mapped to the id 3)
-    Emarsys::Contact.update({:email => "jane.doe@example.com"}, {:first_name => "John", :lastname => "Doe"})
+    Emarsys::Contact.update('email', "jane.doe@example.com", {:firstname => "John", :lastname => "Doe"})
+
+    Emarsys::Contact.create_batch(...)
+    Emarsys::Contact.update_batch(...)
+
+    # HINT: Emarsys does not implement a deleting of a contact. Use the update action to somehow "delete" user data
+    Emarsys::Contact.update('email', "jane.doe@example.com", {:firstname => nil, :lastname => nil})
 
 ### ContactList
 
@@ -74,7 +80,9 @@ that can be overwritten, the mapping will be picked up automatically. E.g.:
 
 ### Emails
 
+    # Get all email campaigns
     Emarsys::Email.collection
+
     Emarsys::Email.collection(:status => 3)
     Emarsys::Email.resource(1)
     Emarsys::Email.create({})
@@ -118,7 +126,7 @@ that can be overwritten, the mapping will be picked up automatically. E.g.:
     Emarsys::Source.destroy(123)
 
 
-Please refer to the code easir understand of each method.
+Please refer to the code for detailed instructions of each method.
 
 
 ## Contributing
