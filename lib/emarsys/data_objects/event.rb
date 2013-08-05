@@ -6,6 +6,12 @@ module Emarsys
   class Event < DataObject
 
     class << self
+
+      # List events
+      #
+      # @return [Hash] List of events
+      # @example
+      #   Emarsys::Event.collection
       def collection
         get 'event', {}
       end

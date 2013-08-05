@@ -11,6 +11,10 @@ module Emarsys
       # @option params [String] :status filter by status
       # @option params [String] :contactlist filter by contactlist
       # @return [Hash] List of emails
+      # @example
+      #   Emarsys::Email.collection
+      #   Emarsys::Email.collection(:status => 3)
+      #   Emarsys::Email.collection(:contactlist => 5)
       def collection(params = {})
         get 'email', params
       end
