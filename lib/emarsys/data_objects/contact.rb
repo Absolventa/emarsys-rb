@@ -5,13 +5,26 @@ module Emarsys
         post "contact", params.merge!({'key_id' => transform_key_id(key_id), transform_key_id(key_id) => key_value})
       end
 
+      def emarsys_id(key_id, key_value)
+        get "contact/#{key_id.to_s}=#{key_value.to_s}", {}
+      end
+
       def update(key_id, key_value, params = {})
         put "contact", params.merge!({'key_id' => transform_key_id(key_id), transform_key_id(key_id) => key_value})
       end
 
-      # Fake destroy - delete all attributes
-      def destroy(key_id, key_value, params = {})
-        update(key_id, key_value, params)
+      # TODO params should be parameterized with field mappings
+      def create_batch(key_id, params = [])
+        post "contact", {'key_id' => transform_key_id(key_id), 'contacts' => params}
+      end
+
+      # TODO params should be parameterized with field mappings
+      def update_batch(key_id, params = [])
+        put "contact", {'key_id' => transform_key_id(key_id), 'contacts' => params}
+      end
+
+      def contact_history(contact_ids_array)
+        post "contact/getcontacthistory", {'contacts' => contact_ids_array}
       end
 
       def transform_key_id(key_id)
