@@ -27,6 +27,11 @@ module Emarsys
         post "contact/getcontacthistory", {'contacts' => contact_ids_array}
       end
 
+      # TODO transform fields to numeric fields
+      def search(key_id, key_values = [], fields = [])
+        post "contact/getdata", {'keyId' => key_id, 'keyValues' => key_values, 'fields' => fields}
+      end
+
       def transform_key_id(key_id)
         matching_attributes = Emarsys::FieldMapping::ATTRIBUTES.find{|elem| elem[:identifier] == key_id.to_s}
         matching_attributes.nil? ? key_id : matching_attributes[:id]

@@ -54,6 +54,14 @@ describe Emarsys::Contact do
     end
   end
 
+  describe ".search" do
+    it "requests contact data based on search params" do
+      stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/contact/getdata").with(:body => {'keyId' => '3', 'keyValues' => ['jane.doe@example.com'], 'fields' => []}.to_json).to_return(standard_return_body)
+      Emarsys::Contact.search('3', ['jane.doe@example.com'])
+      stub.should have_been_requested.once
+    end
+  end
+
   def contact_history(contact_ids_array)
     post "contact/getcontacthistory", {'contacts' => contact_ids_array}
   end
