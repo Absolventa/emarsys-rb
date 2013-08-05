@@ -1,5 +1,10 @@
 module Emarsys
+
+  # Internal helper class for valid email status codes.
+  # Emarsys has no implementation for this data resource.
+  #
   class EmailStatusCode < DataObject
+
     CODES = [
       {'1'   => 'In design'},
       {'2'   => 'Tested'},
@@ -9,7 +14,8 @@ module Emarsys
     ]
 
     class << self
-      def collection(params = {})
+
+      def collection
         CODES
       end
 
@@ -17,5 +23,6 @@ module Emarsys
         CODES.select{|hash| hash.has_key?(id.to_s)}[0]
       end
     end
+
   end
 end

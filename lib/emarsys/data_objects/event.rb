@@ -1,5 +1,10 @@
 module Emarsys
+
+  # Methods for the Event API
+  #
+  #
   class Event < DataObject
+
     class << self
       def collection
         get 'event', {}
@@ -9,5 +14,6 @@ module Emarsys
         post "event/#{event_id}/trigger", {:key_id => key_id, :external_id => external_id}
       end
     end
+
   end
 end

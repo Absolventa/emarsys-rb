@@ -5,10 +5,6 @@ describe Emarsys::EmailLaunchStatus do
     it "requests all email_launch_status" do
       pending
     end
-
-    it "requests all email_launch_status with parameters" do
-      pending
-    end
   end
 
   describe ".resource" do

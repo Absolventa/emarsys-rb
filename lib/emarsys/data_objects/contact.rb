@@ -1,5 +1,10 @@
 module Emarsys
+
+  # Methods for the Contact API
+  #
+  #
   class Contact < DataObject
+
     class << self
       def create(key_id, key_value, params = {})
         post "contact", params.merge!({'key_id' => transform_key_id(key_id), transform_key_id(key_id) => key_value})
@@ -38,5 +43,7 @@ module Emarsys
       end
 
     end
+
   end
+
 end

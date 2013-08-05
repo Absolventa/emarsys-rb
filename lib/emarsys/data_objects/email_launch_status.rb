@@ -1,5 +1,10 @@
 module Emarsys
+
+  # Internal helper class for valid email launch status.
+  # Emarsys has no implementation for this data resource.
+  #
   class EmailLaunchStatus < DataObject
+
     CODES = [
       {'0'   => 'Not launched'},
       {'1'   => 'Launch called via API, launching in Progress'},
@@ -8,7 +13,7 @@ module Emarsys
     ]
 
     class << self
-      def collection(params = {})
+      def collection
         CODES
       end
 
@@ -16,5 +21,6 @@ module Emarsys
         CODES.select{|hash| hash.has_key?(id.to_s)}[0]
       end
     end
+
   end
 end
