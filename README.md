@@ -9,10 +9,11 @@ Simple Ruby wrapper for the Emarsys API.
 ## Emarsys API Hint
 
 This wrapper tries to implement all available methods of the Emarsys API in a
-Ruby-like manner. However, the Emarsys API lacks a decent amount of methods.
+Ruby-like fashion. However, the Emarsys API lacks a decent amount of methods that
+you would an API to provide.
 Thus, if methods are missing or a certain implementation
-style was chossen it is most likely due to the inconsistency of the API itself.
-Feel free to get in touch or submit a pull request if something is missing.
+style was choosen it is most likely due to the inconsistency of the API itself.
+Feel free to get in touch or submit a pull request if you encounter any problems.
 
 Must-known facts about the Emarsys API:
 
@@ -22,7 +23,8 @@ defaults to "1", last_name defaults to "2" etc.
 ("3" - internally it is called email)
 * It is due to the Emarsys API, they usally do not provide a way to access single resources
 * return values differ from method to method. Thus, a Hash or Array of Hashes was choosen
-as the global return object
+as the global return object. It is simply a parsed JSON response.
+* Please refer to the Emarsys API documentation for detailed information on Parameters or Return Values.
 
 ## Configuration and Setup
 ### Authentication
@@ -37,23 +39,24 @@ as the global return object
 ### Field Mapping
 
 As said before, Emarsys loves IDs. For using an APi, they are evil. This Gem provides
-an easy way to adjust the individual field settings. Internally there is a Ruby Constant,
-that can be overwritten, the mapping will be picked up automatically. E.g.:
+an easy way to adjust the individual field settings. Internally a Ruby Mapping Constant is used,
+which that can be overwritten. It will be picked up automatically. E.g.:
 
     # Complete overwrite
     Emarsys::FieldMapping::ATTRIBUTES = [
-      {:id => 0, :identifier => 'interests',  :name => 'Interests'},
-      {:id => 1, :identifier => 'first_name', :name => 'First Name'},
-      {:id => 2, :identifier => 'last_name',  :name => 'Last Name'},
+      {:id => 0, :identifier => 'interests', :name => 'Interests'},
+      {:id => 1, :identifier => 'firstname', :name => 'First Name'},
+      {:id => 2, :identifier => 'lastname',  :name => 'Last Name'},
     ]
 
     # Add to the Mapping-Constant
-    Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'id', :name => "User_id"}
+    Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'user_id', :name => "User-ID"}
 
 
 ## Interacting with the API
 ### Condition
 
+    # Get all conditions
     Emarsys::Condition.collection
 
 ### Contact
@@ -80,12 +83,16 @@ that can be overwritten, the mapping will be picked up automatically. E.g.:
 
 ### Emails
 
-    # Get all email campaigns
+    # Get all email campaigns, optional filter
     Emarsys::Email.collection
-
     Emarsys::Email.collection(:status => 3)
+
+    # Get a single email resource
     Emarsys::Email.resource(1)
+
+    # Create a new email campaign
     Emarsys::Email.create({})
+
     Emarsys::Email.launch({})
 
 ### Event
@@ -104,25 +111,34 @@ that can be overwritten, the mapping will be picked up automatically. E.g.:
 
 ### Folder
 
+    # Get all forms, optional filter parameters
     Emarsys::Folder.collection
     Emarsys::Folder.collection(:folder => 3)
 
 ### Form
 
+    # Get all forms
     Emarsys::Form.collection
 
 ### Language
 
+    # Get all languages
     Emarsys::Language.collection
 
 ### Segment
 
+    # Get all segments
     Emarsys::Segment.collection
 
 ### Source
 
+    # Get all sources
     Emarsys::Source.collection
+
+    # Create a new source
     Emarsys::Source.create("New Source")
+
+    # Destroy a source
     Emarsys::Source.destroy(123)
 
 
