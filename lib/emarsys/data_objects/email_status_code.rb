@@ -26,8 +26,8 @@ module Emarsys
 
       # Get a specific email status codes
       #
-      # @param [Integer, String] key of the code
-      # @return [Hash] Key value-Pair of the status code
+      # @param [Integer, String] id of the code
+      # @return [Hash] Key-Value-Pair of the status code
       # @example
       #   Emarsys::EmailStatusCode.resource('1')
       def resource(id)

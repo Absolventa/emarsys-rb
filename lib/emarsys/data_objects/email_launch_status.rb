@@ -25,8 +25,8 @@ module Emarsys
 
       # Get a specific email launch status
       #
-      # @param [Integer, String] key of the code
-      # @return [Hash] Key value-Pair of the launch code
+      # @param [Integer, String] id of the code
+      # @return [Hash] Key-Value-Pair of the launch code
       # @example
       #   Emarsys::EmailLaunchStatus.resource('1')
       def resource(id)

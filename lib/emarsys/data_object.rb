@@ -2,8 +2,13 @@
 
 module Emarsys
   class DataObject
-
     class << self
+
+      # Make a HTTP GET request
+      #
+      # @param method_name [String] The path, relative to Emarsys.api_endpoint
+      # @param params [Hash] custom params hash
+      # @return [Hash]
       def get(method_name, params)
         if params.empty?
           self.new.request 'get', method_name, params
@@ -12,23 +17,48 @@ module Emarsys
         end
       end
 
+      # Make a HTTP POST request
+      #
+      # @param method_name [String] The path, relative to Emarsys.api_endpoint
+      # @param params [Hash] custom params hash
+      # @return [Hash]
       def post(method_name, params)
         self.new.request 'post', method_name, params
       end
 
+      # Make a HTTP PUT request
+      #
+      # @param method_name [String] The path, relative to Emarsys.api_endpoint
+      # @param params [Hash] custom params hash
+      # @return [Hash]
       def put(method_name, params)
         self.new.request 'put', method_name, params
       end
 
+      # Make a HTTP DELETE request
+      #
+      # @param method_name [String] The path, relative to Emarsys.api_endpoint
+      # @param params [Hash] custom params hash
+      # @return [Hash]
       def delete(method_name, params)
         self.new.request 'delete', method_name, params
       end
 
+      # Custom Parameterizer for Emarsys
+      #
+      # @param params [Hash] custom params hash
+      # @return [String] key => value is returned as key=value
       def parameterize_params(params)
         params.inject(""){|string, (k, v)| string << "#{k}=#{v}"; string << "&"; string}[0..-2]
       end
     end
 
+    # Make a HTTP request
+    #
+    # @param http_verb [String] Http method
+    # @param method_name [String] The path, relative to Emarsys.api_endpoint
+    # @param params [Hash] custom params hash
+    # @return [Hash]
     def request(http_verb, method_name, params)
       response = Emarsys::Request.new(http_verb, method_name, params).send_request
       #hashiefy(response)
