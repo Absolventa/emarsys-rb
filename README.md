@@ -17,17 +17,20 @@ Feel free to get in touch or submit a pull request if you encounter any problems
 
 Must-known facts about the Emarsys API:
 
-* all data_fields must be specified with the internal Emarsys-ID. E.g. "first_name"
-defaults to "1", last_name defaults to "2" etc.
-* certain methods require the specification of a key-field. It defaults to the Emarsys default
-("3" - internally it is called email)
-* It is due to the Emarsys API, they usally do not provide a way to access single resources
-* return values differ from method to method. Thus, a Hash or Array of Hashes was choosen
-as the global return object. It is simply a parsed JSON response.
-* Please refer to the Emarsys API documentation for detailed information on Parameters or Return Values.
+* Emarsys uses internal IDs as field identifiers. E.g. 'email' is mapped to the value 3.
+This Gem tries to work around this by letting you specify a field mapping constant.
+* certain methods require the specification of a key-field, e.g. the email (internally a 3 again).
+Keep that in mind while wokring with the API.
+* Return values differ from method to method, due to the way the Emarsys API is implemented.
+Thus, a Hash as a return value or an Array of Hashes was choosen
+as the global return object. Basically it is a parsed JSON response.
+* Please refer to the Emarsys API documentation for detailed information on Parameters or Return Values. They can be quite confusing.
+* Keep in mind that no contact can be deleted via the API.
 
 ## Configuration and Setup
 ### Authentication
+
+Authenticate with the api credentials provided by your Emarsys account manager.
 
     Emarsys.configure do |c|
       c.api_username = 'my_username'
@@ -52,6 +55,8 @@ which that can be overwritten. It will be picked up automatically. E.g.:
     # Add to the Mapping-Constant
     Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'user_id', :name => "User-ID"}
 
+All Emarsys predefined system fields are prefixed with an underscore, e.g. '_firstname' or '_revenue' in order to not
+clash with individual mappings.
 
 ## Interacting with the API
 ### Condition
@@ -143,6 +148,10 @@ which that can be overwritten. It will be picked up automatically. E.g.:
 
 
 Please refer to the code for detailed instructions of each method.
+
+## Ruby Versions
+
+This gem was developed and tested with versions 1.9.3 and 2.0.0
 
 
 ## Contributing
