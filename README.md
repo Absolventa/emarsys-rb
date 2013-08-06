@@ -20,12 +20,9 @@ Must-known facts about the Emarsys API:
 * Emarsys uses internal IDs as field identifiers. E.g. 'email' is mapped to the value 3.
 This Gem tries to work around this by letting you specify a field mapping constant.
 * certain methods require the specification of a key-field, e.g. the email (internally a 3 again).
-Keep that in mind while wokring with the API.
-* Return values differ from method to method, due to the way the Emarsys API is implemented.
-Thus, a Hash as a return value or an Array of Hashes was choosen
-as the global return object. Basically it is a parsed JSON response.
-* Please refer to the Emarsys API documentation for detailed information on Parameters or Return Values. They can be quite confusing.
-* Keep in mind that no contact can be deleted via the API.
+* Return values differ from method to method due to the way the Emarsys API is implemented.
+Thus, a Hash as a return value or an Array of Hashes was choosen as the global return object. Basically it is a parsed JSON response.
+* Please refer to the Emarsys API documentation for detailed information on parameters or return values. They can be quite confusing.
 
 ## Configuration and Setup
 ### Authentication
@@ -58,7 +55,11 @@ which that can be overwritten. It will be picked up automatically. E.g.:
 All Emarsys predefined system fields are prefixed with an underscore, e.g. '_firstname' or '_revenue' in order to not
 clash with individual mappings.
 
+
 ## Interacting with the API
+
+You can interact with the API on the provided data objects:
+
 ### Condition
 
     # Get all conditions
@@ -74,9 +75,6 @@ clash with individual mappings.
 
     Emarsys::Contact.create_batch(...)
     Emarsys::Contact.update_batch(...)
-
-    # HINT: Emarsys does not implement a deleting of a contact. Use the update action to somehow "delete" user data
-    Emarsys::Contact.update('email', "jane.doe@example.com", {:firstname => nil, :lastname => nil})
 
 ### ContactList
 

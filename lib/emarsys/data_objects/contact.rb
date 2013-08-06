@@ -100,9 +100,15 @@ module Emarsys
         post "contact/getdata", {'keyId' => key_id, 'keyValues' => key_values, 'fields' => fields}
       end
 
-      # TODO POST /getregistrations
+      # Exports the selected fields of contacts whoch registered in the specified time range
+      #
+      # @param params [hash] hash of parameters according to emarsys API
+      # @return [Hash] result data
+      # @example
+      #   Emarsys::Contact.export_registrations(distribution_method: 'local', time_range: ["2013-01-01","2013-12-31"], contact_fields: [1,2,3])
+      #
       def export_registrations(params = {})
-        raise "Not implemented yet"
+        post "contact/getregistrations", params
       end
 
       def transform_key_id(key_id)

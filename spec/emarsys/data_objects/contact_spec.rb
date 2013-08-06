@@ -62,6 +62,17 @@ describe Emarsys::Contact do
     end
   end
 
+  describe ".export_registrations" do
+    it "requests contact data export based on parameters" do
+      stub_params = {distribution_method: 'local', time_range: ["2013-01-01","2013-12-31"], contact_fields: [1,2,3]}
+      stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/contact/getregistrations").with(:body => stub_params.to_json).to_return(standard_return_body)
+      Emarsys::Contact.export_registrations(stub_params)
+      stub.should have_been_requested.once
+    end
+  end
+
+
+
   def contact_history(contact_ids_array)
     post "contact/getcontacthistory", {'contacts' => contact_ids_array}
   end
