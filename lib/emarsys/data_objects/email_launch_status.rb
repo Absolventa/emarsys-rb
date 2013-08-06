@@ -13,10 +13,22 @@ module Emarsys
     ]
 
     class << self
+
+      # List email launch status codes
+      #
+      # @return [Hash] List of email launch status
+      # @example
+      #   Emarsys::EmailLaunchStatus.collection
       def collection
         CODES
       end
 
+      # Get a specific email launch status
+      #
+      # @param [Integer, String] key of the code
+      # @return [Hash] Key value-Pair of the launch code
+      # @example
+      #   Emarsys::EmailLaunchStatus.resource('1')
       def resource(id)
         CODES.select{|hash| hash.has_key?(id.to_s)}[0]
       end

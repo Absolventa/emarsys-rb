@@ -11,5 +11,9 @@ describe Emarsys::EmailLaunchStatus do
     it "requests a single email launch status" do
       pending
     end
+
+    it "returns nil if it cannot find a launch code" do
+      pending
+    end
   end
 end

@@ -5,6 +5,7 @@ module Emarsys
   #
   class Email < DataObject
     class << self
+
       # List email campaigns
       #
       # @param params [Hash] Optional filter for the emails
@@ -23,6 +24,8 @@ module Emarsys
       #
       # @param id [Integer, String] The internal id of an email
       # @return [Hash] Attributes hash
+      # @example
+      #   Emarsys::Email.resource(1)
       def resource(id)
         get "email/#{id}", {}
       end
@@ -52,6 +55,7 @@ module Emarsys
       def response_summary(id)
         get "email/#{id}/responsesummary", {}
       end
+
     end
   end
 end

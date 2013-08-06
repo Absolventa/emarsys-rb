@@ -4,11 +4,13 @@ module Emarsys
   #
   #
   class ContactList < DataObject
-
     class << self
+
       # List contact lists
       #
       # @return [Hash] List of contact_lists
+      # @example
+      #   Emarsys::ContactList.collection
       def collection
         get 'contactlist', {}
       end

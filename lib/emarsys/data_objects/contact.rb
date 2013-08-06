@@ -4,8 +4,8 @@ module Emarsys
   #
   #
   class Contact < DataObject
-
     class << self
+
       def create(key_id, key_value, params = {})
         post "contact", params.merge!({'key_id' => transform_key_id(key_id), transform_key_id(key_id) => key_value})
       end
@@ -43,7 +43,5 @@ module Emarsys
       end
 
     end
-
   end
-
 end
