@@ -44,8 +44,9 @@ module Emarsys
         post "email", params
       end
 
-      def launch
-        # TODO
+      # TODO POST /<id>/launch
+      def launch(id, params = {})
+        raise "Not implemented yet"
       end
 
       def preview(id, version = 'html')
@@ -56,6 +57,31 @@ module Emarsys
         get "email/#{id}/responsesummary", {}
       end
 
+      # TODO POST /<id>/sendtestmail
+      def send_test_mail
+        raise "Not implemented yet"
+      end
+
+      # TODO POST /<id>/url
+      def send_test_mail(id, params = {})
+        #recipient_list = [], segment_id = nil, contactlist_id = nil
+        raise "Not implemented yet"
+      end
+
+      # TODO POST /getdeliverystatus
+      def delivery_status(id, params = {})
+        raise "Not implemented yet"
+      end
+
+      # TODO POST /getlaunchesofemail
+      def email_launches(id)
+        raise "Not implemented yet"
+      end
+
+      # TODO POST /getresponses
+      def export_responses(params = {})
+        raise "Not implemented yet"
+      end
     end
   end
 end
