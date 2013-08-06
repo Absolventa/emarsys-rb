@@ -38,15 +38,27 @@ module Emarsys
       # @option params [String] :fromemail sets the from-header email
       # @option params [String] :fromname sets the from-header name
       # @option params [String] :subject Subject of the email
-      # @option params [String] :email_category associated Email-Category-Id
+      # @option params [Integer] :email_category associated Email-Category-Id
+      # @option params [Integer] :segment associated Segment-id
+      # @option params [Integer] :contactlist associated Contactlist-id
+      # @option params [String] :html_source
+      # @option params [String] :text_source
+      # @option params [Integer] :unsubscribe (optional)
+      # @option params [Integer] :browse (optional)
       # @return [Hash] internal id of the campaign
       def create(params = {})
         post "email", params
       end
 
-      # TODO POST /<id>/launch
+      # Launches an email
+      #
+      # @param id [Integer, String] Internal email id
+      # @param params [hash] Optional launch parmeters
+      # @option params [Datetime] :schedule launch time
+      # @option params [String] :timezone
+      # @return [Hash] Result data
       def launch(id, params = {})
-        raise "Not implemented yet"
+        post "email/#{id}/launch", params
       end
 
       def preview(id, version = 'html')
