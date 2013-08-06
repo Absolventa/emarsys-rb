@@ -18,11 +18,11 @@ Feel free to get in touch or submit a pull request if you encounter any problems
 Must-known facts about the Emarsys API:
 
 * Emarsys uses internal IDs as field identifiers. E.g. 'email' is mapped to the value 3.
-This Gem tries to work around this by letting you specify a field mapping constant.
-* certain methods require the specification of a key-field, e.g. the email (internally a 3 again).
+This gem tries to work around this by letting you specify a field mapping constant.
+* certain methods require the specification of a key-field, e.g. the email (internally refered to as '3' again).
 * Return values differ from method to method due to the way the Emarsys API is implemented.
 Thus, a Hash as a return value or an Array of Hashes was choosen as the global return object. Basically it is a parsed JSON response.
-* Please refer to the Emarsys API documentation for detailed information on parameters or return values. They can be quite confusing.
+* Please refer to the Emarsys API documentation for detailed information on parameters, return values or error codes.
 
 ## Configuration and Setup
 ### Authentication
@@ -60,23 +60,22 @@ clash with individual mappings.
 
 You can interact with the API on the provided data objects:
 
-### Condition
+#### Condition
 
     # Get all conditions
     Emarsys::Condition.collection
 
-### Contact
+#### Contact
 
-    # Create a contact with custom key_field (identifier called 'user_id', internally mapped to the id 100)
-    Emarsys::Contact.create('user_id', 10, {:first_name => "Jane", :lastname => "Doe", :email => "jane.doe@example.com"})
+    # Create a contact with custom key_field (one example with mapped identifier, one without)
+    Emarsys::Contact.create('user_id', 10, {firstname: "Jane", lastname: "Doe", email: "jane.doe@example.com"})
+    Emarsys::Contact.create(4980, 10, {1 => "Jane", 2 => "Doe", 3 => "jane.doe@example.com"})
 
-    # Update a contact with key_field (identifier called 'email', internally mapped to the id 3)
-    Emarsys::Contact.update('email', "jane.doe@example.com", {:firstname => "John", :lastname => "Doe"})
+    # Update a contact with key_field (one example with mapped identifier, one without)
+    Emarsys::Contact.update('email', "jane.doe@example.com", {firstname: "John", lastname: "Doe"})
+    Emarsys::Contact.update(3, "jane.doe@example.com", {1 => "John", 2 => "Doe"})
 
-    Emarsys::Contact.create_batch(...)
-    Emarsys::Contact.update_batch(...)
-
-### ContactList
+#### ContactList
 
     # Get all contact_lists
     Emarsys::ContactList.collection
@@ -84,11 +83,11 @@ You can interact with the API on the provided data objects:
     # Create a contact list
     Emarsys::ContactList.create
 
-### Emails
+#### Emails
 
     # Get all email campaigns, optional filter
     Emarsys::Email.collection
-    Emarsys::Email.collection(:status => 3)
+    Emarsys::Email.collection(status: 3)
 
     # Get a single email resource
     Emarsys::Email.resource(1)
@@ -98,42 +97,42 @@ You can interact with the API on the provided data objects:
 
     Emarsys::Email.launch({})
 
-### Event
+#### Event
 
     Emarsys::Event.collection
     Emarsys::Event.trigger(65, 3, ["test@example.com"])
 
-### Export
+#### Export
 
     Emarsys::Export.resource(1)
 
-### Field
+#### Field
 
     Emarsys::Field.collection
     Emarsys::Field.choice(1)
 
-### Folder
+#### Folder
 
     # Get all forms, optional filter parameters
     Emarsys::Folder.collection
     Emarsys::Folder.collection(:folder => 3)
 
-### Form
+#### Form
 
     # Get all forms
     Emarsys::Form.collection
 
-### Language
+#### Language
 
     # Get all languages
     Emarsys::Language.collection
 
-### Segment
+#### Segment
 
     # Get all segments
     Emarsys::Segment.collection
 
-### Source
+#### Source
 
     # Get all sources
     Emarsys::Source.collection

@@ -46,6 +46,12 @@ module Emarsys
       # @option params [Integer] :unsubscribe (optional)
       # @option params [Integer] :browse (optional)
       # @return [Hash] internal id of the campaign
+      # @example
+      #   Emarsys::Email.create(
+      #     name: 'Test', language: 'de', fromemail: 'john.doe@example.com', fromname: 'John Doe',
+      #     subject: 'Test Subject', :email_category: 3, segment: 1121, contactlist: 0,
+      #     html_source: '<h1>Test</h1>', text_source: 'Test'
+      #   )
       def create(params = {})
         post "email", params
       end
@@ -57,32 +63,60 @@ module Emarsys
       # @option params [Datetime] :schedule launch time
       # @option params [String] :timezone
       # @return [Hash] Result data
+      # @example
+      #   Emarsys::Email.launch(1)
       def launch(id, params = {})
         post "email/#{id}/launch", params
       end
 
+      # Preview an email
+      #
+      # @param id [Integer, String] Internal email id
+      # @param version [String] 'html' or 'text' version
+      # @return [Hash] Result data
+      # @example
+      #   Emarsys::Email.preview(1)
       def preview(id, version = 'html')
         post "email/#{id}/preview", {:version => version}
       end
 
+      # View response summary of an email
+      #
+      # @param id [Integer, String] Internal email id
+      # @return [Hash] Result data
+      # @example
+      #   Emarsys::Email.response_summary(1)
       def response_summary(id)
         get "email/#{id}/responsesummary", {}
       end
 
-      # TODO POST /<id>/sendtestmail
-      def send_test_mail
-        raise "Not implemented yet"
-      end
-
-      # TODO POST /<id>/url
+      # Instruct emarsys to send a test mail
+      #
+      # @param id [Integer, String] Internal email id
+      # @param params [hash] recipient parmeters
+      # @option params [String] :recipientlist email_addresses separated by ';'
+      # @option params [Integer] :segment_id custom segement id
+      # @option params [Integer] :contactlist_id custom contactlist id
+      # Only one of the three parameters must be sent.
+      #
+      # @return [Hash] Result data
+      # @example
+      #   Emarsys::Email.send_test_mail(1, {:recipientlist => 'john.doe@example.com;jane.doe@example.com'})
       def send_test_mail(id, params = {})
-        #recipient_list = [], segment_id = nil, contactlist_id = nil
-        raise "Not implemented yet"
+        post "email/#{id}/sendtestmail", params
       end
 
-      # TODO POST /getdeliverystatus
+      # Returns the delivery status of an email
+      #
+      # @param id [Integer, String] Internal email id
+      # @param params [hash] recipient parmeters
+      # @option params [String] 'lastId'
+      # @option params [Integer] 'launchId'
+      # @return [Hash] Result data
+      # @example
+      #   Emarsys::Email.delivery_status(1)
       def delivery_status(id, params = {})
-        raise "Not implemented yet"
+        post "email/#{id}/getdeliverystatus", params
       end
 
       # TODO POST /getlaunchesofemail

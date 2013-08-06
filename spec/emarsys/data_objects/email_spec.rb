@@ -64,10 +64,21 @@ describe Emarsys::Email do
     end
   end
 
+  describe ".send_test_mail" do
+    it "requests an email test sending with custom recipient list" do
+      stub_params = {:recipientlist => 'john.doe@example.com;jane.doe@example.com'}
+      stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/email/123/sendtestmail").with(:body => stub_params.to_json).to_return(standard_return_body)
+      Emarsys::Email.send_test_mail(123, stub_params)
+      stub.should have_been_requested.once
+    end
+  end
+
   describe ".response_summary" do
     it "requests a single email" do
       stub_get('email/123/responsesummary') { Emarsys::Email.response_summary(123) }.should have_been_requested.once
     end
   end
+
+
 
 end
