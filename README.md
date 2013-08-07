@@ -1,4 +1,4 @@
-# Emarsys
+# emarsys-rb
 
 Simple Ruby wrapper for the Emarsys API.
 

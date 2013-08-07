@@ -90,7 +90,7 @@ module Emarsys
       #
       # @param key_id [Integer, String] Array of contact ids
       # @param key_values [array] Array of key field values
-      # @param key_values [array] requested fields. If empty, all are considered
+      # @param fields [array] requested fields. If empty, all are considered
       # @return [Hash] result data
       # @example
       #   Emarsys::Contact.search('3', ['john.doe@example.com'], [1,2,3]
@@ -106,11 +106,11 @@ module Emarsys
       # @return [Hash] result data
       # @example
       #   Emarsys::Contact.export_registrations(distribution_method: 'local', time_range: ["2013-01-01","2013-12-31"], contact_fields: [1,2,3])
-      #
       def export_registrations(params = {})
         post "contact/getregistrations", params
       end
 
+      # @private
       def transform_key_id(key_id)
         matching_attributes = Emarsys::FieldMapping::ATTRIBUTES.find{|elem| elem[:identifier] == key_id.to_s}
         matching_attributes.nil? ? key_id : matching_attributes[:id]
