@@ -100,7 +100,13 @@ You can interact with the API on the provided data objects:
 #### Event
 
     Emarsys::Event.collection
+
+    # Trigger a custom event
     Emarsys::Event.trigger(65, 3, ["test@example.com"])
+
+    # Trigger a custom event which actually sends a mail
+    # (Emarsys way to send transactional mails with placeholders)
+    Emarsys::Event.trigger(2, 3, 'test@example.com', {:global => {:my_placeholder => "some content"}})
 
 #### Export
 
