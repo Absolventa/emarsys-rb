@@ -10,7 +10,7 @@ Simple Ruby wrapper for the Emarsys API.
 
 This wrapper tries to implement all available methods of the Emarsys API in a
 Ruby-like fashion. However, the Emarsys API lacks a decent amount of methods that
-you would an API to provide.
+you expect an API to provide.
 Thus, if methods are missing or a certain implementation
 style was choosen it is most likely due to the inconsistency of the API itself.
 Feel free to get in touch or submit a pull request if you encounter any problems.
