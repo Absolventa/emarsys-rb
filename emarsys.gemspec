@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["daniel.schoppmann@absolventa.de"]
   spec.description   = %q{A Ruby library for interacting with the Emarsys API.}
   spec.summary       = %q{Easy to use ruby library for Emarsys Marketing Suite.}
-  spec.homepage      = "http://www.absolventa.de"
+  spec.homepage      = "https://github.com/Absolventa/emarsys-rb"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
