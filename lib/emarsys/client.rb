@@ -25,11 +25,11 @@ module Emarsys
     end
 
     def header_nonce
-      Digest::MD5.hexdigest(Time.new.to_i.to_s)
+      Digest::MD5.hexdigest(header_created)
     end
 
     def header_created
-      Time.new.strftime("%Y-%m-%d %H:%M:%S")
+      Time.now.utc.iso8601
     end
 
     def calculated_digest

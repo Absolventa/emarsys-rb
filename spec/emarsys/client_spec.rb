@@ -55,17 +55,14 @@ describe Emarsys::Client do
 
     describe '#header_nonce' do
       it 'uses md5 hash auf current time (as integer)' do
-        Time.any_instance.stub(:to_i).and_return(123456789)
-        Digest::MD5.should_receive(:hexdigest).with("123456789").and_return("25f9e794323b453885f5181f1b624d0b")
+        Digest::MD5.should_receive(:hexdigest).with(Time.now.utc.iso8601).and_return("25f9e794323b453885f5181f1b624d0b")
         Emarsys::Client.new.header_nonce
       end
     end
 
     describe '#header_created' do
       it 'uses current timestamp format' do
-        time = Time.parse("2013-01-01 01:00:01")
-        Time.stub(:new).and_return(time)
-        expect(Emarsys::Client.new.header_created).to eq("2013-01-01 01:00:01")
+        expect(Emarsys::Client.new.header_created).to eq(Time.now.utc.iso8601)
       end
     end
 
