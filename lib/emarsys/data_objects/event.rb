@@ -33,6 +33,22 @@ module Emarsys
         post "event/#{event_id}/trigger", params
       end
 
+      # Trigger an external event for multiple contacts
+      #
+      # @param event_id [Integer, String] The internal emarsys id
+      # @param key_id [Integer, String] The identifer of the key field (e.g. 3 for 'email')
+      # @param contacts [Array, Hash] An array with hashes containing the contacts and optional data per contact
+      # @return [Hash] Result data
+      # @example
+      #   Emarsys::Event.trigger_multiple(2, 3, [{:external_id => "test@example.com"},{:external_id => "test2@example.com", :data => {:name => "Special Name"}}])
+      def trigger_multiple(event_id, key_id, contacts)
+        external_id = ""
+        transformed_key_id = transform_key_id(key_id)
+        params = {:key_id => transformed_key_id, :external_id => external_id, :data => nil}
+        params.merge!(:contacts => contacts)
+        post "event/#{event_id}/trigger", params
+      end
+
       # @private
       def transform_key_id(key_id)
         matching_attributes = Emarsys::FieldMapping::ATTRIBUTES.find{|elem| elem[:identifier] == key_id.to_s}

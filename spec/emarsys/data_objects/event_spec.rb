@@ -20,4 +20,12 @@ describe Emarsys::Event do
       stub.should have_been_requested.once
     end
   end
+
+  describe ".trigger_multiple" do
+    it "requests event trigger with parameters" do
+      stub = stub_request(:post, "https://suite5.emarsys.net/api/v2/event/123/trigger").with(:body => {'key_id' => 3, 'external_id' => "", :data => nil, :contacts => [{'external_id' => "jane.doe@example.com"}]}.to_json).to_return(standard_return_body)
+      Emarsys::Event.trigger_multiple(123,3,[{'external_id' => 'jane.doe@example.com'}])
+      stub.should have_been_requested.once
+    end
+  end
 end
