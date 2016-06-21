@@ -1,4 +1,4 @@
-# emarsys-rb
+# emarsys-rb [![Build Status](https://travis-ci.org/Absolventa/emarsys-rb.svg?branch=master)](https://travis-ci.org/Absolventa/emarsys-rb)
 
 Simple Ruby wrapper for the Emarsys API.
 
