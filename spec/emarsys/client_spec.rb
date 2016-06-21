@@ -32,7 +32,7 @@ describe Emarsys::Client do
         Emarsys::Client.any_instance.stub(:header_nonce).and_return("some_header_nonce")
         Emarsys::Client.any_instance.stub(:header_created).and_return("2013-01-01")
         expect(Emarsys::Client.new.x_wsse_string).to eq(
-          'UsernameToken Username = "my_username", PasswordDigest = "12345689", Nonce = "some_header_nonce", Created = "2013-01-01"'
+          'UsernameToken Username="my_username", PasswordDigest="12345689", Nonce="some_header_nonce", Created="2013-01-01"'
         )
       end
     end
@@ -79,4 +79,3 @@ describe Emarsys::Client do
   end
 
 end
-
