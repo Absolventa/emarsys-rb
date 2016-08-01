@@ -25,7 +25,8 @@ module Emarsys
     end
 
     def header_nonce
-      Digest::MD5.hexdigest(header_created)
+      bytes = Random::DEFAULT.bytes(16)
+      bytes.each_byte.map { |b| sprintf("%02X",b) }.join
     end
 
     def header_created
