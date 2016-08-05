@@ -33,8 +33,8 @@ Authenticate with the api credentials provided by your Emarsys account manager.
 Emarsys.configure do |c|
   c.api_username = 'my_username'
   c.api_password = 'my_password'
-  # OPTIONAL, defaults to https://suite5.emarsys.net/api/v2
-  c.api_endpoint = 'https://www.emarsys.net/api/v2'
+  # OPTIONAL, defaults to https://api.emarsys.net/api/v2
+  c.api_endpoint = 'https://suite5.emarsys.net/api/v2'
 end
 ```
 

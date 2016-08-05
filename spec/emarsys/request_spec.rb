@@ -20,7 +20,7 @@ describe Emarsys::Request do
 
   describe '#emarsys_uri' do
     it 'concats api_endpoint with path' do
-      expect(request.emarsys_uri).to eq("https://suite5.emarsys.net/api/v2/some-path")
+      expect(request.emarsys_uri).to eq("https://api.emarsys.net/api/v2/some-path")
     end
   end
 

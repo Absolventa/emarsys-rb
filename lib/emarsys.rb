@@ -36,7 +36,7 @@ module Emarsys
   class << self
 
     # @!attribute api_endpoint
-    #   @return [String] Base URL for emarsys URLs. default: https://suite5.emarsys.net/api/v2
+    #   @return [String] Base URL for emarsys URLs. default: https://api.emarsys.net/api/v2
     # @!attribute api_password
     #   @return [String] API Username given by Emarsys
     # @!attribute api_username
@@ -48,7 +48,7 @@ module Emarsys
     #
     # @return [String] domain which should be used to query the API
     def api_endpoint
-      @api_endpoint ||= 'https://suite5.emarsys.net/api/v2'
+      @api_endpoint ||= 'https://api.emarsys.net/api/v2'
     end
 
     # Set configuration options using a block
