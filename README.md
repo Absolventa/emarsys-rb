@@ -183,6 +183,15 @@ Please refer to the code for detailed instructions of each method.
 
 This gem was developed and tested with versions 1.9.3 and 2.0.0
 
+## Changelog
+
+### HEAD (not yet released)
+
+* Update default endpoint fom `suite5.emarsys.net/api/v2` to `api.emarsys.net/api/v2`
+
+### v0.1.0
+
+Initial version
 
 ## Contributing
 
