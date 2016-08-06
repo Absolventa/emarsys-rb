@@ -40,7 +40,7 @@ end
 
 ### Field Mapping
 
-As said before, Emarsys loves IDs. For using an APi, they are evil. This Gem provides
+As said before, Emarsys loves IDs. For using an API, they are evil. This gem provides
 an easy way to adjust the individual field settings. Internally a Ruby Mapping Constant is used,
 which that can be overwritten. It will be picked up automatically. E.g.:
 
