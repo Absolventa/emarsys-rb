@@ -29,12 +29,14 @@ Thus, a Hash as a return value or an Array of Hashes was choosen as the global r
 
 Authenticate with the api credentials provided by your Emarsys account manager.
 
-    Emarsys.configure do |c|
-      c.api_username = 'my_username'
-      c.api_password = 'my_password'
-      # OPTIONAL, defaults to https://suite5.emarsys.net/api/v2
-      c.api_endpoint = 'https://www.emarsys.net/api/v2'
-    end
+```ruby
+Emarsys.configure do |c|
+  c.api_username = 'my_username'
+  c.api_password = 'my_password'
+  # OPTIONAL, defaults to https://suite5.emarsys.net/api/v2
+  c.api_endpoint = 'https://www.emarsys.net/api/v2'
+end
+```
 
 ### Field Mapping
 
@@ -42,15 +44,17 @@ As said before, Emarsys loves IDs. For using an APi, they are evil. This Gem pro
 an easy way to adjust the individual field settings. Internally a Ruby Mapping Constant is used,
 which that can be overwritten. It will be picked up automatically. E.g.:
 
-    # Complete overwrite
-    Emarsys::FieldMapping::ATTRIBUTES = [
-      {:id => 0, :identifier => 'interests', :name => 'Interests'},
-      {:id => 1, :identifier => 'firstname', :name => 'First Name'},
-      {:id => 2, :identifier => 'lastname',  :name => 'Last Name'},
-    ]
+```ruby
+# Complete overwrite
+Emarsys::FieldMapping::ATTRIBUTES = [
+  {:id => 0, :identifier => 'interests', :name => 'Interests'},
+  {:id => 1, :identifier => 'firstname', :name => 'First Name'},
+  {:id => 2, :identifier => 'lastname',  :name => 'Last Name'},
+]
 
-    # Add to the Mapping-Constant
-    Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'user_id', :name => "User-ID"}
+# Add to the Mapping-Constant
+Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'user_id', :name => "User-ID"}
+```
 
 All Emarsys predefined system fields are prefixed with an underscore, e.g. '_firstname' or '_revenue' in order to not
 clash with individual mappings.
@@ -62,93 +66,116 @@ You can interact with the API on the provided data objects:
 
 #### Condition
 
-    # Get all conditions
-    Emarsys::Condition.collection
+```ruby
+# Get all conditions
+Emarsys::Condition.collection
+```
 
 #### Contact
 
-    # Create a contact with custom key_field (one example with mapped identifier, one without)
-    Emarsys::Contact.create('user_id', 10, {firstname: "Jane", lastname: "Doe", email: "jane.doe@example.com"})
-    Emarsys::Contact.create(4980, 10, {1 => "Jane", 2 => "Doe", 3 => "jane.doe@example.com"})
+```ruby
+# Create a contact with custom key_field (one example with mapped identifier, one without)
+Emarsys::Contact.create('user_id', 10, {firstname: "Jane", lastname: "Doe", email: "jane.doe@example.com"})
+Emarsys::Contact.create(4980, 10, {1 => "Jane", 2 => "Doe", 3 => "jane.doe@example.com"})
 
-    # Update a contact with key_field (one example with mapped identifier, one without)
-    Emarsys::Contact.update('email', "jane.doe@example.com", {firstname: "John", lastname: "Doe"})
-    Emarsys::Contact.update(3, "jane.doe@example.com", {1 => "John", 2 => "Doe"})
+# Update a contact with key_field (one example with mapped identifier, one without)
+Emarsys::Contact.update('email', "jane.doe@example.com", {firstname: "John", lastname: "Doe"})
+Emarsys::Contact.update(3, "jane.doe@example.com", {1 => "John", 2 => "Doe"})
+```
 
 #### ContactList
 
-    # Get all contact_lists
-    Emarsys::ContactList.collection
+```ruby
+# Get all contact_lists
+Emarsys::ContactList.collection
 
-    # Create a contact list
-    Emarsys::ContactList.create
+# Create a contact list
+Emarsys::ContactList.create
+```
 
 #### Emails
 
-    # Get all email campaigns, optional filter
-    Emarsys::Email.collection
-    Emarsys::Email.collection(status: 3)
+```ruby
+# Get all email campaigns, optional filter
+Emarsys::Email.collection
+Emarsys::Email.collection(status: 3)
 
-    # Get a single email resource
-    Emarsys::Email.resource(1)
+# Get a single email resource
+Emarsys::Email.resource(1)
 
-    # Create a new email campaign
-    Emarsys::Email.create({})
+# Create a new email campaign
+Emarsys::Email.create({})
 
-    Emarsys::Email.launch({})
+Emarsys::Email.launch({})
+```
 
 #### Event
 
-    Emarsys::Event.collection
+```ruby
+Emarsys::Event.collection
 
-    # Trigger a custom event
-    Emarsys::Event.trigger(65, 3, ["test@example.com"])
+# Trigger a custom event
+Emarsys::Event.trigger(65, 3, ["test@example.com"])
 
-    # Trigger a custom event which actually sends a mail
-    # (Emarsys way to send transactional mails with placeholders)
-    Emarsys::Event.trigger(2, 3, 'test@example.com', {:global => {:my_placeholder => "some content"}})
+# Trigger a custom event which actually sends a mail
+# (Emarsys way to send transactional mails with placeholders)
+Emarsys::Event.trigger(2, 3, 'test@example.com', {:global => {:my_placeholder => "some content"}})
+```
 
 #### Export
 
-    Emarsys::Export.resource(1)
+```ruby
+Emarsys::Export.resource(1)
+```
 
 #### Field
 
-    Emarsys::Field.collection
-    Emarsys::Field.choice(1)
+```ruby
+Emarsys::Field.collection
+Emarsys::Field.choice(1)
+```
 
 #### Folder
 
-    # Get all forms, optional filter parameters
-    Emarsys::Folder.collection
-    Emarsys::Folder.collection(:folder => 3)
+```ruby
+# Get all forms, optional filter parameters
+Emarsys::Folder.collection
+Emarsys::Folder.collection(:folder => 3)
+```
 
 #### Form
 
-    # Get all forms
-    Emarsys::Form.collection
+```ruby
+# Get all forms
+Emarsys::Form.collection
+```
 
 #### Language
 
-    # Get all languages
-    Emarsys::Language.collection
+```ruby
+# Get all languages
+Emarsys::Language.collection
+```
 
 #### Segment
 
-    # Get all segments
-    Emarsys::Segment.collection
+```ruby
+# Get all segments
+Emarsys::Segment.collection
+```
 
 #### Source
 
-    # Get all sources
-    Emarsys::Source.collection
+```ruby
+# Get all sources
+Emarsys::Source.collection
 
-    # Create a new source
-    Emarsys::Source.create("New Source")
+# Create a new source
+Emarsys::Source.create("New Source")
 
-    # Destroy a source
-    Emarsys::Source.destroy(123)
-
+# Destroy a source
+Emarsys::Source.destroy(123)
+```
 
 Please refer to the code for detailed instructions of each method.
 
