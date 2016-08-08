@@ -54,9 +54,8 @@ describe Emarsys::Client do
     end
 
     describe '#header_nonce' do
-      it 'uses md5 hash auf current time (as integer)' do
-        Digest::MD5.should_receive(:hexdigest).with(Time.now.utc.iso8601).and_return("25f9e794323b453885f5181f1b624d0b")
-        Emarsys::Client.new.header_nonce
+      it 'uses 16 random bytes to generate a 32 char hex string' do
+        expect(Emarsys::Client.new.header_nonce).to match(/^[0-9a-f]{32}$/i)
       end
     end
 
