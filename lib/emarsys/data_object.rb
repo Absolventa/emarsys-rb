@@ -47,9 +47,17 @@ module Emarsys
       # Custom Parameterizer for Emarsys
       #
       # @param params [Hash] custom params hash
-      # @return [String] key => value is returned as key=value
+      # @return [String] {key1 => value1, key2 => value2 is returned as ?key1=value1&key2=value2
       def parameterize_params(params)
-        params.inject(""){|string, (k, v)| string << "#{k}=#{v}"; string << "&"; string}[0..-2]
+        '?' + params.map{|k, v| "#{url_encode(k)}=#{url_encode(v)}"}.join('&')
+      end
+
+
+      private
+
+      # Encode params like Emarsys does
+      def url_encode(param)
+        ERB::Util.url_encode(param)
       end
     end
 

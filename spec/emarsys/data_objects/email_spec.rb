@@ -7,15 +7,15 @@ describe Emarsys::Email do
     end
 
     it "requests all emails to the given status parameter" do
-      stub_get('email/status=3') { Emarsys::Email.collection({:status => 3}) }.should have_been_requested.once
+      stub_get('email/?status=3') { Emarsys::Email.collection({:status => 3}) }.should have_been_requested.once
     end
 
     it "requests all emails to the given contactlist parameter" do
-      stub_get('email/contactlist=123') { Emarsys::Email.collection({:contactlist => 123}) }.should have_been_requested.once
+      stub_get('email/?contactlist=123') { Emarsys::Email.collection({:contactlist => 123}) }.should have_been_requested.once
     end
 
     it "requests all emails - even with combined parameters" do
-      stub_get('email/status=3&contactlist=123') { Emarsys::Email.collection({:status => 3, :contactlist => 123}) }.should have_been_requested.once
+      stub_get('email/?status=3&contactlist=123') { Emarsys::Email.collection({:status => 3, :contactlist => 123}) }.should have_been_requested.once
     end
   end
 

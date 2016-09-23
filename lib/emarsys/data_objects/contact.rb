@@ -29,7 +29,7 @@ module Emarsys
       #   Emarsys::Contact.emarsys_id('email', 'john.dow@example.com')
       #   Emarsys::Contact.emarsys_id(1, 'John')
       def emarsys_id(key_id, key_value)
-        get "contact/#{transform_key_id(key_id).to_s}=#{key_value.to_s}", {}
+        get "contact", {"#{transform_key_id(key_id).to_s}" => key_value}
       end
 
       # Update a contact. The given params are transformed to emarsys ids.
