@@ -12,7 +12,7 @@ describe Emarsys::Contact do
 
   describe ".emarsys_id" do
     it "requests emarsys_id of a contact" do
-      stub = stub_request(:get, "https://api.emarsys.net/api/v2/contact/3=jane.doe@example.com").to_return(standard_return_body)
+      stub = stub_request(:get, "https://api.emarsys.net/api/v2/contact/?3=jane.doe@example.com").to_return(standard_return_body)
       Emarsys::Contact.emarsys_id(3, 'jane.doe@example.com')
       stub.should have_been_requested.once
     end

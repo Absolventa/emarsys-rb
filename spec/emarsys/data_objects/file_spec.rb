@@ -7,7 +7,7 @@ describe Emarsys::File do
     end
 
     it "requests all files with parameter" do
-      stub_get("file/folder=3") { Emarsys::File.collection(:folder => 3) }.should have_been_requested.once
+      stub_get("file/?folder=3") { Emarsys::File.collection(:folder => 3) }.should have_been_requested.once
     end
   end
 

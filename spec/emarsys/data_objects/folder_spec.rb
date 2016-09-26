@@ -7,7 +7,7 @@ describe Emarsys::Folder do
     end
 
     it "requests all folders with parameters" do
-      stub_get("folder/folder=3") { Emarsys::Folder.collection(:folder => 3) }.should have_been_requested.once
+      stub_get("folder/?folder=3") { Emarsys::Folder.collection(:folder => 3) }.should have_been_requested.once
     end
   end
 end

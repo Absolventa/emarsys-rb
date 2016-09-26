@@ -10,7 +10,7 @@ describe Emarsys::DataObject do
       end
 
       it "transfers params to specific emarsys params format" do
-        Emarsys::DataObject.any_instance.should_receive(:request).with('get', 'test_method/a=1&b=2', {}).and_return(nil)
+        Emarsys::DataObject.any_instance.should_receive(:request).with('get', 'test_method/?a=1&b=2', {}).and_return(nil)
         Emarsys::DataObject.get('test_method', {'a' => 1, 'b' => 2})
       end
     end
@@ -39,7 +39,12 @@ describe Emarsys::DataObject do
     describe '.parameterize_params' do
       it "converts hash to params string" do
         params = {"a" => 1, "b" => 2, "c" => 3}
-        expect(Emarsys::DataObject.parameterize_params(params)).to eq("a=1&b=2&c=3")
+        expect(Emarsys::DataObject.parameterize_params(params)).to eq("?a=1&b=2&c=3")
+      end
+
+      it "url_encodes params" do
+        params = {"email" => "best/email@mail.org"}
+        expect(Emarsys::DataObject.parameterize_params(params)).to eq("?email=best%2Femail%40mail.org")
       end
     end
   end
