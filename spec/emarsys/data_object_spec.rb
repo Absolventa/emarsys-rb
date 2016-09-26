@@ -47,7 +47,7 @@ describe Emarsys::DataObject do
   context "as an instance" do
     let(:data_object) { Emarsys::DataObject.new }
 
-    it "provides a simpel #request that delegates to Emarsys::Request" do
+    it "provides a simple #request that delegates to Emarsys::Request" do
       Emarsys::Request.any_instance.should_receive(:send_request).and_return(nil)
       data_object.request('get', 'test_method', {})
     end
