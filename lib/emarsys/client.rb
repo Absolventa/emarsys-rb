@@ -12,16 +12,16 @@ module Emarsys
     end
 
     def x_wsse_string
-      string = 'UsernameToken '
-      string += 'Username="' + username + '",'
-      string += 'PasswordDigest="' + header_password_digest + '",'
-      string += 'Nonce="' + header_nonce + '",'
-      string += 'Created="' + header_created + '"'
-      string
+      'UsernameToken ' +
+      "Username=\"#{username}\", " +
+      "PasswordDigest=\"#{header_password_digest}\", " +
+      "Nonce=\"#{header_nonce}\", " +
+      "Created=\"#{header_created}\""
     end
 
     def header_password_digest
-      Base64.encode64(calculated_digest).gsub("\n", "")
+      # Base64.encode64(calculated_digest).gsub("\n", "")
+      Base64.encode64().strip
     end
 
     def header_nonce
@@ -34,7 +34,7 @@ module Emarsys
     end
 
     def calculated_digest
-      Digest::SHA1.hexdigest(header_nonce + header_created + password)
+      Digest::SHA1.new.hexdigest(header_nonce + header_created + password)
     end
 
   end
