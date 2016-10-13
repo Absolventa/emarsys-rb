@@ -1,6 +1,5 @@
 module Emarsys
   class Client
-    attr_accessor :nonce
     def username
       raise ArgumentError, "Emarsys.api_username is not set" if Emarsys.api_username.nil?
       Emarsys.api_username
@@ -28,7 +27,6 @@ module Emarsys
       return @nonce if @nonce
       bytes = Random::DEFAULT.bytes(16)
       @nonce = bytes.each_byte.map { |b| sprintf("%02X",b) }.join
-      @nonce
     end
 
     def header_created
@@ -36,7 +34,7 @@ module Emarsys
     end
 
     def calculated_digest
-      Digest::SHA1.new.hexdigest(header_nonce + header_created + password)
+      Digest::SHA1.hexdigest(header_nonce + header_created + password)
     end
 
   end
