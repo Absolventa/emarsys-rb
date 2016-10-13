@@ -21,7 +21,7 @@ module Emarsys
 
     def header_password_digest
       # Base64.encode64(calculated_digest).gsub("\n", "")
-      Base64.encode64().strip
+      Base64.encode64(calculated_digest).strip
     end
 
     def header_nonce
