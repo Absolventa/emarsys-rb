@@ -4,6 +4,7 @@ require 'rest_client'
 require 'uri'
 
 require 'emarsys/client'
+require 'emarsys/country'
 require 'emarsys/data_object'
 require 'emarsys/error'
 require 'emarsys/extensions'
