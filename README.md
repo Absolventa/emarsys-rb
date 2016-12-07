@@ -62,6 +62,9 @@ All Emarsys predefined system fields are prefixed with an underscore, e.g. '_fir
 clash with individual mappings.
 
 ### Mapping Country IDs from ISO 3166-1 alpha-2 country codes
+
+A utility method is provided to map to Emarsys internal country IDs.  You can pass a symbol or a string, and case is ignored.
+
 ```ruby
 >> Emarsys::Country.from_iso('GB')
 => {:id=>184, :name=>"United Kingdom"}
