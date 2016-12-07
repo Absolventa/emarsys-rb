@@ -61,7 +61,7 @@ Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'user_id', :nam
 All Emarsys predefined system fields are prefixed with an underscore, e.g. '_firstname' or '_revenue' in order to not
 clash with individual mappings.
 
-# Mapping Country IDs from ISO 3166-1 alpha-2 country codes
+### Mapping Country IDs from ISO 3166-1 alpha-2 country codes
 ```ruby
 >> Emarsys::Country.from_iso('GB')
 => {:id=>184, :name=>"United Kingdom"}
