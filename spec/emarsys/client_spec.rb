@@ -57,12 +57,6 @@ describe Emarsys::Client do
       it 'uses 16 random bytes to generate a 32 char hex string' do
         expect(Emarsys::Client.new.header_nonce).to match(/^[0-9a-f]{32}$/i)
       end
-
-      it 'only creates the nonce once' do
-        client = Emarsys::Client.new
-        nonce = client.header_nonce
-        expect(client.header_nonce).to eq nonce
-      end
     end
 
     describe '#header_created' do
