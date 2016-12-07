@@ -3,4 +3,6 @@ sudo: false
 cache:
   bundler: true
 rvm:
+- jruby-9.0.5.0
+- 2.2.2
 - 2.3.1
