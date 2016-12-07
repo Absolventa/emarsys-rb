@@ -1,6 +1,5 @@
 module Emarsys
   class Client
-
     def username
       raise ArgumentError, "Emarsys.api_username is not set" if Emarsys.api_username.nil?
       Emarsys.api_username
@@ -12,21 +11,22 @@ module Emarsys
     end
 
     def x_wsse_string
-      string = 'UsernameToken '
-      string += 'Username="' + username + '", '
-      string += 'PasswordDigest="' + header_password_digest + '", '
-      string += 'Nonce="' + header_nonce + '", '
-      string += 'Created="' + header_created + '"'
-      string
+      'UsernameToken ' +
+      "Username=\"#{username}\", " +
+      "PasswordDigest=\"#{header_password_digest}\", " +
+      "Nonce=\"#{header_nonce}\", " +
+      "Created=\"#{header_created}\""
     end
 
     def header_password_digest
-      Base64.encode64(calculated_digest).gsub("\n", "")
+      # Base64.encode64(calculated_digest).gsub("\n", "")
+      Base64.encode64(calculated_digest).strip
     end
 
     def header_nonce
+      return @nonce if @nonce
       bytes = Random::DEFAULT.bytes(16)
-      bytes.each_byte.map { |b| sprintf("%02X",b) }.join
+      @nonce = bytes.each_byte.map { |b| sprintf("%02X",b) }.join
     end
 
     def header_created
