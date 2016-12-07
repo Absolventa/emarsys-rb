@@ -65,6 +65,12 @@ clash with individual mappings.
 ```ruby
 >> Emarsys::Country.from_iso('GB')
 => {:id=>184, :name=>"United Kingdom"}
+
+>> Emarsys::Country.from_iso(:af)
+=> {:id=>1, :name=>"Afghanistan"}
+
+>> Emarsys::Country.from_iso('us')
+=> {:id=>185, :name=>"United States of America"}
 ```
 
 ## Interacting with the API
