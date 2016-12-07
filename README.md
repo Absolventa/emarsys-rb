@@ -24,7 +24,7 @@ This gem tries to work around this by letting you specify a field mapping consta
 Thus, a Hash as a return value or an Array of Hashes was choosen as the global return object. Basically it is a parsed JSON response.
 * Please refer to the Emarsys API documentation for detailed information on parameters, return values or error codes.
 * The list of available countries is defined by Emarsys, and uses internal Emarsys-specific IDs.  A utility class is
-provided to map ISO 3166-1 alpha-2 data (aka 2-letter country codes) to internal Emarsys country IDs.
+provided to map [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 "ISO 3166-1 alpha-2") data (aka 2-letter country codes) to internal Emarsys country IDs.
 
 ## Configuration and Setup
 ### Authentication
@@ -61,9 +61,9 @@ Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'user_id', :nam
 All Emarsys predefined system fields are prefixed with an underscore, e.g. '_firstname' or '_revenue' in order to not
 clash with individual mappings.
 
-### Mapping Country IDs from ISO 3166-1 alpha-2 country codes
+### Mapping Country IDs from ISO country codes
 
-A utility method is provided to map to Emarsys internal country IDs.  You can pass a symbol or a string, and case is ignored.
+A utility method is provided to map to Emarsys internal country IDs from ISO 3166-1 alpha-2 two-letter country codes.  You can pass a symbol or a string, and case is ignored.
 
 ```ruby
 >> Emarsys::Country.from_iso('GB')
