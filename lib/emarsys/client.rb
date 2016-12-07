@@ -12,12 +12,10 @@ module Emarsys
     end
 
     def x_wsse_string
-      string = 'UsernameToken '
-      string += 'Username="' + username + '", '
-      string += 'PasswordDigest="' + header_password_digest + '", '
-      string += 'Nonce="' + header_nonce + '", '
-      string += 'Created="' + header_created + '"'
-      string
+      str = <<-STRING
+      UsernameToken Username="#{username}", PasswordDigest="#{header_password_digest}", Nonce="#{header_nonce}", Created="#{header_created}"
+      STRING
+      str.strip
     end
 
     def header_password_digest
@@ -25,12 +23,14 @@ module Emarsys
     end
 
     def header_nonce
-      bytes = Random::DEFAULT.bytes(16)
-      bytes.each_byte.map { |b| sprintf("%02X",b) }.join
+      @header_nonce ||= begin
+        bytes = Random::DEFAULT.bytes(16)
+        bytes.each_byte.map { |b| sprintf("%02X",b) }.join.strip
+      end
     end
 
     def header_created
-      Time.now.utc.iso8601
+      @header_created ||= Time.now.utc.iso8601
     end
 
     def calculated_digest
