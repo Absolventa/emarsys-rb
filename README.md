@@ -23,7 +23,7 @@ This gem tries to work around this by letting you specify a field mapping consta
 * Return values differ from method to method due to the way the Emarsys API is implemented.
 Thus, a Hash as a return value or an Array of Hashes was choosen as the global return object. Basically it is a parsed JSON response.
 * Please refer to the Emarsys API documentation for detailed information on parameters, return values or error codes.
-* The list of available countries are defined by Emarsys, and use internal Emarsys-specific IDs.  A utility class is
+* The list of available countries is defined by Emarsys, and uses internal Emarsys-specific IDs.  A utility class is
 provided to map ISO 3166-1 alpha-2 data (aka 2-letter country codes) to internal Emarsys country IDs.
 
 ## Configuration and Setup
