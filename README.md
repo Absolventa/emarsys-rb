@@ -179,9 +179,6 @@ Emarsys::Source.destroy(123)
 
 Please refer to the code for detailed instructions of each method.
 
-## Ruby Versions
-
-This gem was developed and tested with versions 1.9.3 and 2.0.0
 
 ## Changelog
 
