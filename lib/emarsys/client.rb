@@ -12,10 +12,9 @@ module Emarsys
     end
 
     def x_wsse_string
-      str = <<-STRING
+      <<-STRING.strip
       UsernameToken Username="#{username}", PasswordDigest="#{header_password_digest}", Nonce="#{header_nonce}", Created="#{header_created}"
       STRING
-      str.strip
     end
 
     def header_password_digest
