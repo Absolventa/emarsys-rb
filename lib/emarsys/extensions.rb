@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Hash
   def stringify_keys
     inject({}) do |options, (key, value)|

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Emarsys
 
   # Internal helper class for valid email status codes.

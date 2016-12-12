@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Emarsys
   # Custom error class for rescuing from Emarsys errors
   class Error < StandardError

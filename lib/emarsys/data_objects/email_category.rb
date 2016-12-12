@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Emarsys
 
   # Methods for the EmailCategory API
