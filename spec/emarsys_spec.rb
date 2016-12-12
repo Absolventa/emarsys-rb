@@ -16,7 +16,7 @@ describe Emarsys do
   describe ".api_endpoint getter" do
     it "returns specific url as default value" do
       Emarsys.api_endpoint = nil
-      Emarsys.api_endpoint.should eq('https://api.emarsys.net/api/v2')
+      expect(Emarsys.api_endpoint).to eq('https://api.emarsys.net/api/v2')
     end
   end
 end
