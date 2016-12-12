@@ -200,7 +200,12 @@ Please refer to the code for detailed instructions of each method.
 
 ### HEAD (not yet released)
 
-* Update default endpoint fom `suite5.emarsys.net/api/v2` to `api.emarsys.net/api/v2`
+### v0.2.0
+* Added country mapping ([#17](https://github.com/Absolventa/emarsys-rb/pull/17))
+* Proper encoding of GET parameters ([#11](https://github.com/Absolventa/emarsys-rb/pull/11))
+* Update default endpoint fom `suite5.emarsys.net/api/v2` to `api.emarsys.net/api/v2` ([#10](https://github.com/Absolventa/emarsys-rb/pull/10))
+* Bugfixes in nonce header ([#5](https://github.com/Absolventa/emarsys-rb/pull/5) and [#19](https://github.com/Absolventa/emarsys-rb/pull/19))
+* Trigger an external event for multiple contacts ([#3](https://github.com/Absolventa/emarsys-rb/pull/3))
 
 ### v0.1.0
 
