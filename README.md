@@ -76,6 +76,14 @@ A utility method is provided to map to Emarsys internal country IDs from ISO 316
 => {:id=>185, :name=>"United States of America"}
 ```
 
+### Rate Limiting
+
+The Emarsys API documentation states you can make "at least 200 requests per minute", which is reasonably slow - in practice, the Emarsys API seems to handle rates of up to about 60-70 req/sec before complaining.
+
+If you exceed the limit, the Emarsys API returns an HTTP 429 'Too Many Requests' response. The client library will raise an error in this case.
+
+
+
 ## Interacting with the API
 
 You can interact with the API on the provided data objects:
