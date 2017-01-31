@@ -16,10 +16,10 @@ module Emarsys
         data
       elsif !status.nil? && status == 401
         raise Emarsys::Unauthorized.new(code, text, status)
+      elsif !status.nil? && status == 429
+        raise Emarsys::TooManyRequests.new(code, text, status)
       else
         raise Emarsys::BadRequest.new(code, text, status)
-      else
-        raise Emarsys::TooManyRequests.new(code, text, status)
       end
     end
 

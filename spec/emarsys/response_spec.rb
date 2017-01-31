@@ -30,6 +30,12 @@ describe Emarsys::Response do
       allow(response).to receive(:status).and_return(401)
       expect{response.result}.to raise_error(Emarsys::Unauthorized)
     end
+
+    it "raises TooManyRequests error if http-status is 429" do
+      allow(response).to receive(:code).and_return(1)
+      allow(response).to receive(:status).and_return(429)
+      expect{response.result}.to raise_error(Emarsys::TooManyRequests)
+    end
   end
 
 end
