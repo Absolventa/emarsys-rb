@@ -18,6 +18,8 @@ module Emarsys
         raise Emarsys::Unauthorized.new(code, text, status)
       else
         raise Emarsys::BadRequest.new(code, text, status)
+      else
+        raise Emarsys::TooManyRequests.new(code, text, status)
       end
     end
 
