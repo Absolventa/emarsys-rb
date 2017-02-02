@@ -20,6 +20,9 @@ module Emarsys
   # Raised when Emarsys returns a 401 HTTP status code
   class Unauthorized < Error; end
 
+  # Raised when Emarsys returns a 429 HTTP status code
+  class TooManyRequests < Error; end
+
   # Raised when Emarsys returns a 500 HTTP status code
   class InternalServerError < Error; end
 end
