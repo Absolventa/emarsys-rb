@@ -208,6 +208,10 @@ Please refer to the code for detailed instructions of each method.
 
 ### HEAD (not yet released)
 
+### v0.2.1
+
+* Added basic support for rate-limiting response from Emarsys API ([#21](https://github.com/Absolventa/emarsys-rb/pull/21))
+
 ### v0.2.0
 * Added country mapping ([#17](https://github.com/Absolventa/emarsys-rb/pull/17))
 * Proper encoding of GET parameters ([#11](https://github.com/Absolventa/emarsys-rb/pull/11))
