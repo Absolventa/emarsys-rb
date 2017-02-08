@@ -38,13 +38,15 @@ module Emarsys
       # @param key_id [Integer, String] internal id of key field
       # @param key_value [Integer, String] value of interal id field
       # @param params [Hash] Contact information to update
+      # @param create_if_not_exists [Boolean] Whether to create contact if it does not exist
       # @return [Hash] internal id of the contact
       # @example
       #   Emarsys::Contact.update('app_id', 23, {:firstname => "Jon", :lastname => "Doe"})
-      #   Emarsys::Contact.update('3', 'john.doe@example.com', {'1' => "Jon", '2' => "Doe"})
-      def update(key_id, key_value, params = {})
+      #   Emarsys::Contact.update('3', 'john.doe@example.com', {'1' => "Jon", '2' => "Doe"}, true)
+      def update(key_id, key_value, params = {}, create_if_not_exists = false)
+        path = "contact#{create_if_not_exists ? '/?create_if_not_exists=1' : ''}"
         transformed_key_id = transform_key_id(key_id)
-        put "contact", params.merge!({'key_id' => transformed_key_id, transformed_key_id => key_value})
+        put path, params.merge!({'key_id' => transformed_key_id, transformed_key_id => key_value})
       end
 
       # Batch creation of contacts.
@@ -66,15 +68,19 @@ module Emarsys
       #
       # @param key_id [Integer, String] internal id of key field
       # @param params [Hash] Contact information of each new contact
+      # @param create_if_not_exists [Boolean] Whether to create non-existing contacts
       # @example
       #   Emarsys::Contact.update_batch(
-      #     'email', {:app_id => 1, :firstname => "Jon", :lastname => "Doe"},
-      #              {:app_id => 2, :firstname => "Jane", :lastname => "Doe"}
+      #     'email',
+      #     [{:email => "john@example.com", :firstname => "Jon", :lastname => "Doe"},
+      #      {:email => "jane@example.com", :firstname => "Jane", :lastname => "Doe"}],
+      #     true
       #   )
       #
       # TODO params should be parameterized with field mappings
-      def update_batch(key_id, params = [])
-        put "contact", {'key_id' => transform_key_id(key_id), 'contacts' => params}
+      def update_batch(key_id, params = [], create_if_not_exists = false)
+        path = "contact#{create_if_not_exists ? '/?create_if_not_exists=1' : ''}"
+        put path, {'key_id' => transform_key_id(key_id), 'contacts' => params}
       end
 
       # Get list of emails send to a contact

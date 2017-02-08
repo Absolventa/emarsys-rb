@@ -25,6 +25,12 @@ describe Emarsys::Contact do
       Emarsys::Contact.update(3, 'jane.doe@example.com', stub_params)
       expect(stub).to have_been_requested.once
     end
+    it "may create non-existing contact" do
+      stub_params = {1 => 'Jane', 2 => "Doe"}
+      stub = stub_request(:put, "https://api.emarsys.net/api/v2/contact/?create_if_not_exists=1").with(:body => stub_params.merge!({'key_id' => 3, 3 => 'jane.doe@example.com'}).to_json).to_return(standard_return_body)
+      Emarsys::Contact.update(3, 'jane.doe@example.com', stub_params, true)
+      expect(stub).to have_been_requested.once
+    end
   end
 
   describe ".create_batch" do
@@ -41,6 +47,12 @@ describe Emarsys::Contact do
       stub_params = [{1 => 'Jane', 2 => "Doe"}, {1 => 'Paul', 2 => 'Tester'}]
       stub = stub_request(:put, "https://api.emarsys.net/api/v2/contact").with(:body => {'key_id' => 3, 'contacts' => stub_params}.to_json).to_return(standard_return_body)
       Emarsys::Contact.update_batch(3, stub_params)
+      expect(stub).to have_been_requested.once
+    end
+    it "may create non-existing contacts" do
+      stub_params = [{1 => 'Jane', 2 => "Doe"}, {1 => 'Paul', 2 => 'Tester'}]
+      stub = stub_request(:put, "https://api.emarsys.net/api/v2/contact/?create_if_not_exists=1").with(:body => {'key_id' => 3, 'contacts' => stub_params}.to_json).to_return(standard_return_body)
+      Emarsys::Contact.update_batch(3, stub_params, true)
       expect(stub).to have_been_requested.once
     end
   end
