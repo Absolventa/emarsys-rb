@@ -208,6 +208,11 @@ Please refer to the code for detailed instructions of each method.
 
 ### HEAD (not yet released)
 
+### v0.2.2
+
+* Allow batch updates to create missing contacts ([#22](https://github.com/Absolventa/emarsys-rb/pull/22))
+* Add support for the data export API ([#23]((https://github.com/Absolventa/emarsys-rb/pull/23))
+
 ### v0.2.1
 
 * Added basic support for rate-limiting response from Emarsys API ([#21](https://github.com/Absolventa/emarsys-rb/pull/21))
