@@ -125,9 +125,33 @@ module Emarsys
         raise "Not implemented yet"
       end
 
-      # TODO POST /getresponses
-      def export_responses(params = {})
-        raise "Not implemented yet"
+      # Exports the selected fields of all contacts who responded to emails
+      # within the specified time range.
+      #
+      # @param distribution_method [String] ftp or local
+      # @param time_range [array] Array with two elements (start date, end date)
+      # @param contact_fields [array] Array of contact field IDs
+      # @param sources [array] Array which defines sources
+      # @param analysis_fields [array] Array that defines the contact behaviours to analyse
+      # @option params [hash]
+      # @return [Hash] Result data
+      # @example
+      #   Emarsys::Email.export_responses(
+      #     'local',
+      #     ['2012-02-09', '2014-08-13'],
+      #     [1, 3],
+      #     ['trackable_links'],
+      #     [5, 8, 13]
+      #   )
+      def export_responses(distribution_method, time_range, contact_fields, sources, analysis_fields, params = {})
+        params.merge!(
+          :distribution_method => distribution_method,
+          :time_range => time_range,
+          :contact_fields => Emarsys::ParamsConverter.new(contact_fields).convert_to_ids,
+          :sources => sources,
+          :analysis_fields => analysis_fields
+        )
+        post "email/getresponses", params
       end
     end
   end

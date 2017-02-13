@@ -8,4 +8,12 @@ describe Emarsys::Export do
       ).to have_been_requested.once
     end
   end
+
+  describe ".data" do
+    it "requests export data" do
+      expect(
+        stub_get('export/123/data') { Emarsys::Export.data(123) }
+      ).to have_been_requested.once
+    end
+  end
 end
