@@ -4,10 +4,15 @@ module Emarsys
     attr_accessor :code, :text, :data, :status
 
     def initialize(response)
-      json = JSON.parse(response)
-      self.code = json['replyCode']
-      self.text = json['replyText']
-      self.data = json['data']
+      if response.headers[:content_type] == 'text/csv'
+        self.code = 0
+        self.data = response.body
+      else
+        json = JSON.parse(response)
+        self.code = json['replyCode']
+        self.text = json['replyText']
+        self.data = json['data']
+      end
       self.status = response.code if response.respond_to?(:code)
     end
 
