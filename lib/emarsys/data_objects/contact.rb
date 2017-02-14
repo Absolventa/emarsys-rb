@@ -61,7 +61,10 @@ module Emarsys
       #
       # TODO params should be parameterized with field mappings
       def create_batch(key_id, params = [])
-        post "contact", {'key_id' => transform_key_id(key_id), 'contacts' => params}
+        converted_params = params.map do |p|
+          Emarsys::ParamsConverter.new(p).convert_to_ids
+        end
+        post "contact", {'key_id' => transform_key_id(key_id), 'contacts' => converted_params}
       end
 
       # Batch update of contacts.
@@ -77,10 +80,12 @@ module Emarsys
       #     true
       #   )
       #
-      # TODO params should be parameterized with field mappings
       def update_batch(key_id, params = [], create_if_not_exists = false)
         path = "contact#{create_if_not_exists ? '/?create_if_not_exists=1' : ''}"
-        put path, {'key_id' => transform_key_id(key_id), 'contacts' => params}
+        converted_params = params.map do |p|
+          Emarsys::ParamsConverter.new(p).convert_to_ids
+        end
+        put path, {'key_id' => transform_key_id(key_id), 'contacts' => converted_params}
       end
 
       # Get list of emails send to a contact
