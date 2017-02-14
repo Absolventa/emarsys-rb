@@ -40,6 +40,13 @@ describe Emarsys::Contact do
       Emarsys::Contact.create_batch(3, stub_params)
       expect(stub).to have_been_requested.once
     end
+    it "transforms identifiers to IDs for each contact parameter set" do
+      given_params = [{'_firstname' => 'Jane', '_lastname' => "Doe"}, {'_firstname' => 'Paul', '_lastname' => 'Tester'}]
+      expected_params = [{1 => 'Jane', 2 => "Doe"}, {1 => 'Paul', 2 => 'Tester'}]
+      stub = stub_request(:post, "https://api.emarsys.net/api/v2/contact").with(:body => {'key_id' => 3, 'contacts' => expected_params}.to_json).to_return(standard_return_body)
+      Emarsys::Contact.create_batch('_email', given_params)
+      expect(stub).to have_been_requested.once
+    end
   end
 
   describe ".update_batch" do
@@ -47,6 +54,13 @@ describe Emarsys::Contact do
       stub_params = [{1 => 'Jane', 2 => "Doe"}, {1 => 'Paul', 2 => 'Tester'}]
       stub = stub_request(:put, "https://api.emarsys.net/api/v2/contact").with(:body => {'key_id' => 3, 'contacts' => stub_params}.to_json).to_return(standard_return_body)
       Emarsys::Contact.update_batch(3, stub_params)
+      expect(stub).to have_been_requested.once
+    end
+    it "transforms identifiers to IDs for each contact parameter set" do
+      given_params = [{'_firstname' => 'Jane', '_lastname' => "Doe"}, {'_firstname' => 'Paul', '_lastname' => 'Tester'}]
+      expected_params = [{1 => 'Jane', 2 => "Doe"}, {1 => 'Paul', 2 => 'Tester'}]
+      stub = stub_request(:put, "https://api.emarsys.net/api/v2/contact").with(:body => {'key_id' => 3, 'contacts' => expected_params}.to_json).to_return(standard_return_body)
+      Emarsys::Contact.update_batch('_email', given_params)
       expect(stub).to have_been_requested.once
     end
     it "may create non-existing contacts" do
