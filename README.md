@@ -208,6 +208,10 @@ Please refer to the code for detailed instructions of each method.
 
 ### HEAD (not yet released)
 
+### v0.2.3
+
+* Convert params when using the batch APIs ([#25](https://github.com/Absolventa/emarsys-rb/pull/25))
+
 ### v0.2.2
 
 * Allow batch updates to create missing contacts ([#22](https://github.com/Absolventa/emarsys-rb/pull/22))
