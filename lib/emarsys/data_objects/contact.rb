@@ -59,12 +59,8 @@ module Emarsys
       #              {:app_id => 2, :firstname => "Jane", :lastname => "Doe"}
       #   )
       #
-      # TODO params should be parameterized with field mappings
       def create_batch(key_id, params = [])
-        converted_params = params.map do |p|
-          Emarsys::ParamsConverter.new(p).convert_to_ids
-        end
-        post "contact", {'key_id' => transform_key_id(key_id), 'contacts' => converted_params}
+        post "contact", {'key_id' => transform_key_id(key_id), 'contacts' => batch_params(params)}
       end
 
       # Batch update of contacts.
@@ -82,10 +78,7 @@ module Emarsys
       #
       def update_batch(key_id, params = [], create_if_not_exists = false)
         path = "contact#{create_if_not_exists ? '/?create_if_not_exists=1' : ''}"
-        converted_params = params.map do |p|
-          Emarsys::ParamsConverter.new(p).convert_to_ids
-        end
-        put path, {'key_id' => transform_key_id(key_id), 'contacts' => converted_params}
+        put path, {'key_id' => transform_key_id(key_id), 'contacts' => batch_params(params)}
       end
 
       # Get list of emails send to a contact
@@ -126,6 +119,11 @@ module Emarsys
       def transform_key_id(key_id)
         matching_attributes = Emarsys::FieldMapping::ATTRIBUTES.find{|elem| elem[:identifier] == key_id.to_s}
         matching_attributes.nil? ? key_id : matching_attributes[:id]
+      end
+
+      # @private
+      def batch_params(params = [])
+        params.map { |p| Emarsys::ParamsConverter.new(p).convert_to_ids }
       end
 
     end
