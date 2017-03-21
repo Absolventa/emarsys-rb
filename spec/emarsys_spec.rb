@@ -8,15 +8,9 @@ describe Emarsys do
         Emarsys.configure do |config|
           config.send("#{key}=", key)
         end
-        expect(Emarsys.instance_variable_get(:"@#{key}")).to eq key
+        expect(Emarsys::Configuration.for(nil).__send__(key)).to eq key
       end
     end
   end
 
-  describe ".api_endpoint getter" do
-    it "returns specific url as default value" do
-      Emarsys.api_endpoint = nil
-      expect(Emarsys.api_endpoint).to eq('https://api.emarsys.net/api/v2')
-    end
-  end
 end

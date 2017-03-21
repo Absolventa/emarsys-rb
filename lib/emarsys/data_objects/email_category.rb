@@ -12,8 +12,8 @@ module Emarsys
       # @return [Hash] List of email_categories
       # @example
       #   Emarsys::EmailCategory.collection
-      def collection
-        get 'emailcategory', {}
+      def collection(account: nil)
+        get account, 'emailcategory', {}
       end
 
     end

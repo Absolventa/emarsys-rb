@@ -25,4 +25,8 @@ module Emarsys
 
   # Raised when Emarsys returns a 500 HTTP status code
   class InternalServerError < Error; end
+
+  class AccountNotConfigured < StandardError; end
+
+  class AccountRequired < StandardError; end
 end

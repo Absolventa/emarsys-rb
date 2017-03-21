@@ -4,6 +4,7 @@ require 'json'
 require 'rest_client'
 require 'uri'
 
+require 'emarsys/configuration'
 require 'emarsys/client'
 require 'emarsys/country'
 require 'emarsys/data_object'
@@ -36,27 +37,14 @@ require "emarsys/version"
 # Ruby toolkit for the Emarsys API
 module Emarsys
   class << self
+    extend Forwardable
 
-    # @!attribute api_endpoint
-    #   @return [String] Base URL for emarsys URLs. default: https://api.emarsys.net/api/v2
-    # @!attribute api_password
-    #   @return [String] API Username given by Emarsys
-    # @!attribute api_username
-    #   @return [String] API Username given by Emarsys
+    attr_accessor :allow_default_configuration
 
-    attr_accessor :api_endpoint, :api_username, :api_password
+    def_delegators :configuration, :configure
 
-    # Base URL for the Emarsys API
-    #
-    # @return [String] domain which should be used to query the API
-    def api_endpoint
-      @api_endpoint ||= 'https://api.emarsys.net/api/v2'
+    def configuration
+      @configuration ||= Emarsys::Configuration
     end
-
-    # Set configuration options using a block
-    def configure
-      yield self
-    end
-
   end
 end

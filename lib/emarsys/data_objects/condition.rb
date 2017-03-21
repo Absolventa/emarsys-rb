@@ -12,8 +12,8 @@ module Emarsys
       # @return [Hash] List of conditions
       # @example
       #   Emarsys::Condition.collection
-      def collection
-        get 'condition', {}
+      def collection(account: nil)
+        get account, 'condition', {}
       end
     end
 

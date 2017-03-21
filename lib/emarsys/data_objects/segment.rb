@@ -12,8 +12,8 @@ module Emarsys
       # @return [Hash] List of segments
       # @example
       #   Emarsys::Segment.collection
-      def collection
-        get 'filter', {}
+      def collection(account: nil)
+        get account, 'filter', {}
       end
 
     end

@@ -15,12 +15,12 @@ module Emarsys
       # @example
       #   Emarsys::Field.collection
       #   Emarsys::Field.collection(:translate => 'en')
-      def collection(params = {})
+      def collection(account: nil, **params)
         params = params.stringify_keys
         if params['translate']
-          get "field/translate/#{params['translate'].to_s}", {}
+          get account, "field/translate/#{params['translate'].to_s}", {}
         else
-          get 'field', {}
+          get account, 'field', {}
         end
       end
 
@@ -30,8 +30,8 @@ module Emarsys
       # @return [Hash] Result Data
       # @example
       #   Emarsys::Field.choice(3)
-      def choice(id)
-        get "field/#{id}/choice", {}
+      def choice(id, account: nil)
+        get account, "field/#{id}/choice", {}
       end
     end
 

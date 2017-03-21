@@ -12,8 +12,8 @@ module Emarsys
       # @return [Hash] List of languages
       # @example
       #   Emarsys::Language.collection
-      def collection
-        get 'language', {}
+      def collection(account: nil)
+        get account, 'language', {}
       end
 
     end

@@ -4,23 +4,27 @@ describe Emarsys::Client do
 
   describe 'configs for username and password' do
     it 'inherits username from module' do
-      allow(Emarsys).to receive(:api_username).and_return("my_username")
       expect(Emarsys::Client.new.username).to eq("my_username")
     end
 
     it 'inherits password from module' do
-      allow(Emarsys).to receive(:api_password).and_return("my_password")
       expect(Emarsys::Client.new.password).to eq("my_password")
     end
 
-    it 'raises error if api_username is not set' do
-      allow(Emarsys).to receive(:api_username).and_return(nil)
-      expect{Emarsys::Client.new.username}.to raise_error(ArgumentError, 'Emarsys.api_username is not set')
-    end
+    context 'missing values' do
+      before do
+        Emarsys.configure do |config|
+          config.api_username = nil
+          config.api_password = nil
+        end
+      end
+      it 'raises error if api_username is not set' do
+        expect{Emarsys::Client.new.username}.to raise_error(ArgumentError, 'api_username is not set')
+      end
 
-    it 'raises error if api_password is not set' do
-      allow(Emarsys).to receive(:api_password).and_return(nil)
-      expect{Emarsys::Client.new.password}.to raise_error(ArgumentError, 'Emarsys.api_password is not set')
+      it 'raises error if api_password is not set' do
+        expect{Emarsys::Client.new.password}.to raise_error(ArgumentError, 'api_password is not set')
+      end
     end
   end
 

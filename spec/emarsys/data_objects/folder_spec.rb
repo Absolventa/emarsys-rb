@@ -10,7 +10,7 @@ describe Emarsys::Folder do
 
     it "requests all folders with parameters" do
       expect(
-        stub_get("folder/?folder=3") { Emarsys::Folder.collection(:folder => 3) }
+        stub_get("folder/?folder=3") { Emarsys::Folder.collection(folder: 3) }
       ).to have_been_requested.once
     end
   end
