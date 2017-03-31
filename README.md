@@ -86,6 +86,15 @@ If you exceed the limit, the Emarsys API returns an HTTP 429 'Too Many Requests'
 
 ## Interacting with the API
 
+Each API request returns a response object, which exposes the following methods:
+
+* `code`: HTTP status code
+* `text`: 'replyText' from parsed JSON
+* `data`: 'data' from parsed JSON
+* `code`: 'replyCode' from parsed JSON
+
+If the `replyCode` is not `0`, an exception will be raised.
+
 You can interact with the API on the provided data objects:
 
 #### Condition
@@ -207,6 +216,9 @@ Please refer to the code for detailed instructions of each method.
 ## Changelog
 
 ### HEAD (not yet released)
+
+* Return response, not just (parsed) body of it ([#29](https://github.com/Absolventa/emarsys-rb/pull/29)). To migrate existing code, you need to call `#data` on the
+response object.
 
 ### v0.2.3
 
