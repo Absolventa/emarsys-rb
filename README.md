@@ -40,6 +40,20 @@ Emarsys.configure do |c|
 end
 ```
 
+It is also possible to configure multiple Emarsys accounts like this:
+
+```ruby
+Emarsys.configure(account: :foo) do |c|
+  c.api_username = 'foo_username'
+  c.api_password = 'foo_password'
+end
+
+Emarsys.configure(account: :bar) do |c|
+  c.api_username = 'bar_username'
+  c.api_password = 'bar_password'
+end
+```
+
 ### Field Mapping
 
 As said before, Emarsys loves IDs. For using an API, they are evil. This gem provides
@@ -86,6 +100,8 @@ If you exceed the limit, the Emarsys API returns an HTTP 429 'Too Many Requests'
 
 ## Interacting with the API
 
+### Responses
+
 Each API request returns a response object, which exposes the following methods:
 
 * `code`: HTTP status code
@@ -95,7 +111,13 @@ Each API request returns a response object, which exposes the following methods:
 
 If the `replyCode` is not `0`, an exception will be raised.
 
-You can interact with the API on the provided data objects:
+### Multiple accounts
+If you configured multiple Emarsys accounts, you will need to pass the keyword
+argument `account` to every API call, e.g.
+`Emarsys::Condition.collection(account: :foo)`.
+
+
+### Endpoints
 
 #### Condition
 
@@ -108,12 +130,12 @@ Emarsys::Condition.collection
 
 ```ruby
 # Create a contact with custom key_field (one example with mapped identifier, one without)
-Emarsys::Contact.create('user_id', 10, {firstname: "Jane", lastname: "Doe", email: "jane.doe@example.com"})
-Emarsys::Contact.create(4980, 10, {1 => "Jane", 2 => "Doe", 3 => "jane.doe@example.com"})
+Emarsys::Contact.create(key_id: 'user_id', key_value: 10, params: {firstname: "Jane", lastname: "Doe", email: "jane.doe@example.com"})
+Emarsys::Contact.create(key_id: 4980, key_value: 10, params: {1 => "Jane", 2 => "Doe", 3 => "jane.doe@example.com"})
 
 # Update a contact with key_field (one example with mapped identifier, one without)
-Emarsys::Contact.update('email', "jane.doe@example.com", {firstname: "John", lastname: "Doe"})
-Emarsys::Contact.update(3, "jane.doe@example.com", {1 => "John", 2 => "Doe"})
+Emarsys::Contact.update(key_id: 'email', key_value: "jane.doe@example.com", params: {firstname: "John", lastname: "Doe"})
+Emarsys::Contact.update(key_id: 3, key_value: "jane.doe@example.com", params: {1 => "John", 2 => "Doe"})
 ```
 
 #### ContactList
@@ -137,9 +159,9 @@ Emarsys::Email.collection(status: 3)
 Emarsys::Email.resource(1)
 
 # Create a new email campaign
-Emarsys::Email.create({})
+Emarsys::Email.create
 
-Emarsys::Email.launch({})
+Emarsys::Email.launch(1)
 ```
 
 #### Event
@@ -148,11 +170,11 @@ Emarsys::Email.launch({})
 Emarsys::Event.collection
 
 # Trigger a custom event
-Emarsys::Event.trigger(65, 3, ["test@example.com"])
+Emarsys::Event.trigger(65, key_id: 3, external_id: "test@example.com")
 
 # Trigger a custom event which actually sends a mail
 # (Emarsys way to send transactional mails with placeholders)
-Emarsys::Event.trigger(2, 3, 'test@example.com', {:global => {:my_placeholder => "some content"}})
+Emarsys::Event.trigger(2, key_id: 3, external_id: 'test@example.com', data: {:global => {:my_placeholder => "some content"}})
 ```
 
 #### Export
@@ -173,7 +195,7 @@ Emarsys::Field.choice(1)
 ```ruby
 # Get all forms, optional filter parameters
 Emarsys::Folder.collection
-Emarsys::Folder.collection(:folder => 3)
+Emarsys::Folder.collection(folder: 3)
 ```
 
 #### Form
@@ -204,7 +226,7 @@ Emarsys::Segment.collection
 Emarsys::Source.collection
 
 # Create a new source
-Emarsys::Source.create("New Source")
+Emarsys::Source.create(name: "New Source")
 
 # Destroy a source
 Emarsys::Source.destroy(123)
@@ -213,36 +235,6 @@ Emarsys::Source.destroy(123)
 Please refer to the code for detailed instructions of each method.
 
 
-## Changelog
-
-### HEAD (not yet released)
-
-* Return response, not just (parsed) body of it ([#29](https://github.com/Absolventa/emarsys-rb/pull/29)). To migrate existing code, you need to call `#data` on the
-response object.
-
-### v0.2.3
-
-* Convert params when using the batch APIs ([#25](https://github.com/Absolventa/emarsys-rb/pull/25))
-
-### v0.2.2
-
-* Allow batch updates to create missing contacts ([#22](https://github.com/Absolventa/emarsys-rb/pull/22))
-* Add support for the data export API ([#23]((https://github.com/Absolventa/emarsys-rb/pull/23))
-
-### v0.2.1
-
-* Added basic support for rate-limiting response from Emarsys API ([#21](https://github.com/Absolventa/emarsys-rb/pull/21))
-
-### v0.2.0
-* Added country mapping ([#17](https://github.com/Absolventa/emarsys-rb/pull/17))
-* Proper encoding of GET parameters ([#11](https://github.com/Absolventa/emarsys-rb/pull/11))
-* Update default endpoint fom `suite5.emarsys.net/api/v2` to `api.emarsys.net/api/v2` ([#10](https://github.com/Absolventa/emarsys-rb/pull/10))
-* Bugfixes in nonce header ([#5](https://github.com/Absolventa/emarsys-rb/pull/5) and [#19](https://github.com/Absolventa/emarsys-rb/pull/19))
-* Trigger an external event for multiple contacts ([#3](https://github.com/Absolventa/emarsys-rb/pull/3))
-
-### v0.1.0
-
-Initial version
 
 ## Contributing
 
