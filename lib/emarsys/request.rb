@@ -2,12 +2,13 @@
 module Emarsys
 
   class Request
-    attr_accessor :http_verb, :path, :params
+    attr_accessor :http_verb, :path, :params, :account
 
-    def initialize(http_verb, path, params = {})
+    def initialize(account, http_verb, path, params = {})
       self.path = path
       self.http_verb = http_verb
       self.params = params
+      self.account = account
     end
 
     def send_request
@@ -32,11 +33,11 @@ module Emarsys
     end
 
     def client
-      Emarsys::Client.new
+      Emarsys::Client.new(account)
     end
 
     def emarsys_uri
-      [Emarsys.api_endpoint, @path].join('/')
+      [client.endpoint, @path].join('/')
     end
 
     def converted_params

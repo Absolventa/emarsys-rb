@@ -12,8 +12,8 @@ module Emarsys
       # @return [Hash] List of contact_lists
       # @example
       #   Emarsys::ContactList.collection
-      def collection
-        get 'contactlist', {}
+      def collection(account: nil)
+        get account, 'contactlist', {}
       end
 
       # Create a new contact list
@@ -25,22 +25,22 @@ module Emarsys
       # @return [Hash] internal id of the contact list
       # @example
       #   Emarsys::ContactList.create(key_id: "3", name: 'Test-Liste', description: 'Something')
-      def create(params = {})
-        post "contactlist", params
+      def create(account: nil, **params)
+        post account, "contactlist", params
       end
 
       # Add a contacts to a specific contact list
       #
       # This cannot be an instance method, because the API does not allow to retrieve a single resource. How crappy is that?
-      def add_contacts(contact_list_id, key_id, external_ids = [])
-        post "contactlist/#{contact_list_id}/add", {'key_id' => key_id, 'external_ids' => external_ids}
+      def add_contacts(id, key_id:, external_ids: [], account: nil)
+        post account, "contactlist/#{id}/add", {'key_id' => key_id, 'external_ids' => external_ids}
       end
 
       # Remove contacts from a specific contact list
       #
       # This cannot be an instance method, because the API does not allow to retrieve a single resource. How crappy is that?
-      def remove_contacts(contact_list_id, key_id, external_ids = [])
-        post "contactlist/#{contact_list_id}/remove", {'key_id' => key_id, 'external_ids' => external_ids}
+      def remove_contacts(id, key_id:, external_ids: [], account: nil)
+        post account, "contactlist/#{id}/remove", {'key_id' => key_id, 'external_ids' => external_ids}
       end
 
     end

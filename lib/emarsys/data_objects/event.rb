@@ -13,13 +13,13 @@ module Emarsys
       # @return [Hash] List of events
       # @example
       #   Emarsys::Event.collection
-      def collection
-        get 'event', {}
+      def collection(account: nil)
+        get account, 'event', {}
       end
 
       # Trigger an external event
       #
-      # @param event_id [Integer, String] The internal emarsys id
+      # @param id [Integer, String] The internal emarsys id
       # @param key_id [Integer, String] The identifer of the key field (e.g. 3 for 'email')
       # @param external_id [String] The id of the given filed specified with key_id (e.g. 'test@example.com')
       # @option data [Hash] data hash for transactional mails
@@ -27,27 +27,27 @@ module Emarsys
       # @example
       #   Emarsys::Event.trigger(2, 3, 'test@example.com')
       #   Emarsys::Event.trigger(2, 'user_id', 57687, {:global => {:name => "Special Name"}})
-      def trigger(event_id, key_id, external_id, data = {})
+      def trigger(id, key_id:, external_id:, data: {}, account: nil)
         transformed_key_id = transform_key_id(key_id)
         params = {:key_id => transformed_key_id, :external_id => external_id}
         params.merge!(:data => data) if not data.empty?
-        post "event/#{event_id}/trigger", params
+        post account, "event/#{id}/trigger", params
       end
 
       # Trigger an external event for multiple contacts
       #
-      # @param event_id [Integer, String] The internal emarsys id
+      # @param id [Integer, String] The internal emarsys id
       # @param key_id [Integer, String] The identifer of the key field (e.g. 3 for 'email')
       # @param contacts [Array, Hash] An array with hashes containing the contacts and optional data per contact
       # @return [Hash] Result data
       # @example
       #   Emarsys::Event.trigger_multiple(2, 3, [{:external_id => "test@example.com"},{:external_id => "test2@example.com", :data => {:name => "Special Name"}}])
-      def trigger_multiple(event_id, key_id, contacts)
+      def trigger_multiple(id, key_id:, contacts:, account: nil)
         external_id = ""
         transformed_key_id = transform_key_id(key_id)
         params = {:key_id => transformed_key_id, :external_id => external_id, :data => nil}
         params.merge!(:contacts => contacts)
-        post "event/#{event_id}/trigger", params
+        post account, "event/#{id}/trigger", params
       end
 
       # @private

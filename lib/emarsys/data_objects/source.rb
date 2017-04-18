@@ -12,8 +12,8 @@ module Emarsys
       # @return [Hash] List of sources
       # @example
       #   Emarsys::Source.collection
-      def collection
-        get 'source', {}
+      def collection(account: nil)
+        get account, 'source', {}
       end
 
       # Create a new source
@@ -22,8 +22,8 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Source.create("My new source")
-      def create(name)
-        post 'source/create', {:name => name}
+      def create(name:, account: nil)
+        post account, 'source/create', {:name => name}
       end
 
       # Destroy a specific source
@@ -32,8 +32,8 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Source.destroy(2)
-      def destroy(id)
-        delete "source/#{id}", {}
+      def destroy(id, account: nil)
+        delete account, "source/#{id}", {}
       end
 
     end

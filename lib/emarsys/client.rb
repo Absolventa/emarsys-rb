@@ -1,15 +1,22 @@
 # frozen_string_literal: true
 module Emarsys
   class Client
+    attr_accessor :account
+
+    def initialize(account = nil)
+      self.account = account
+    end
+
+    def endpoint
+      Emarsys::Configuration.for(account).api_endpoint
+    end
 
     def username
-      raise ArgumentError, "Emarsys.api_username is not set" if Emarsys.api_username.nil?
-      Emarsys.api_username
+      Emarsys::Configuration.for(account).api_username
     end
 
     def password
-      raise ArgumentError, "Emarsys.api_password is not set" if Emarsys.api_password.nil?
-      Emarsys.api_password
+      Emarsys::Configuration.for(account).api_password
     end
 
     def x_wsse_string
@@ -33,6 +40,5 @@ module Emarsys
     def calculated_digest
       Digest::SHA1.hexdigest(header_nonce + header_created + password)
     end
-
   end
 end

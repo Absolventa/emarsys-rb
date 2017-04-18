@@ -13,6 +13,7 @@ def stub_emarsys_authentication!
     config.api_username = "my_username"
     config.api_password = "my_password"
   end
+  Emarsys.allow_default_configuration = true
 end
 
 def standard_return_body

@@ -12,8 +12,8 @@ module Emarsys
       # @return [Hash] List of forms
       # @example
       #   Emarsys::Form.collection
-      def collection
-        get 'form', {}
+      def collection(account: nil)
+        get account, 'form', {}
       end
 
     end

@@ -17,8 +17,8 @@ module Emarsys
       #   Emarsys::Email.collection
       #   Emarsys::Email.collection(:status => 3)
       #   Emarsys::Email.collection(:contactlist => 5)
-      def collection(params = {})
-        get 'email', params
+      def collection(account: nil, **params)
+        get account, 'email', params
       end
 
       # Get Email attirbutes of a specific email
@@ -27,8 +27,8 @@ module Emarsys
       # @return [Hash] Attributes hash
       # @example
       #   Emarsys::Email.resource(1)
-      def resource(id)
-        get "email/#{id}", {}
+      def resource(id, account: nil)
+        get account, "email/#{id}", {}
       end
 
       # Create a new email campaign
@@ -53,8 +53,8 @@ module Emarsys
       #     subject: 'Test Subject', :email_category: 3, segment: 1121, contactlist: 0,
       #     html_source: '<h1>Test</h1>', text_source: 'Test'
       #   )
-      def create(params = {})
-        post "email", params
+      def create(account: nil, **params)
+        post account, "email", params
       end
 
       # Launches an email
@@ -66,8 +66,8 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Email.launch(1)
-      def launch(id, params = {})
-        post "email/#{id}/launch", params
+      def launch(id, account: nil, **params)
+        post account, "email/#{id}/launch", params
       end
 
       # Preview an email
@@ -77,8 +77,8 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Email.preview(1)
-      def preview(id, version = 'html')
-        post "email/#{id}/preview", {:version => version}
+      def preview(id, version: 'html', account: nil)
+        post account, "email/#{id}/preview", {:version => version}
       end
 
       # View response summary of an email
@@ -87,8 +87,8 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Email.response_summary(1)
-      def response_summary(id)
-        get "email/#{id}/responsesummary", {}
+      def response_summary(id, account: nil)
+        get account, "email/#{id}/responsesummary", {}
       end
 
       # Instruct emarsys to send a test mail
@@ -103,8 +103,8 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Email.send_test_mail(1, {:recipientlist => 'john.doe@example.com;jane.doe@example.com'})
-      def send_test_mail(id, params = {})
-        post "email/#{id}/sendtestmail", params
+      def send_test_mail(id, account: nil, **params)
+        post account, "email/#{id}/sendtestmail", params
       end
 
       # Returns the delivery status of an email
@@ -116,12 +116,12 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Email.delivery_status(1)
-      def delivery_status(id, params = {})
-        post "email/#{id}/getdeliverystatus", params
+      def delivery_status(id, account: nil, **params)
+        post account, "email/#{id}/getdeliverystatus", params
       end
 
       # TODO POST /getlaunchesofemail
-      def email_launches(id)
+      def email_launches(id, account: nil)
         raise "Not implemented yet"
       end
 
@@ -143,7 +143,7 @@ module Emarsys
       #     ['trackable_links'],
       #     [5, 8, 13]
       #   )
-      def export_responses(distribution_method, time_range, contact_fields, sources, analysis_fields, params = {})
+      def export_responses(distribution_method:, time_range:, contact_fields:, sources:, analysis_fields:, account: nil, **params)
         params.merge!(
           :distribution_method => distribution_method,
           :time_range => time_range,
@@ -151,7 +151,7 @@ module Emarsys
           :sources => sources,
           :analysis_fields => analysis_fields
         )
-        post "email/getresponses", params
+        post account, "email/getresponses", params
       end
     end
   end

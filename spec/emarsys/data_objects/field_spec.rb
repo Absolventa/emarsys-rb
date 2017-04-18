@@ -10,7 +10,7 @@ describe Emarsys::Field do
 
     it "requests all fields with translate parameter" do
       expect(
-        stub_get("field/translate/en") { Emarsys::Field.collection('translate' => 'en') }
+        stub_get("field/translate/en") { Emarsys::Field.collection(translate: 'en') }
       ).to have_been_requested.once
     end
   end

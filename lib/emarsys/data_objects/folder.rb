@@ -15,8 +15,8 @@ module Emarsys
       # @example
       #   Emarsys::Folder.collection
       #   Emarsys::Folder.collection(:folder => 3)
-      def collection(params = {})
-        get 'folder', params
+      def collection(account: nil, **params)
+        get account, 'folder', params
       end
     end
 

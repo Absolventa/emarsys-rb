@@ -13,8 +13,8 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Export.resource(2)
-      def resource(id)
-        get "export/#{id}", {}
+      def resource(id, account: nil)
+        get account, "export/#{id}", {}
       end
 
       # Download export data
@@ -25,11 +25,11 @@ module Emarsys
       # @return [String] text/csv
       # @example
       #   Emarsys::Export.data(2)
-      def data(id, offset = nil, limit = nil)
+      def data(id, offset: nil, limit: nil, account: nil)
         params = {}
         params.merge!(:offset => offset) if offset
         params.merge!(:limit => limit) if limit
-        get "export/#{id}/data", params
+        get account, "export/#{id}/data", params
       end
     end
 

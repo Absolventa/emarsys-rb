@@ -58,9 +58,9 @@ describe Emarsys::Email do
     end
 
     it "requests an email launch with parameters" do
-      stub_params = {:schedule => "2013-12-01 23:00:00", :time_zone => "Europe/Berlin"}
+      stub_params = {schedule: "2013-12-01 23:00:00", time_zone: "Europe/Berlin"}
       stub = stub_request(:post, "https://api.emarsys.net/api/v2/email/123/launch").with(:body => stub_params.to_json).to_return(standard_return_body)
-      Emarsys::Email.launch(123, stub_params)
+      Emarsys::Email.launch(123, schedule: "2013-12-01 23:00:00", time_zone: "Europe/Berlin")
       expect(stub).to have_been_requested.once
     end
   end
@@ -69,16 +69,16 @@ describe Emarsys::Email do
     it "requests an email preview" do
       stub_params = {:version => 'html'}
       stub = stub_request(:post, "https://api.emarsys.net/api/v2/email/123/preview").with(:body => stub_params.to_json).to_return(standard_return_body)
-      Emarsys::Email.preview(123, 'html')
+      Emarsys::Email.preview(123, version: 'html')
       expect(stub).to have_been_requested.once
     end
   end
 
   describe ".send_test_mail" do
     it "requests an email test sending with custom recipient list" do
-      stub_params = {:recipientlist => 'john.doe@example.com;jane.doe@example.com'}
+      stub_params = {recipientlist: 'john.doe@example.com;jane.doe@example.com'}
       stub = stub_request(:post, "https://api.emarsys.net/api/v2/email/123/sendtestmail").with(:body => stub_params.to_json).to_return(standard_return_body)
-      Emarsys::Email.send_test_mail(123, stub_params)
+      Emarsys::Email.send_test_mail(123, recipientlist: 'john.doe@example.com;jane.doe@example.com')
       expect(stub).to have_been_requested.once
     end
   end

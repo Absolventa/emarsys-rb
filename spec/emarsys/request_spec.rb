@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Emarsys::Request do
   let(:client) { Emarsys::Client.new }
-  let(:request) { Emarsys::Request.new('get', 'some-path', {:a => 1}) }
+  let(:request) { Emarsys::Request.new(nil, 'get', 'some-path', {:a => 1}) }
 
   describe '#initialize' do
     it 'sets client, path, http_verb and params attributes on initialize' do
