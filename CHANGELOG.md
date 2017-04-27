@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.3.1
 
 * Export segment ([#31](https://github.com/Absolventa/emarsys-rb/pull/31))
 
