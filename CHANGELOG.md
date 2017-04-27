@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* Export segment ([#31](https://github.com/Absolventa/emarsys-rb/pull/31))
+
 ## v0.3.0
 
 * Return response, not just (parsed) body of it ([#29](https://github.com/Absolventa/emarsys-rb/pull/29)). To migrate existing code, you need to call `#data` on the
