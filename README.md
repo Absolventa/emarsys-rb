@@ -54,6 +54,14 @@ Emarsys.configure(account: :bar) do |c|
 end
 ```
 
+When your application uses only one Emarsys account you will need to add:
+
+```ruby
+Emarsys.allow_default_configuration = true
+```
+
+to your configuration.
+
 ### Field Mapping
 
 As said before, Emarsys loves IDs. For using an API, they are evil. This gem provides
