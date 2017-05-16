@@ -81,6 +81,20 @@ module Emarsys
         put account, path, {'key_id' => transform_key_id(key_id), 'contacts' => batch_params(params)}
       end
 
+      # Delete a contact. The given params are transformed to emarsys ids.
+      #
+      # @param key_id [Integer, String] internal id of key field
+      # @param key_value [Integer, String] value of interal id field
+      # @return [Hash]
+      # @example
+      #   Emarsys::Contact.update('app_id', 23, {:firstname => "Jon", :lastname => "Doe"})
+      #   Emarsys::Contact.update('3', 'john.doe@example.com', {'1' => "Jon", '2' => "Doe"}, true)
+      def delete(key_id:, key_value:, account: nil)
+        path = "contact/delete"
+        transformed_key_id = transform_key_id(key_id)
+        post account, path, {'key_id' => transformed_key_id, transformed_key_id => key_value}
+      end
+
       # Get list of emails send to a contact
       #
       # @param contacts [array] Array of contact ids

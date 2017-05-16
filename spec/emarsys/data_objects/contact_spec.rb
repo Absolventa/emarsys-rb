@@ -71,6 +71,14 @@ describe Emarsys::Contact do
     end
   end
 
+  describe ".delete" do
+    it "deletes contact" do
+      stub = stub_request(:post, "https://api.emarsys.net/api/v2/contact/delete").with(:body => {'key_id' => 3, 3 => 'jane.doe@example.com'}.to_json).to_return(standard_return_body)
+      Emarsys::Contact.delete(key_id: 3, key_value: 'jane.doe@example.com')
+      expect(stub).to have_been_requested.once
+    end
+  end
+
   describe ".contact_history" do
     it "requests contact histories" do
       stub_params = [1,2,3]
