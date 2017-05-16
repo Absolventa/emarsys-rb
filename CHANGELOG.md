@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.2
+
+* Contact deletion ([#33](https://github.com/Absolventa/emarsys-rb/pull/33))
+
 ## v0.3.1
 
 * Export segment ([#31](https://github.com/Absolventa/emarsys-rb/pull/31))
