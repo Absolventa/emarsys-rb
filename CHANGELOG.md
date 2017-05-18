@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.3
+
+* Fix Tunisia country code ([#34](https://github.com/Absolventa/emarsys-rb/pull/34))
+
 ## v0.3.2
 
 * Contact deletion ([#33](https://github.com/Absolventa/emarsys-rb/pull/33))
