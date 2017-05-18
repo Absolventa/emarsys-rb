@@ -184,7 +184,7 @@ module Emarsys
         'TG' => {id: 174, name: 'Togo'},
         'TO' => {id: 175, name: 'Tonga'},
         'TT' => {id: 176, name: 'Trinidad and Tobago'},
-        'TU' => {id: 177, name: 'Tunisia'},
+        'TN' => {id: 177, name: 'Tunisia'},
         'TR' => {id: 178, name: 'Turkey'},
         'TM' => {id: 179, name: 'Turkmenistan'},
         'TV' => {id: 180, name: 'Tuvalu'},
