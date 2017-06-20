@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.3.4
+
+* Allow accessing of error code ([#35](https://github.com/Absolventa/emarsys-rb/pull/35))
+
+
 ## v0.3.3
 
 * Fix Tunisia country code ([#34](https://github.com/Absolventa/emarsys-rb/pull/34))
