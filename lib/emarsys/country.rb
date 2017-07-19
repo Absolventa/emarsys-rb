@@ -102,7 +102,7 @@ module Emarsys
         'KR' => {id: 91, name: 'Korea, South'},
         'KW' => {id: 92, name: 'Kuwait'},
         'KG' => {id: 93, name: 'Kyrgyzstan'},
-        'LO' => {id: 94, name: 'Laos'},
+        'LA' => {id: 94, name: 'Laos'},
         'LV' => {id: 95, name: 'Latvia'},
         'LB' => {id: 96, name: 'Lebanon'},
         'LS' => {id: 97, name: 'Lesotho'},
