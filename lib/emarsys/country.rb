@@ -143,7 +143,7 @@ module Emarsys
         'PW' => {id: 132, name: 'Palau'},
         'PA' => {id: 134, name: 'Panama'},
         'PG' => {id: 135, name: 'Papua New Guinea'},
-        'PU' => {id: 136, name: 'Paraguay'},
+        'PY' => {id: 136, name: 'Paraguay'},
         'PE' => {id: 137, name: 'Peru'},
         'PH' => {id: 138, name: 'Philippines'},
         'PL' => {id: 139, name: 'Poland'},
