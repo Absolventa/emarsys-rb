@@ -122,7 +122,7 @@ module Emarsys
         'MR' => {id: 111, name: 'Mauritania'},
         'MU' => {id: 112, name: 'Mauritius'},
         'MX' => {id: 113, name: 'Mexico'},
-        'MI' => {id: 114, name: 'Micronesia'},
+        'FM' => {id: 114, name: 'Micronesia'},
         'MD' => {id: 115, name: 'Moldova'},
         'MC' => {id: 116, name: 'Monaco'},
         'MN' => {id: 117, name: 'Mongolia'},
