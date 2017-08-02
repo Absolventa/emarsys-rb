@@ -40,5 +40,13 @@ module Emarsys
     def calculated_digest
       Digest::SHA1.hexdigest(header_nonce + header_created + password)
     end
+
+    def open_timeout
+      Emarsys::Configuration.for(account).open_timeout
+    end
+
+    def read_timeout
+      Emarsys::Configuration.for(account).read_timeout
+    end
   end
 end
