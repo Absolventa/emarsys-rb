@@ -153,6 +153,24 @@ module Emarsys
         )
         post account, "email/getresponses", params
       end
+
+      # http://documentation.emarsys.com/resource/developers/endpoints/email/query-responses/
+      def responses(type:, start_date: nil, end_date: nil, campaign_id: nil, account: nil)
+        params = { type: type }
+        if !campaign_id.nil?
+          params.merge!(campaign_id: campaign_id)
+        elsif !start_date.nil? && !end_date.nil?
+          params.merge!(start_date: start_date, end_date: end_date)
+        else
+          raise "Either campaign_id OR start_date/end_date must be provided"
+        end
+        post account, "email/responses", params
+      end
+
+      # http://documentation.emarsys.com/resource/developers/endpoints/email/query-responses-result/
+      def responses_result(query_id, account: nil)
+        get account, "email/#{query_id}/responses", {}
+      end
     end
   end
 end

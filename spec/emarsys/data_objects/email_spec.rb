@@ -91,4 +91,21 @@ describe Emarsys::Email do
     end
   end
 
+  describe ".responses" do
+    it "queries responses" do
+      stub_params = { type: "received", campaign_id: 123 }
+      stub = stub_request(:post, "https://api.emarsys.net/api/v2/email/responses").with(:body => stub_params.to_json).to_return(standard_return_body)
+      Emarsys::Email.responses(stub_params)
+      expect(stub).to have_been_requested.once
+    end
+  end
+
+  describe ".responses_result" do
+    it "queries responses result" do
+      expect(
+        stub_get('email/123/responses') { Emarsys::Email.responses_result(123) }
+      ).to have_been_requested.once
+    end
+  end
+
 end
