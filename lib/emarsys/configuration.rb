@@ -50,5 +50,11 @@ module Emarsys
       @api_password or raise ArgumentError.new('api_password is not set')
     end
 
+    # @!attribute open_timeout
+    #   @return [Integer] Connect Timeout. default: RestClient timeout which is 60s
+    # @!attribute read_timeout
+    #   @return [Integer] Read Timeout. default: RestClient timeout which is 60s
+    attr_accessor :open_timeout, :read_timeout
+
   end
 end
