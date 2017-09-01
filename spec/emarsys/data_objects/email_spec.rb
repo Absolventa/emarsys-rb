@@ -85,8 +85,13 @@ describe Emarsys::Email do
 
   describe ".response_summary" do
     it "requests a single email" do
-      expect(
-        stub_get('email/123/responsesummary') { Emarsys::Email.response_summary(123) }
+      stub_params = {
+        launch_id: 123,
+        start_date: '2013-12-01 23:00:00',
+        end_date: '2013-12-02 23:00:00'
+      }
+      expect(stub_get('email/123/responsesummary/?end_date=2013-12-02%2023:00:00&launch_id=123&start_date=2013-12-01%2023:00:00') { 
+        Emarsys::Email.response_summary(123, stub_params) }
       ).to have_been_requested.once
     end
   end
