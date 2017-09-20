@@ -67,6 +67,16 @@ describe Emarsys::Client do
         nonce = client.header_nonce
         expect(client.header_nonce).to eq nonce
       end
+
+      describe 'in a forked environment' do
+        it 'will not break apart' do
+          fork do
+            client = Emarsys::Client.new
+            nonce = client.header_nonce
+            expect(client.header_nonce).to eq nonce
+          end
+        end
+      end
     end
 
     describe '#header_created' do
