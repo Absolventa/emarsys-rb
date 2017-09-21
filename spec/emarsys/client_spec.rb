@@ -76,7 +76,7 @@ describe Emarsys::Client do
             expect(client.header_nonce).to eq nonce
           end
         end
-      end
+      end if RUBY_ENGINE == 'ruby'
     end
 
     describe '#header_created' do
