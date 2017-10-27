@@ -53,7 +53,7 @@ module Emarsys
       def create(name:, application_type:, string_id: nil, account: nil)
         params = { name: name, application_type: application_type }
         params[:string_id] = string_id if string_id
-        post account, 'field/create', params
+        post account, 'field', params
       end
     end
 

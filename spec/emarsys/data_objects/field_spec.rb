@@ -26,7 +26,7 @@ describe Emarsys::Field do
   describe '.create' do
     it 'creates a new custom field' do
       expect(
-        stub_post('field/create') do
+        stub_post('field') do
           Emarsys::Field.create(name: 'New field', application_type: 'shorttext')
         end
       ).to have_been_requested.once
