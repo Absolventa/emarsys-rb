@@ -10,7 +10,7 @@ module Emarsys
       # Create a new contact. The given params are transformed to emarsys ids.
       #
       # @param key_id [Integer, String] internal id of key field
-      # @param key_value [Integer, String] value of interal id field
+      # @param key_value [Integer, String] value of internal id field
       # @param params [Hash] Contact information to create
       # @return [Hash] internal id of the contact
       # @example
@@ -21,10 +21,10 @@ module Emarsys
         post account, "contact", params.merge!({'key_id' => transformed_key_id, transformed_key_id => key_value})
       end
 
-      # Get the interal emarsys id of a contact. The given params are transformed to emarsys ids.
+      # Get the internal emarsys id of a contact. The given params are transformed to emarsys ids.
       #
       # @param key_id [Integer, String] internal id of key field
-      # @param key_value [Integer, String] value of interal id field
+      # @param key_value [Integer, String] value of internal id field
       # @return [Hash] internal emarsys id of the contact
       # @example
       #   Emarsys::Contact.emarsys_id('email', 'john.dow@example.com')
@@ -36,7 +36,7 @@ module Emarsys
       # Update a contact. The given params are transformed to emarsys ids.
       #
       # @param key_id [Integer, String] internal id of key field
-      # @param key_value [Integer, String] value of interal id field
+      # @param key_value [Integer, String] value of internal id field
       # @param params [Hash] Contact information to update
       # @param create_if_not_exists [Boolean] Whether to create contact if it does not exist
       # @return [Hash] internal id of the contact
@@ -84,7 +84,7 @@ module Emarsys
       # Delete a contact. The given params are transformed to emarsys ids.
       #
       # @param key_id [Integer, String] internal id of key field
-      # @param key_value [Integer, String] value of interal id field
+      # @param key_value [Integer, String] value of internal id field
       # @return [Hash]
       # @example
       #   Emarsys::Contact.update('app_id', 23, {:firstname => "Jon", :lastname => "Doe"})
