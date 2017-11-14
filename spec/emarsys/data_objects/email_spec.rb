@@ -83,6 +83,16 @@ describe Emarsys::Email do
     end
   end
 
+  describe ".unsubscribe" do
+    it "requests an email test sending with custom recipient list" do
+      stub_params = {contact_uid: '1', email_id: '1', launch_list_id: '1'}
+      stub = stub_request(:post, "https://api.emarsys.net/api/v2/email/unsubscribe").with(:body => stub_params.to_json).to_return(standard_return_body)
+
+      Emarsys::Email.unsubscribe(stub_params)
+      expect(stub).to have_been_requested.once
+    end
+  end
+
   describe ".response_summary" do
     it "requests a single email" do
       expect(
