@@ -3,6 +3,7 @@ require "base64"
 require 'json'
 require 'rest_client'
 require 'uri'
+require 'securerandom'
 
 require 'emarsys/configuration'
 require 'emarsys/client'

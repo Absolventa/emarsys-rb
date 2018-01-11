@@ -23,7 +23,7 @@ module Emarsys
       #
       # @param filename [String] The filename
       # @param file [String] Base64 encoded version of the file
-      # @param folder [Integer, String] optinal folder to out te file into
+      # @param folder [Integer, String] optional folder to put the file into
       # @return [Hash] Result data
       # @example
       #   Emarsys::File.create("my_file.jpg", "asdhkajsh...")

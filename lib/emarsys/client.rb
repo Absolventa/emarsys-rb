@@ -30,7 +30,7 @@ module Emarsys
     end
 
     def header_nonce
-      @header_nonce ||= Random::DEFAULT.bytes(16).each_byte.map { |b| sprintf("%02X",b) }.join
+      @header_nonce ||= SecureRandom::random_bytes(16).each_byte.map { |b| sprintf("%02X",b) }.join
     end
 
     def header_created

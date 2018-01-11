@@ -120,6 +120,19 @@ module Emarsys
         post account, "email/#{id}/getdeliverystatus", params
       end
 
+      # Tracking email campaign unsubscribes
+      #
+      # @param params [hash] unsubscribe parameters
+      # @option params [String] 'contact_uid'
+      # @option params [String] 'email_id'
+      # @option params [String] 'launch_list_id'
+      # @return [Hash] Result data
+      # @example
+      #   Emarsys::Email.unsubscribe({contact_uid: '1', email_id: '1', launch_list_id: '1'})
+      def unsubscribe(account: nil, **params)
+        post account, "email/unsubscribe", params
+      end
+      
       # https://help.emarsys.com/hc/en-us/articles/115004523714
       def email_launches(id, account: nil)
         post account, "email/getlaunchesofemail", emailId: id

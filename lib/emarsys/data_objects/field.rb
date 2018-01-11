@@ -33,6 +33,28 @@ module Emarsys
       def choice(id, account: nil)
         get account, "field/#{id}/choice", {}
       end
+
+      # Create a new custom field
+      #
+      # @param name [String] name of the new field
+      # @param application_type [String] type of the new field
+      # @param string_id [String] optional string_id for the new field
+      # @return [Hash] Result Data
+      # @example
+      #   Emarsys::Field.create(
+      #     name: 'New field',
+      #     application_type: 'shorttext',
+      #     string_id: 'string_id_for_the_new_field'
+      #   )
+      #   Emarsys::Field.create(
+      #     name: 'New number field',
+      #     application_type: 'numeric'
+      #   )
+      def create(name:, application_type:, string_id: nil, account: nil)
+        params = { name: name, application_type: application_type }
+        params[:string_id] = string_id if string_id
+        post account, 'field', params
+      end
     end
 
   end
