@@ -118,4 +118,15 @@ describe Emarsys::Email do
     end
   end
 
+  describe ".email_launches" do
+    it "queries email launches" do
+      stub_params = { emailId: 123 }
+      stub = stub_request(:post, 'https://api.emarsys.net/api/v2/email/getlaunchesofemail')
+      .with(body: stub_params.to_json)
+      .to_return(standard_return_body)
+      Emarsys::Email.email_launches(123) 
+      expect(stub).to have_been_requested.once
+    end
+  end
+
 end

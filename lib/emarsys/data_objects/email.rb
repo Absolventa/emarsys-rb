@@ -132,10 +132,10 @@ module Emarsys
       def unsubscribe(account: nil, **params)
         post account, "email/unsubscribe", params
       end
-
-      # TODO POST /getlaunchesofemail
+      
+      # https://help.emarsys.com/hc/en-us/articles/115004523714
       def email_launches(id, account: nil)
-        raise "Not implemented yet"
+        post account, "email/getlaunchesofemail", emailId: id
       end
 
       # Exports the selected fields of all contacts who responded to emails
