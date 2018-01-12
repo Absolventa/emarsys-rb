@@ -81,14 +81,23 @@ module Emarsys
         post account, "email/#{id}/preview", {:version => version}
       end
 
-      # View response summary of an email
-      #
-      # @param id [Integer, String] Internal email id
-      # @return [Hash] Result data
-      # @example
-      #   Emarsys::Email.response_summary(1)
-      def response_summary(id, account: nil)
-        get account, "email/#{id}/responsesummary", {}
+      # http://documentation.emarsys.com/resource/developers/endpoints/email/response-summary/
+      def response_summary(id, launch_id: nil, start_date: nil, end_date: nil, account: nil)
+        params = {}
+
+        if !launch_id.nil?
+          params.merge!(launch_id: launch_id) 
+        end
+
+        if !start_date.nil? 
+          params.merge!(start_date: start_date)
+        end
+
+        if !end_date.nil?
+          params.merge!(end_date: end_date)
+        end
+
+        get account, "email/#{id}/responsesummary", params
       end
 
       # Instruct emarsys to send a test mail
