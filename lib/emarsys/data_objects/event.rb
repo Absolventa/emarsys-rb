@@ -23,14 +23,16 @@ module Emarsys
       # @param key_id [Integer, String] The identifer of the key field (e.g. 3 for 'email')
       # @param external_id [String] The id of the given filed specified with key_id (e.g. 'test@example.com')
       # @option data [Hash] data hash for transactional mails
+      # @option attachment [Array] array containing an attachment for transactional mails
       # @return [Hash] Result data
       # @example
       #   Emarsys::Event.trigger(2, 3, 'test@example.com')
       #   Emarsys::Event.trigger(2, 'user_id', 57687, {:global => {:name => "Special Name"}})
-      def trigger(id, key_id:, external_id:, data: {}, account: nil)
+      def trigger(id, key_id:, external_id:, data: {}, attachment: [], account: nil)
         transformed_key_id = transform_key_id(key_id)
-        params = {:key_id => transformed_key_id, :external_id => external_id}
-        params.merge!(:data => data) if not data.empty?
+        params = { key_id: transformed_key_id, external_id: external_id }
+        params.merge!(data: data) if not data.empty?
+        params.merge!(attachment: attachment) if not attachment.empty?
         post account, "event/#{id}/trigger", params
       end
 
