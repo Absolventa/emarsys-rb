@@ -70,14 +70,14 @@ which that can be overwritten. It will be picked up automatically. E.g.:
 
 ```ruby
 # Complete overwrite
-Emarsys::FieldMapping::ATTRIBUTES = [
+Emarsys::FieldMapping.set_attributes([
   {:id => 0, :identifier => 'interests', :name => 'Interests'},
   {:id => 1, :identifier => 'firstname', :name => 'First Name'},
   {:id => 2, :identifier => 'lastname',  :name => 'Last Name'},
-]
+])
 
 # Add to the Mapping-Constant
-Emarsys::FieldMapping::ATTRIBUTES << {:id => 100, :identifier => 'user_id', :name => "User-ID"}
+Emarsys::FieldMapping.add_attributes({:id => 100, :identifier => 'user_id', :name => "User-ID"})
 ```
 
 All Emarsys predefined system fields are prefixed with an underscore, e.g. '_firstname' or '_revenue' in order to not

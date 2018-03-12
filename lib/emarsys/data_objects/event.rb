@@ -54,7 +54,7 @@ module Emarsys
 
       # @private
       def transform_key_id(key_id)
-        matching_attributes = Emarsys::FieldMapping::ATTRIBUTES.find{|elem| elem[:identifier] == key_id.to_s}
+        matching_attributes = Emarsys::FieldMapping.attributes.find{|elem| elem[:identifier] == key_id.to_s}
         matching_attributes.nil? ? key_id : matching_attributes[:id]
       end
     end
