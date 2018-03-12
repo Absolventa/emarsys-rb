@@ -53,4 +53,23 @@ module Emarsys::FieldMapping
     {:id => 48,  :identifier => '_date_of_first_registration', :name => 'Date of first registration'}
   ]
 
+  def self.attributes
+    return @custom_attributes if excluded_default_attributes?
+    return ATTRIBUTES.dup.concat(@custom_attributes) if @custom_attributes
+    ATTRIBUTES
+  end
+
+  def self.set_attributes(attrs)
+    @exclude_default_attributes = true
+    @custom_attributes = [attrs].flatten
+  end
+
+  def self.add_attributes(attrs)
+    @custom_attributes.concat([attrs].flatten)
+  end
+
+  def self.excluded_default_attributes?
+    @exclude_default_attributes == true
+  end
+
 end

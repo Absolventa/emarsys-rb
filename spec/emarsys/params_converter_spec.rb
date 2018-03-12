@@ -9,7 +9,10 @@ describe Emarsys::ParamsConverter do
       {:id => 1,   :identifier => 'first_name', :name => 'First Name'},
       {:id => 2,   :identifier => 'last_name',  :name => 'Last Name'},
     ]
-    stub_const("Emarsys::FieldMapping::ATTRIBUTES", attributes)
+
+    allow(Emarsys::FieldMapping).to receive(:attributes).and_return(
+      attributes
+    )
   end
 
   describe 'with attributes' do
