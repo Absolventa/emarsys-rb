@@ -119,6 +119,19 @@ module Emarsys
         post account, "contact/getdata", {'keyId' => key_id, 'keyValues' => key_values, 'fields' => fields}
       end
 
+      # Query contacts by custom
+      #
+      # @param key_id [Integer, String] The key used to query
+      # @param key_value [String] Value of internal id field
+      # @param return_value [Integer, String] Value of internal id field
+      # @return [Hash] result data
+      # @example
+      #   Emarsys::Contact.query('3', 'john.doe@example.com', 'uid')
+      #
+      def query(key_id:, key_value:, return_value: , account: nil)
+        get account, "contact/query", { key_id => key_value, 'return' => return_value}
+      end
+
       # Exports the selected fields of contacts whoch registered in the specified time range
       #
       # @param params [hash] hash of parameters according to emarsys API
