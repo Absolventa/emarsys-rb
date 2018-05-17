@@ -98,7 +98,7 @@ describe Emarsys::Contact do
 
   describe ".query" do
     it "queries contact data based on search params" do
-      stub = stub_request(:get, "https://api.emarsys.net/api/v2/contact/query?3=jane.doe@example.com&return=email").to_return(standard_return_body)
+      stub = stub_request(:get, "https://api.emarsys.net/api/v2/contact/query/?3=jane.doe@example.com&return=email").to_return(standard_return_body)
       Emarsys::Contact.query(key_id: 3, key_value: 'jane.doe@example.com', return_value: 'email')
       expect(stub).to have_been_requested.once
     end
