@@ -18,11 +18,11 @@ module Emarsys
 
       if code != 0
         if status == 401
-          raise Emarsys::Unauthorized.new(code, text, status)
+          raise Emarsys::Unauthorized.new(code, text, status, self.data)
         elsif status == 429
-          raise Emarsys::TooManyRequests.new(code, text, status)
+          raise Emarsys::TooManyRequests.new(code, text, status, self.data)
         else
-          raise Emarsys::BadRequest.new(code, text, status)
+          raise Emarsys::BadRequest.new(code, text, status, self.data)
         end
       end
     end

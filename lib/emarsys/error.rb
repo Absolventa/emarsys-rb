@@ -4,15 +4,16 @@ module Emarsys
   class Error < StandardError
     attr_reader :code
 
-    def initialize(code, text, status)
+    def initialize(code, text, status, data = nil)
       @code = code
       @text = text
       @status = status
+      @data = data
       super(build_error_message)
     end
 
     def build_error_message
-      "HTTP-Code: #{@status}, Emarsys-Code: #{@code} - #{@text}"
+      "HTTP-Code: #{@status}, Emarsys-Code: #{@code} - #{@text}\nEmarys-Data: #{@data.inspect}"
     end
   end
 
