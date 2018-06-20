@@ -144,7 +144,11 @@ Emarsys::Contact.create(key_id: 4980, key_value: 10, params: {1 => "Jane", 2 => 
 # Update a contact with key_field (one example with mapped identifier, one without)
 Emarsys::Contact.update(key_id: 'email', key_value: "jane.doe@example.com", params: {firstname: "John", lastname: "Doe"})
 Emarsys::Contact.update(key_id: 3, key_value: "jane.doe@example.com", params: {1 => "John", 2 => "Doe"})
+
+# Query contact information
+Emarsys::Contact.query('3', 'john.doe@example.com', 'uid')
 ```
+
 
 #### ContactList
 
