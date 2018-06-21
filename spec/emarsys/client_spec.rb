@@ -83,6 +83,15 @@ describe Emarsys::Client do
       it 'uses current timestamp format' do
         expect(Emarsys::Client.new.header_created).to eq(Time.now.utc.iso8601)
       end
+
+      it 'only generates time once' do
+        client = Emarsys::Client.new
+        header_created = Timecop.travel(Time.now - 10) do
+          client.header_created
+        end
+
+        expect(client.header_created).to eq(header_created)
+      end
     end
 
     describe '#calculated_digest' do
