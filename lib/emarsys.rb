@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require "base64"
+require 'forwardable'
 require 'json'
 require 'rest_client'
 require 'uri'
