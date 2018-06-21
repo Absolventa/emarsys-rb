@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.3.10
+
+* Fix 'Invalid Password' error ([#55](https://github.com/Absolventa/emarsys-rb/pull/55))
+
+## v0.3.9
+
+* Add 'query' support to Contact data object ([#53](https://github.com/Absolventa/emarsys-rb/pull/53))
+
+## v0.3.5 - v0.3.8
+
+* Documentation TODO
+
 ## v0.3.4
 
 * Allow accessing of error code ([#35](https://github.com/Absolventa/emarsys-rb/pull/35))
