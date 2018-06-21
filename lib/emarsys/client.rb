@@ -34,7 +34,7 @@ module Emarsys
     end
 
     def header_created
-      Time.now.utc.iso8601
+      @header_created ||= Time.now.utc.iso8601
     end
 
     def calculated_digest
