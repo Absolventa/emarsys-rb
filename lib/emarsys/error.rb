@@ -2,7 +2,7 @@
 module Emarsys
   # Custom error class for rescuing from Emarsys errors
   class Error < StandardError
-    attr_reader :code
+    attr_reader :code, :text, :status
 
     def initialize(code, text, status)
       @code = code
