@@ -17,8 +17,7 @@ module Emarsys
       end
 
       # List ids of contacts in a segment.
-      # This may return HTTP 202 {"replyCode":10001,"replyText":"The segment is currently evaluated.","data":""}
-      # if the segment is being currently processed.
+      # Raises Emarsys::SegmentIsEvaluated if the segment is being currently evaluated.
       # Reference: https://dev.emarsys.com/v2/response-codes/http-202-errors
       # The `limit` param is required by this endpoint although it is marked as optional in the API v2 doc.
       #

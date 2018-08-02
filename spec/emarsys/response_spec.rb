@@ -59,7 +59,8 @@ describe Emarsys::Response do
   end
 
   describe 'error response' do
-    let(:response_string) { "{\"replyCode\":1,\"replyText\":\"Something\",\"data\":1}" }
+    let(:reply_code) { 1 }
+    let(:response_string) { "{\"replyCode\":#{reply_code},\"replyText\":\"Something\",\"data\":1}" }
     let(:fake_response) { FakeResponse.new(response_string).extend(FakeResponse::JSON) }
     let(:response) { Emarsys::Response.new(fake_response) }
 
@@ -76,6 +77,14 @@ describe Emarsys::Response do
     it "raises TooManyRequests error if http-status is 429" do
       allow(fake_response).to receive(:code).and_return(429)
       expect{response}.to raise_error(Emarsys::TooManyRequests)
+    end
+
+    context 'with Reply Code 10001' do
+      let(:reply_code) { 10001 }
+      it "raises SegmentIsEvaluated error if http-status i 202" do
+        allow(fake_response).to receive(:code).and_return(202)
+        expect{response}.to raise_error(Emarsys::SegmentIsEvaluated)
+      end
     end
   end
 
