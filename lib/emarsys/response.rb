@@ -21,6 +21,8 @@ module Emarsys
           raise Emarsys::Unauthorized.new(code, text, status)
         elsif status == 429
           raise Emarsys::TooManyRequests.new(code, text, status)
+        elsif status == 202 && code == 10001
+          raise Emarsys::SegmentIsEvaluated.new(code, text, status) 
         else
           raise Emarsys::BadRequest.new(code, text, status)
         end
