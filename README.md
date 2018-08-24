@@ -231,6 +231,11 @@ Emarsys::Language.collection
 Emarsys::Segment.collection
 ```
 
+```ruby
+# List contacts in a segment
+Emarsys::Segment.contacts(123, limit: 2000)
+```
+
 #### Source
 
 ```ruby
