@@ -121,15 +121,27 @@ module Emarsys
 
       # Query contacts by custom
       #
-      # @param key_id [Integer, String] The key used to query
-      # @param key_value [String] Value of internal id field
       # @param return_value [Integer, String] Value of internal id field
+      # @param account [String] The account to use
+      # @param opts [Mixed] Further symbols to pass down to the request
       # @return [Hash] result data
       # @example
-      #   Emarsys::Contact.query('3', 'john.doe@example.com', 'uid')
-      #
-      def query(key_id:, key_value:, return_value: , account: nil)
-        get account, "contact/query", { key_id => key_value, 'return' => return_value}
+      #   # Get all emails from the emarsys account
+      #   Emarsys::Contact.query(return_value: 'email')
+      #   # Get the ID of the account with a specific email
+      #   Emarsys::Contact.query(key_id: '_email', key_value: 'john.doe@example.com', return_value: 'email')
+      #   Emarsys::Contact.query(key_id: 3, key_value: 'jane.doe@example.com', return_value: 'email')
+      def query(return_value:, account: nil, **opts)
+        if opts.key?(:key_id) && opts.key?(:key_value)
+          id, value = [opts.delete(:key_id), opts.delete(:key_value)]
+          opts["#{transform_key_id(id).to_s}"] = value
+        end
+
+        opts = opts.each_with_object({}) do |(key, val), memo|
+          memo[key.to_s] = val
+        end
+
+        get account, 'contact/query', opts.merge('return' => return_value)
       end
 
       # Exports the selected fields of contacts whoch registered in the specified time range
