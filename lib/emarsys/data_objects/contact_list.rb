@@ -40,7 +40,7 @@ module Emarsys
       #
       # This cannot be an instance method, because the API does not allow to retrieve a single resource. How crappy is that?
       def remove_contacts(id, key_id:, external_ids: [], account: nil)
-        post account, "contactlist/#{id}/remove", {'key_id' => key_id, 'external_ids' => external_ids}
+        post account, "contactlist/#{id}/delete", {'key_id' => key_id, 'external_ids' => external_ids}
       end
 
     end
