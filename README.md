@@ -158,6 +158,9 @@ Emarsys::ContactList.collection
 
 # Create a contact list
 Emarsys::ContactList.create
+
+# Delete a contact list
+Emarsys::ContactList.delete(123)
 ```
 
 #### Emails
