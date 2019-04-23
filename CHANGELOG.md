@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.11
+
+* Add support for Segments API ([#58](https://github.com/Absolventa/emarsys-rb/pull/58))
+* Improved Contact.query method ([#61](https://github.com/Absolventa/emarsys-rb/pull/61))
+* Use correct endpoint in ContactList.remove_contacts ([#62](https://github.com/Absolventa/emarsys-rb/pull/62))
+* Add method to delete ContactList by ID ([#63](https://github.com/Absolventa/emarsys-rb/pull/63))
+
 ## v0.3.10
 
 * Fix 'Invalid Password' error ([#55](https://github.com/Absolventa/emarsys-rb/pull/55))
