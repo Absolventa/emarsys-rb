@@ -29,6 +29,16 @@ module Emarsys
         post account, "contactlist", params
       end
 
+      # Delete a contact list
+      #
+      # @param id [Integer] Internal contact list id
+
+      # @example
+      #   Emarsys::ContactList.delete(751283429)
+      def delete(id, account: nil)
+        post account, "contactlist/#{id}/deletelist", {}
+      end
+
       # Add a contacts to a specific contact list
       #
       # This cannot be an instance method, because the API does not allow to retrieve a single resource. How crappy is that?
