@@ -28,10 +28,6 @@ module Emarsys
   # Raised when Emarsys returns a 500 HTTP status code
   class InternalServerError < Error; end
 
-  # Raised when Emarsys returns a 202 HTTP status code with 10001 Reply Code
-  # https://dev.emarsys.com/v2/response-codes/http-202-errors
-  class SegmentIsEvaluated < Error; end
-
   class AccountNotConfigured < StandardError; end
 
   class AccountRequired < StandardError; end
