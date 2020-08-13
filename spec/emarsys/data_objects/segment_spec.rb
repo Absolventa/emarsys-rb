@@ -17,7 +17,7 @@ describe Emarsys::Segment do
     describe ".status" do
       it "requests the status of the given segment run" do
         expect(
-          stub_get("filter/runs/333") { Emarsys::Segment.status(333) }
+          stub_get("filter/runs/foo-333-bar") { Emarsys::Segment.status('foo-333-bar') }
         ).to have_been_requested.once
       end
     end

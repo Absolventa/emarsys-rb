@@ -28,7 +28,7 @@ module Emarsys
       # Poll the Status of a Segment Run for Multiple Contacts
       # Reference: https://dev.emarsys.com/v2/segments/poll-the-status-of-a-segment-run-for-multiple-contacts
       #
-      # @param run_id [Integer] the id of the segment run, @see #run
+      # @param run_id [String] the id of the segment run, @see #run
       def status(run_id, account: nil)
         path = "filter/runs/#{run_id}"
         get account, path, {}
