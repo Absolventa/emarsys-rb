@@ -16,6 +16,14 @@ module Emarsys
         get account, 'contactlist', {}
       end
 
+      # List contacts in a contact list
+      # Reference: https://dev.emarsys.com/v2/contact-lists/list-contacts-in-a-contact-list
+      # 
+      # @param id [Integer] The contact list id
+      def contacts(id, account: nil)
+        get account, "contactlist/#{id}/", {}
+      end
+
       # Create a new contact list
       #
       # @param params [Hash] Contact list information to create
