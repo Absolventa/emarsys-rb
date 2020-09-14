@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.0
+
+* Add supported segment endpoints and remove the deprecated one ([#64]https://github.com/Absolventa/emarsys-rb/pull/64)
+
 ## v0.3.13 
 
 * Add method to delete ContactList by ID ([#63](https://github.com/Absolventa/emarsys-rb/pull/63))
