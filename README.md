@@ -161,6 +161,9 @@ Emarsys::ContactList.create
 
 # Delete a contact list
 Emarsys::ContactList.delete(123)
+
+# List all contacts in a contact list
+Emarsys::ContactList.contacts(123)
 ```
 
 #### Emails
@@ -235,8 +238,13 @@ Emarsys::Segment.collection
 ```
 
 ```ruby
-# List contacts in a segment
-Emarsys::Segment.contacts(123, limit: 2000)
+# Run a segment for multiple contacts
+Emarsys::Segment.run(123)
+```
+
+```ruby
+# Check the status of a segment run
+Emarsys::Segment.status('foo123')
 ```
 
 #### Source
