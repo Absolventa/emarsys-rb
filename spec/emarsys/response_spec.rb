@@ -78,14 +78,6 @@ describe Emarsys::Response do
       allow(fake_response).to receive(:code).and_return(429)
       expect{response}.to raise_error(Emarsys::TooManyRequests)
     end
-
-    context 'with Reply Code 10001' do
-      let(:reply_code) { 10001 }
-      it "raises SegmentIsEvaluated error if http-status i 202" do
-        allow(fake_response).to receive(:code).and_return(202)
-        expect{response}.to raise_error(Emarsys::SegmentIsEvaluated)
-      end
-    end
   end
 
 end
