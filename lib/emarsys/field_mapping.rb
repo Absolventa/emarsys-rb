@@ -65,7 +65,7 @@ module Emarsys::FieldMapping
   end
 
   def self.add_attributes(attrs)
-    @custom_attributes.concat([attrs].flatten)
+    attributes.concat([attrs].flatten)
   end
 
   def self.excluded_default_attributes?
