@@ -66,8 +66,15 @@ describe Emarsys::FieldMapping do
         {:id => 101,   :identifier => 'foo', :name => 'Foo'},
         {:id => 102,   :identifier => 'bar', :name => 'Bar'}
       ]
-      Emarsys::FieldMapping.add_attributes(attributes)
-      expect(Emarsys::FieldMapping.attributes).to include(attributes[0], attributes[1])
+
+      stub_const('Emarsys::FieldMapping::ATTRIBUTES', attributes)
+
+      mapping_to_be_added = {
+        id: 2000, identifier: 'baz', name: 'Baz'
+      }
+
+      Emarsys::FieldMapping.add_attributes(mapping_to_be_added)
+      expect(Emarsys::FieldMapping.attributes).to include(attributes[0], attributes[1], mapping_to_be_added)
     end
   end
 
