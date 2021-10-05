@@ -22,7 +22,7 @@ describe Emarsys::Response do
 
     module CSV
       def headers
-        {:content_type => 'text/csv'}
+        {:content_type => 'text/csv;charset=UTF-8'}
       end
     end
   end
