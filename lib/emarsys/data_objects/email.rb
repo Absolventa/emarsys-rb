@@ -86,10 +86,10 @@ module Emarsys
         params = {}
 
         if !launch_id.nil?
-          params.merge!(launch_id: launch_id) 
+          params.merge!(launch_id: launch_id)
         end
 
-        if !start_date.nil? 
+        if !start_date.nil?
           params.merge!(start_date: start_date)
         end
 
@@ -141,7 +141,7 @@ module Emarsys
       def unsubscribe(account: nil, **params)
         post account, "email/unsubscribe", params
       end
-      
+
       # https://help.emarsys.com/hc/en-us/articles/115004523714
       def email_launches(id, account: nil)
         post account, "email/getlaunchesofemail", emailId: id
@@ -159,11 +159,11 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Email.export_responses(
-      #     'local',
-      #     ['2012-02-09', '2014-08-13'],
-      #     [1, 3],
-      #     ['trackable_links'],
-      #     [5, 8, 13]
+      #     distribution_method: 'local',
+      #     time_range: ['2012-02-09', '2014-08-13'],
+      #     contact_fields: [1, 3],
+      #     sources: ['trackable_links'],
+      #     analysis_fields: [5, 8, 13]
       #   )
       def export_responses(distribution_method:, time_range:, contact_fields:, sources:, analysis_fields:, account: nil, **params)
         params.merge!(

@@ -1,10 +1,16 @@
 # Changelog
 
+## v1.4.0 - DIVERTED FROM ORIGINAL PROJECT
+
+* Fix add attributes method  ([#67](https://github.com/Absolventa/emarsys-rb/pull/67))
+* Fix CSV data export ([#68](https://github.com/Absolventa/emarsys-rb/pull/68))
+* Other minor fixes, typos and gem updates
+
 ## v0.4.0
 
-* Add supported segment endpoints and remove the deprecated one ([#64]https://github.com/Absolventa/emarsys-rb/pull/64)
+* Add supported segment endpoints and remove the deprecated one ([#64](https://github.com/Absolventa/emarsys-rb/pull/64))
 
-## v0.3.13 
+## v0.3.13
 
 * Add method to delete ContactList by ID ([#63](https://github.com/Absolventa/emarsys-rb/pull/63))
 * Use correct endpoint in ContactList.remove_contacts ([#62](https://github.com/Absolventa/emarsys-rb/pull/62))
