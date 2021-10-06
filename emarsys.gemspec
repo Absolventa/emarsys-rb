@@ -19,11 +19,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = '>= 2.3'
 
-  spec.add_dependency "rest-client"
+  spec.add_dependency "rest-client", "~> 2.1.0"
 
   spec.add_development_dependency "bundler", "~> 2.2.4"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec", ">= 3.5.0"
+  spec.add_development_dependency "rake", "~> 13.0.6"
+  spec.add_development_dependency "rspec", "~> 3.10.0"
   spec.add_development_dependency "webmock", "~> 3.14.0"
-  spec.add_development_dependency "timecop"
+  spec.add_development_dependency "timecop", "~> 0.9.4"
 end
