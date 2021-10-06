@@ -4,7 +4,7 @@ module Emarsys
     attr_accessor :code, :text, :data, :status
 
     def initialize(response)
-      if response.headers[:content_type] == 'text/csv'
+      if response.headers[:content_type]&.start_with?('text/csv')
         self.code = 0
         self.data = response.body
       else

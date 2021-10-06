@@ -2,6 +2,10 @@
 
 Simple Ruby wrapper for the Emarsys API.
 
+## Note
+
+This fork was created because the original author doesn't seem to be merging PRs anymore. If that gets rectified, I'll close this repo. In the meantime I'll start release from the original version + 1.0.0 (e.g. 0.4.0 -> 1.4.0).
+
 ## Installation
 
     gem install emarsys
@@ -12,16 +16,16 @@ This wrapper tries to implement all available methods of the Emarsys API in a
 Ruby-like fashion. However, the Emarsys API lacks a decent amount of methods that
 you expect an API to provide.
 Thus, if methods are missing or a certain implementation
-style was choosen it is most likely due to the inconsistency of the API itself.
+style was chosen it is most likely due to the inconsistency of the API itself.
 Feel free to get in touch or submit a pull request if you encounter any problems.
 
 Must-known facts about the Emarsys API:
 
 * Emarsys uses internal IDs as field identifiers. E.g. 'email' is mapped to the value 3.
 This gem tries to work around this by letting you specify a field mapping constant.
-* certain methods require the specification of a key-field, e.g. the email (internally refered to as '3' again).
+* certain methods require the specification of a key-field, e.g. the email (internally referred to as '3' again).
 * Return values differ from method to method due to the way the Emarsys API is implemented.
-Thus, a Hash as a return value or an Array of Hashes was choosen as the global return object. Basically it is a parsed JSON response.
+Thus, a Hash as a return value or an Array of Hashes was chosen as the global return object. Basically it is a parsed JSON response.
 * Please refer to the Emarsys API documentation for detailed information on parameters, return values or error codes.
 * The list of available countries is defined by Emarsys, and uses internal Emarsys-specific IDs.  A utility class is
 provided to map [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 "ISO 3166-1 alpha-2") data (aka 2-letter country codes) to internal Emarsys country IDs.
