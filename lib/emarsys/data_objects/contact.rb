@@ -155,12 +155,13 @@ module Emarsys
       # @return [Hash] result data
       # @example
       #   Emarsys::Contact.export_registrations(distribution_method: 'local', time_range: ["2013-01-01","2013-12-31"], contact_fields: [1,2,3])
-      def export_registrations(distribution_method:, time_range:, contact_fields:, account: nil)
-        post account, "contact/getregistrations", {
+      def export_registrations(distribution_method:, time_range:, contact_fields:, account: nil, **params)
+        params.merge!(
           distribution_method: distribution_method,
           time_range: time_range,
           contact_fields: contact_fields
-        }
+        )
+        post account, "contact/getregistrations", params
       end
 
       # @private
