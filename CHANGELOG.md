@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.1
+
+* Allow nonspecific arguments for the `export_registrations` call
+
 ## v1.4.0 - DIVERTED FROM ORIGINAL PROJECT
 
 * Fix add attributes method  ([#67](https://github.com/Absolventa/emarsys-rb/pull/67))
