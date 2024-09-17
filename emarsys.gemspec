@@ -14,8 +14,7 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
 
   spec.metadata = {
-    "allowed_push_host" => "https://rubygems.pkg.github.com/ygt/emarsys-rb",
-    "github_repo" => "ssh://github.com/ygt/emarsys-rb"
+    "github_repo" => "ssh://github.com/Absolventa/emarsys-rb"
   }
 
   spec.files = `git ls-files`.split($/)
