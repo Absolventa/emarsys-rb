@@ -10,19 +10,19 @@ describe Emarsys::Email do
 
     it "requests all emails to the given status parameter" do
       expect(
-        stub_get('email/?status=3') { Emarsys::Email.collection({:status => 3}) }
+        stub_get('email/?status=3') { Emarsys::Email.collection(:status => 3) }
       ).to have_been_requested.once
     end
 
     it "requests all emails to the given contactlist parameter" do
       expect(
-        stub_get('email/?contactlist=123') { Emarsys::Email.collection({:contactlist => 123}) }
+        stub_get('email/?contactlist=123') { Emarsys::Email.collection(:contactlist => 123) }
       ).to have_been_requested.once
     end
 
     it "requests all emails - even with combined parameters" do
       expect(
-        stub_get('email/?status=3&contactlist=123') { Emarsys::Email.collection({:status => 3, :contactlist => 123}) }
+        stub_get('email/?status=3&contactlist=123') { Emarsys::Email.collection(:status => 3, :contactlist => 123) }
       ).to have_been_requested.once
     end
   end
@@ -45,7 +45,7 @@ describe Emarsys::Email do
     it "requests email creation with parameters" do
       stub_params = {:language => 'de', :name => "Something"}
       stub = stub_request(:post, "https://api.emarsys.net/api/v2/email").with(:body => stub_params.to_json).to_return(standard_return_body)
-      Emarsys::Email.create(stub_params)
+      Emarsys::Email.create(**stub_params)
       expect(stub).to have_been_requested.once
     end
   end
@@ -88,7 +88,7 @@ describe Emarsys::Email do
       stub_params = {contact_uid: '1', email_id: '1', launch_list_id: '1'}
       stub = stub_request(:post, "https://api.emarsys.net/api/v2/email/unsubscribe").with(:body => stub_params.to_json).to_return(standard_return_body)
 
-      Emarsys::Email.unsubscribe(stub_params)
+      Emarsys::Email.unsubscribe(**stub_params)
       expect(stub).to have_been_requested.once
     end
   end
@@ -100,8 +100,8 @@ describe Emarsys::Email do
         start_date: '2013-12-01 23:00:00',
         end_date: '2013-12-02 23:00:00'
       }
-      expect(stub_get('email/123/responsesummary/?end_date=2013-12-02%2023:00:00&launch_id=123&start_date=2013-12-01%2023:00:00') { 
-        Emarsys::Email.response_summary(123, stub_params) }
+      expect(stub_get('email/123/responsesummary/?end_date=2013-12-02%2023:00:00&launch_id=123&start_date=2013-12-01%2023:00:00') {
+        Emarsys::Email.response_summary(123, **stub_params) }
       ).to have_been_requested.once
     end
   end
@@ -110,7 +110,7 @@ describe Emarsys::Email do
     it "queries responses" do
       stub_params = { type: "received", campaign_id: 123 }
       stub = stub_request(:post, "https://api.emarsys.net/api/v2/email/responses").with(:body => stub_params.to_json).to_return(standard_return_body)
-      Emarsys::Email.responses(stub_params)
+      Emarsys::Email.responses(**stub_params)
       expect(stub).to have_been_requested.once
     end
   end
@@ -129,7 +129,7 @@ describe Emarsys::Email do
       stub = stub_request(:post, 'https://api.emarsys.net/api/v2/email/getlaunchesofemail')
       .with(body: stub_params.to_json)
       .to_return(standard_return_body)
-      Emarsys::Email.email_launches(123) 
+      Emarsys::Email.email_launches(123)
       expect(stub).to have_been_requested.once
     end
   end
