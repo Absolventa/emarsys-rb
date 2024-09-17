@@ -6,8 +6,8 @@ require 'emarsys/version'
 Gem::Specification.new do |spec|
   spec.name = "emarsys"
   spec.version = Emarsys::VERSION
-  spec.authors = ["Palatinate Tech"]
-  spec.email = ["info@palatinategroup.com"]
+  spec.authors = ["Daniel Schoppmann", "Palatinate Tech", "Rory Sinclair"]
+  spec.email = [ "daniel.schoppmann@absolventa.de", "info@palatinategroup.com","rory@asw.com"]
   spec.description = %q{A Ruby library for interacting with the Emarsys API.}
   spec.summary = %q{Easy to use ruby library for Emarsys Marketing Suite.}
   spec.homepage = "https://github.com/ygt/emarsys-rb"
