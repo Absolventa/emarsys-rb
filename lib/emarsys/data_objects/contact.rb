@@ -14,8 +14,8 @@ module Emarsys
       # @param params [Hash] Contact information to create
       # @return [Hash] internal id of the contact
       # @example
-      #   Emarsys::Contact.create('app_id', 23, {:firstname => "Jon", :lastname => "Doe"})
-      #   Emarsys::Contact.create('3', 'john.doe@example.com', {'1' => "Jon", '2' => "Doe"})
+      #   Emarsys::Contact.create(key_id: 'app_id', key_value: 23, params: {:firstname => "Jon", :lastname => "Doe"})
+      #   Emarsys::Contact.create(key_id: '3', key_value: 'john.doe@example.com', params:  {'1' => "Jon", '2' => "Doe"})
       def create(key_id:, key_value:, params: {}, account: nil)
         transformed_key_id = transform_key_id(key_id)
         post account, "contact", params.merge!({'key_id' => transformed_key_id, transformed_key_id => key_value})
@@ -27,8 +27,8 @@ module Emarsys
       # @param key_value [Integer, String] value of internal id field
       # @return [Hash] internal emarsys id of the contact
       # @example
-      #   Emarsys::Contact.emarsys_id('email', 'john.dow@example.com')
-      #   Emarsys::Contact.emarsys_id(1, 'John')
+      #   Emarsys::Contact.emarsys_id(key_id: 'email', key_value: 'john.dow@example.com')
+      #   Emarsys::Contact.emarsys_id(key_id: 1, key_value: 'John')
       def emarsys_id(key_id:, key_value:, account: nil)
         get account, "contact", {"#{transform_key_id(key_id).to_s}" => key_value}
       end
@@ -41,8 +41,8 @@ module Emarsys
       # @param create_if_not_exists [Boolean] Whether to create contact if it does not exist
       # @return [Hash] internal id of the contact
       # @example
-      #   Emarsys::Contact.update('app_id', 23, {:firstname => "Jon", :lastname => "Doe"})
-      #   Emarsys::Contact.update('3', 'john.doe@example.com', {'1' => "Jon", '2' => "Doe"}, true)
+      #   Emarsys::Contact.update(key_id: 'app_id', key_value: 23, params: {:firstname => "Jon", :lastname => "Doe"})
+      #   Emarsys::Contact.update(key_id: '3', key_value: 'john.doe@example.com', params: {'1' => "Jon", '2' => "Doe"}, true)
       def update(key_id:, key_value:, params: {}, create_if_not_exists: false, account: nil)
         path = "contact#{create_if_not_exists ? '/?create_if_not_exists=1' : ''}"
         transformed_key_id = transform_key_id(key_id)
@@ -55,8 +55,11 @@ module Emarsys
       # @param params [Hash] Contact information of each new contact
       # @example
       #   Emarsys::Contact.create_batch(
-      #     'email', {:app_id => 1, :firstname => "Jon", :lastname => "Doe"},
-      #              {:app_id => 2, :firstname => "Jane", :lastname => "Doe"}
+      #     key_id: 'email',
+      #     params: [
+      #       {:app_id => 1, :firstname => "Jon", :lastname => "Doe"},
+      #       {:app_id => 2, :firstname => "Jane", :lastname => "Doe"}
+      #     ]
       #   )
       #
       def create_batch(key_id:, params: [], account: nil)
@@ -70,10 +73,12 @@ module Emarsys
       # @param create_if_not_exists [Boolean] Whether to create non-existing contacts
       # @example
       #   Emarsys::Contact.update_batch(
-      #     'email',
-      #     [{:email => "john@example.com", :firstname => "Jon", :lastname => "Doe"},
-      #      {:email => "jane@example.com", :firstname => "Jane", :lastname => "Doe"}],
-      #     true
+      #     key_id: 'email',
+      #     params: [
+      #       {:email => "john@example.com", :firstname => "Jon", :lastname => "Doe"},
+      #       {:email => "jane@example.com", :firstname => "Jane", :lastname => "Doe"}
+      #     ],
+      #     create_if_not_exists: true
       #   )
       #
       def update_batch(key_id:, params: [], create_if_not_exists: false, account: nil)
@@ -87,8 +92,8 @@ module Emarsys
       # @param key_value [Integer, String] value of internal id field
       # @return [Hash]
       # @example
-      #   Emarsys::Contact.update('app_id', 23, {:firstname => "Jon", :lastname => "Doe"})
-      #   Emarsys::Contact.update('3', 'john.doe@example.com', {'1' => "Jon", '2' => "Doe"}, true)
+      #   Emarsys::Contact.delete(key_id: 'app_id', key_value: 23)
+      #   Emarsys::Contact.delete(key_id: '3', key_value: 'john.doe@example.com')
       def delete(key_id:, key_value:, account: nil)
         path = "contact/delete"
         transformed_key_id = transform_key_id(key_id)
@@ -100,7 +105,7 @@ module Emarsys
       # @param contacts [array] Array of contact ids
       # @return [Hash] result data
       # @example
-      #   Emarsys::Contact.contact_history([1,2,3]
+      #   Emarsys::Contact.contact_history(contacts: [1,2,3]
       def contact_history(contacts:, account: nil)
         post account, "contact/getcontacthistory", {'contacts' => contacts}
       end
@@ -112,7 +117,7 @@ module Emarsys
       # @param fields [array] requested fields. If empty, all are considered
       # @return [Hash] result data
       # @example
-      #   Emarsys::Contact.search('3', ['john.doe@example.com'], [1,2,3])
+      #   Emarsys::Contact.search(key_id: '3', key_value: ['john.doe@example.com'], fields: [1,2,3])
       #
       # TODO transform fields to numeric fields
       def search(key_id:, key_values:, fields: [], account: nil)
@@ -150,12 +155,13 @@ module Emarsys
       # @return [Hash] result data
       # @example
       #   Emarsys::Contact.export_registrations(distribution_method: 'local', time_range: ["2013-01-01","2013-12-31"], contact_fields: [1,2,3])
-      def export_registrations(distribution_method:, time_range:, contact_fields:, account: nil)
-        post account, "contact/getregistrations", {
+      def export_registrations(distribution_method:, time_range:, contact_fields:, account: nil, **params)
+        params.merge!(
           distribution_method: distribution_method,
           time_range: time_range,
           contact_fields: contact_fields
-        }
+        )
+        post account, "contact/getregistrations", params
       end
 
       # @private

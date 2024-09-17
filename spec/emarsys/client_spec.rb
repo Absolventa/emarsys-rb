@@ -47,12 +47,12 @@ describe Emarsys::Client do
       end
 
       it 'encodes string with Base64' do
-        expect(Base64).to receive(:encode64).with("something").and_return("something_base64_encoded")
+        expect(Base64).to receive(:strict_encode64).with("something").and_return("something_base64_encoded")
         Emarsys::Client.new.header_password_digest
       end
 
       it 'strips of \n character' do
-        expect(Base64).to receive(:encode64).with("something").and_return("something_base64_encoded\n")
+        expect(Base64).to receive(:strict_encode64).with("something").and_return("something_base64_encoded\n")
         expect(Emarsys::Client.new.header_password_digest).to eq("something_base64_encoded")
       end
     end
