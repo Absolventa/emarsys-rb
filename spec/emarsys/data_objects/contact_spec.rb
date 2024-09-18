@@ -120,7 +120,7 @@ describe Emarsys::Contact do
     it "requests contact data export based on parameters" do
       stub_params = {add_field_names_header: 0, distribution_method: 'local', time_range: ["2013-01-01","2013-12-31"], contact_fields: [1,2,3]}
       stub = stub_request(:post, "https://api.emarsys.net/api/v2/contact/getregistrations").with(:body => stub_params.to_json).to_return(standard_return_body)
-      Emarsys::Contact.export_registrations(stub_params)
+      Emarsys::Contact.export_registrations(**stub_params)
       expect(stub).to have_been_requested.once
     end
   end
