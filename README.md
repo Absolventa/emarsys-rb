@@ -1,10 +1,6 @@
-# emarsys-rb [![Build Status](https://travis-ci.org/Absolventa/emarsys-rb.svg?branch=master)](https://travis-ci.org/Absolventa/emarsys-rb)
+# emarsys-rb
 
 Simple Ruby wrapper for the Emarsys API.
-
-## Note
-
-This fork was created because the original author doesn't seem to be merging PRs anymore. If that gets rectified, I'll close this repo. In the meantime I'll start release from the original version + 1.0.0 (e.g. 0.4.0 -> 1.4.0).
 
 ## Installation
 
