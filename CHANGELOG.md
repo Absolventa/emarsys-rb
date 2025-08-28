@@ -1,11 +1,8 @@
 # Changelog
 
-## v1.4.1
+## v0.5.0
 
 * Allow nonspecific arguments for the `export_registrations` call
-
-## v1.4.0 - DIVERTED FROM ORIGINAL PROJECT
-
 * Fix add attributes method  ([#67](https://github.com/Absolventa/emarsys-rb/pull/67))
 * Fix CSV data export ([#68](https://github.com/Absolventa/emarsys-rb/pull/68))
 * Other minor fixes, typos and gem updates
